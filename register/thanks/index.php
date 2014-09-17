@@ -1,4 +1,4 @@
-<?php include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php'; if ($session->IsLoggedIn()) { header('Location: /account'); die(); } ?>
+<?php include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php'; RequireAuthentication(); ?>
 
 <?php $Title = "Thanks for Registering!"; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
 

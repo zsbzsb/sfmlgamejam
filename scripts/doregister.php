@@ -12,7 +12,7 @@ else if (strlen($username) == 0) Error('Username can not be blank.');
 else if (strlen($password) == 0) Error('Password can not be blank.');
 else if (strlen($email) == 0) Error('Email can not be blank.');
 
-if ($session->TryRegister($username, $password, $email)) Success("/register/thanks");
+if ($session->TryRegister($username, $password, $email)) Success('/register/thanks');
 else Error('Username or Email is already in use.');
 
 ?>

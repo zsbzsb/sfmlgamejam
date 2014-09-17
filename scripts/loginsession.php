@@ -2,6 +2,17 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
 
+function RequireAuthentication($AdminLevel = false)
+{
+  global $session;
+
+  if (!$session->IsLoggedIn() || ($AdminLevel && $session->GetStatus() != AccountStatus::Admin))
+  {
+    header('Location: /login?return='.$_SERVER["REQUEST_URI"]);
+    die();
+  }
+}
+
 abstract class AccountStatus
 {
   const Banned = -1;
@@ -136,6 +147,16 @@ class LoginSession
   public function GetUsername()
   {
     return $this->m_username;
+  }
+
+  public function GetUserID()
+  {
+    return $this->m_userid;
+  }
+
+  public function GetStatus()
+  {
+    return $this->m_status;
   }
 }
 
