@@ -97,6 +97,19 @@ class LoginSession
     $this->m_status = $rows[0]['status'];
   }
 
+  public function Logout()
+  {
+    global $COOKIE_TOKENID;
+    global $dbconnection;
+
+    if ($this->IsLoggedIn())
+    {
+      $stmt = $dbconnection->prepare("DELETE FROM user_tokens WHERE tokenid = ?;");
+      $stmt->execute(array($_COOKIE[$COOKIE_TOKENID]));
+    }
+    setcookie($COOKIE_TOKENID, null, -1, '/');
+  }
+
   public function IsLoggedIn()
   {
     return $this->m_loggedin;
