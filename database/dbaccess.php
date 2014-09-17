@@ -1,4 +1,5 @@
 <?php
+
 include_once $_SERVER['DOCUMENT_ROOT'].'/settings/globals.php';
 
 function CreateDBConnection()
@@ -10,4 +11,5 @@ function CreateDBConnection()
 }
 
 $dbconnection = CreateDBConnection();
+
 ?>
