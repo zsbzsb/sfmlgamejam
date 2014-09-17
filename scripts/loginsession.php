@@ -62,13 +62,31 @@ class LoginSession
     if ($rows[0]['COUNT(*)'] > 0) return false;
     $stmt = $dbconnection->prepare("INSERT INTO users (username, password, salt, email, status, specialcode, avatar, about, website) VALUES (?, ?, ?, ?, ?, ?, '', '', '');");
     $salt = uniqid('', true);
-    $stmt->execute(array($Username, hash("SHA512", $salt.$Password), $salt, $Email, AccountStatus::Normal, ''));
+    $stmt->execute(array($Username, $this->HashPW($salt, $Password), $salt, $Email, AccountStatus::Normal, ''));
     $this->Login($dbconnection->lastInsertId(), true);
     return true;
   }
 
   public function TryLogin($Username, $Password)
   {
+    global $dbconnection;
+
+    if ($this->IsLoggedIn()) return false;
+    $stmt = $dbconnection->prepare("SELECT id, password, salt FROM users WHERE username = ?;");
+    $stmt->execute(array($Username));
+    $rows = $stmt->fetchAll();
+    if ($stmt->rowCount() == 0) return false;
+    if ($this->HashPW($rows[0]['salt'], $Password) == $rows[0]['password'])
+    {
+      $this->Login($rows[0]['id'], true);
+      return true;
+    }
+    else return false;
+  }
+
+  private function HashPW($Password, $Salt)
+  {
+    return hash("SHA512", $Salt.$Password.$Salt);
   }
 
   private function Login($UserID, $CreateToken)

@@ -1,3 +1,5 @@
+<?php include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php'; if ($session->IsLoggedIn()) { header('Location: /account'); die(); } ?>
+
 <?php $Title = "Register"; $Active = "Register"; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
 
 <div class="row">
@@ -6,11 +8,11 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <form role="form" id="registerform">
+    <form role="form" id="form">
       <div class="alert alert-dismissible hide" role="alert" id="feedback"><button type="button" class="close" id="feedback-hide"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><span id="feedback-content"></span></div>
       <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" class="form-control" id="username" placeholder="PieMaker" />
+        <input type="text" class="form-control" id="username" placeholder="JohnThreeSixteen" />
       </div>
       <div class="form-group">
         <label for="password">Password</label>
@@ -29,28 +31,22 @@
           <input type="checkbox" id="acceptterms">I have read and accepted the <a target="_blank" href="/terms">Terms of Use</a>
         </label>
       </div>
-      <button type="submit" class="btn btn-success pull-right disabled" id="register">Register</button>
+      <button type="submit" class="btn btn-success pull-right disabled" id="submit">Register</button>
     </form>
   </div>
 </div>
 
-<script>
-var InProgress = false;
-var InProgressAnimation;
+<!-- Custom Feedback -->
+<script src="/js/feedback.js"></script>
 
+<script>
 $(function() {
   RegisterTextbox($('#username'));
   RegisterTextbox($('#password'));
   RegisterTextbox($('#confirmpassword'));
   RegisterTextbox($('#email'));
   $('#acceptterms').bind("change", function() { ValidateForm(); });
-  $('#register').bind("click", function() { Register(); return false; });
-  $('#feedback-hide').bind("click", function() { $('#feedback').addClass('hide'); });
 });
-
-function RegisterTextbox(Textbox) {
-  Textbox.bind("change keypress paste input", function() { ValidateForm(); });
-};
 
 function ValidateForm() {
   var valid = true;
@@ -61,60 +57,15 @@ function ValidateForm() {
   if (!(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i).test($('#email').val())) valid = false;
   if (!$('#acceptterms').is(":checked")) valid = false;
 
-  EnableForm(valid);
   return valid;
 };
 
-function EnableForm(Valid) {
-  if (!InProgress) {
-    if (Valid) $('#register').removeClass('disabled');
-    else $('#register').addClass('disabled');
-    $("#registerform :input").attr('disabled', false);
-    StopWaitingAnimation();
-  }
-  else {
-    $('#register').addClass('disabled');
-    $("#registerform :input").attr('disabled', true);
-    StartWaitingAnimation();
-  }
-};
-
-function StartWaitingAnimation() {
-  $('#register').html('.');
-  InProgressAnimation = window.setInterval(function() {
-    if ($('#register').html().length > 5) $('#register').html('.');
-    else $('#register').append('.');
-  }, 500);
-};
-
-function StopWaitingAnimation() {
-  window.clearInterval(InProgressAnimation);
-  $('#register').html('Register');
-};
-
-function Register() {
-  if (!ValidateForm()) return;
-  InProgress = true;
-  EnableForm(false);
+function Submit() {
   var username = $('#username').val();
   var password = $('#password').val();
   var email = $('#email').val();
-  $.post("/scripts/doregister.php", {username:username, password:password, email:email}, function(result) {
-    if (!result.success) {
-      InProgress = false;
-      EnableForm(true);
-      $('#feedback-content').html(result.error);
-      $('#feedback').removeClass('hide alert-success');
-      $('#feedback').addClass('alert-danger');
-    }
-    else {
-      StopWaitingAnimation();
-      $('#feedback-content').html('Success! You are now being redirected...');
-      $('#feedback').removeClass('hide alert-danger');
-      $('#feedback').addClass('alert-success');
-      window.location.replace(result.url);
-    }
-  }, 'json');
+  
+  Post('/scripts/doregister.php', {username:username, password:password, email:email});
 };
 </script>
 
