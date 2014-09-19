@@ -26,3 +26,7 @@ textarea {
   padding-bottom: 0px !important;
   font-size: 10px !important;
 }
+
+#logoutlink {
+  margin-left: -15px;
+}

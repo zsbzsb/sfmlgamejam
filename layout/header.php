@@ -49,7 +49,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <?php
-              if ($session->IsLoggedIn()) echo '<li><a href="/account">Welcome '.$session->GetUsername().'</a></li><li><a href="/logout"><span class="glyphicon glyphicon-remove"></span></a></li>';
+              if ($session->IsLoggedIn()) echo '<li><a href="/account">Welcome '.$session->GetUsername().'</a></li><li><a href="/logout" id="logoutlink"><span class="glyphicon glyphicon-off"></span></a></li>';
               else echo '<li'.($Active == "Login" ? ' class="active"' : '').'><a href="/login">Login</a></li><li'.($Active == "Register" ? ' class="active"' : '').'><a href="/register">Register</a></li>';
             ?>
           </ul>
