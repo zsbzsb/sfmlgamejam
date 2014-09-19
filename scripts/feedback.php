@@ -1,14 +1,14 @@
 <?php
 
-function Success($URL)
+function Success($URL, $Message = '')
 {
-  echo '{ "success": true, "error": "", "url": "'.$URL.'" }';
+  echo '{ "success": true, "error": "", "url": "'.$URL.'", "message": "'.$Message.'" }';
   exit();
 }
 
 function Error($ErrorMessage)
 {
-  echo '{ "success": false, "error": "'.$ErrorMessage.'" }';
+  echo '{ "success": false, "error": "'.$ErrorMessage.'", "message": "" }';
   exit();
 }
 

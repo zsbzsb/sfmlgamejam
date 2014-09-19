@@ -20,6 +20,9 @@
     <!-- Bootstrap JS -->
     <script src="/js/bootstrap.min.js"></script>
 
+    <!-- Custom Animation -->
+    <script src="/js/animation.js"></script>
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/images/logo.png" />
   </head>

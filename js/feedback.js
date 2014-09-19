@@ -1,9 +1,6 @@
 var InProgress = false;
-var InProgressAnimation;
-var SubmitDefault = 'Submit';
 
 $(function() {
-  SubmitDefault = $('#submit').html();
   $('#feedback-hide').bind("click", function() { $('#feedback').addClass('hide'); });
   $('#submit').bind("click", function() { if (!ValidateForm()) return false; InProgress = true; EnableForm(false); Submit(); return false; });
 });
@@ -27,16 +24,11 @@ function EnableForm(Valid) {
 };
 
 function StartWaitingAnimation() {
-  $('#submit').html('.');
-  InProgressAnimation = window.setInterval(function() {
-    if ($('#submit').html().length > 5) $('#submit').html('.');
-    else $('#submit').append('.');
-  }, 500);
+  DotAnimation($('#submit'));
 };
 
 function StopWaitingAnimation() {
-  window.clearInterval(InProgressAnimation);
-  $('#submit').html(SubmitDefault);
+  StopAnimation($('#submit'));
 };
 
 function SuccessFeedback(Message) {
@@ -46,12 +38,12 @@ function SuccessFeedback(Message) {
 };
 
 function ErrorFeedback(Message) {
- $('#feedback-content').html(Message);
- $('#feedback').removeClass('hide alert-success');
- $('#feedback').addClass('alert-danger');
+  $('#feedback-content').html(Message);
+  $('#feedback').removeClass('hide alert-success');
+  $('#feedback').addClass('alert-danger');
 };
 
-function Post(URL, Data) {
+function Post(URL, Data, SuccessMessage = 'Success! You are now being redirected...') {
   $.post(URL, Data, function(result) {
     if (!result.success) {
       InProgress = false;
@@ -60,8 +52,12 @@ function Post(URL, Data) {
     }
     else {
       StopWaitingAnimation();
-      SuccessFeedback("Success! You are now being redirected...");
-      window.location.replace(result.url);
+      SuccessFeedback(SuccessMessage);
+      if (result.url.length > 0) window.location.replace(result.url);
+      else {
+        InProgress = false;
+        EnableForm(true);
+      }
     }
   }, 'json');
 };

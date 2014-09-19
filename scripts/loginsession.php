@@ -27,7 +27,7 @@ class LoginSession
   private $m_userid;
   private $m_username;
   private $m_status;
-
+  private $m_info;
 
   private function GetHost()
   {
@@ -157,6 +157,22 @@ class LoginSession
   public function GetStatus()
   {
     return $this->m_status;
+  }
+
+  public function GetInfo()
+  {
+    if (!isset($this->m_info)) $this->LoadInfo();
+    return $this->m_info;
+  }
+
+  private function LoadInfo()
+  {
+    global $dbconnection;    
+
+    if (!$this->IsLoggedIn()) return;
+    $stmt = $dbconnection->prepare("SELECT * FROM users WHERE id = ?;");
+    $stmt->execute(array($this->m_userid));
+    $this->m_info = $stmt->fetchAll()[0];
   }
 }
 
