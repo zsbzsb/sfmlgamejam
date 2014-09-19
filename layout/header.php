@@ -1,4 +1,13 @@
-<?php include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php'; ?>
+<?php
+
+include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
+
+if (isset($RequiresAuthentication) && $RequiresAuthentication)
+  RequireAuthentication(isset($RequiresAdmin) && $RequiresAdmin);
+else if (isset($RequiresGuest) && $RequiresGuest)
+  RequireGuest()
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">

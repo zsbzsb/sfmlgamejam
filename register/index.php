@@ -1,6 +1,4 @@
-<?php include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php'; if ($session->IsLoggedIn()) { header('Location: /account'); die(); } ?>
-
-<?php $Title = "Register"; $Active = "Register"; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
+<?php $Title = "Register"; $Active = "Register"; $RequiresGuest = true; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
 
 <div class="row">
   <h2 class="text-center">Create an Account</h2>

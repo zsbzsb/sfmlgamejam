@@ -13,6 +13,17 @@ function RequireAuthentication($AdminLevel = false)
   }
 }
 
+function RequireGuest()
+{
+  global $session;
+
+  if ($session->IsLoggedIn())
+  {
+    header('Location: /account');
+    die();
+  }
+}
+
 abstract class AccountStatus
 {
   const Banned = -1;
