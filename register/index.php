@@ -45,7 +45,7 @@ $(function() {
   RegisterTextbox($('#password'));
   RegisterTextbox($('#confirmpassword'));
   RegisterTextbox($('#email'));
-  $('#acceptterms').bind("change", function() { ValidateForm(); });
+  $('#acceptterms').bind("change", function() { RequestValidateForm(); });
 });
 
 function ValidateForm() {

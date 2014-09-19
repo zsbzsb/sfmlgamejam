@@ -2,7 +2,7 @@
 
 function EmailValid($Email)
 {
-  return filter_var($email, FILTER_VALIDATE_EMAIL);
+  return filter_var($Email, FILTER_VALIDATE_EMAIL);
 }
 
 function URLValid($URL)

@@ -6,7 +6,11 @@ $(function() {
 });
 
 function RegisterTextbox(Textbox) {
-  Textbox.bind("change keypress paste input", function() { EnableForm(ValidateForm()); });
+  Textbox.bind("change keypress paste input", function() { RequestValidateForm() });
+};
+
+function RequestValidateForm() {
+  EnableForm(ValidateForm());
 };
 
 function EnableForm(Valid) {
