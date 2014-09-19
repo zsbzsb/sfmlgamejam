@@ -8,6 +8,21 @@ body {
   margin-right: -7px;
 }
 
+#contentarea {
+  margin-bottom: 50px;
+}
+
 textarea {
   resize: vertical;
+}
+
+#footer {
+  min-height: 25px !important;
+  height: 25px !important;
+}
+
+#footer a {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  font-size: 10px !important;
 }

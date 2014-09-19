@@ -47,6 +47,7 @@ $(function() {
 });
 
 function LoadPreview() {
+  $('#preview').css('min-height', $('#edit').css('height'));
   DotAnimation($('#preview'), 'Loading');
   var text = $('#about').val();
   $.post('/scripts/markdownpreview.php', {text:text}, function(result) {
