@@ -2,7 +2,7 @@
 
 include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
 
-if (isset($RequiresAuthentication) && $RequiresAuthentication)
+if ((isset($RequiresAuthentication) && $RequiresAuthentication) || (isset($RequiresAdmin) && $RequiresAdmin))
   RequireAuthentication(isset($RequiresAdmin) && $RequiresAdmin);
 else if (isset($RequiresGuest) && $RequiresGuest)
   RequireGuest()
@@ -45,7 +45,7 @@ else if (isset($RequiresGuest) && $RequiresGuest)
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/"><img src="/images/logo.png" alt="" class="navbar-logo"></img></a>
+          <a class="navbar-brand" href="/"><img src="/images/logo.png" alt="" class="navbar-logo"></a>
           <a class="navbar-brand" href="/">SFML Game Jam</a>
         </div>
         <div class="collapse navbar-collapse">
@@ -55,6 +55,7 @@ else if (isset($RequiresGuest) && $RequiresGuest)
             <li<?php if ($Active == "News") echo ' class="active"'; ?>><a href="/news">News</a></li>
             <li<?php if ($Active == "Jams") echo ' class="active"'; ?>><a href="/jams">Jams</a></li>
             <li<?php if ($Active == "Rules") echo ' class="active"'; ?>><a href="/rules">Rules</a></li>
+            <?php if ($session->GetStatus() == AccountStatus::Admin) echo '<li'.($Active == "Admin" ? ' class="active"' : '').'><a href="/admin">Admin</a></li>'; ?>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <?php
