@@ -40,9 +40,9 @@
                     echo '
                     <tr>
                       <td>'.$row['title'].'</td>
-                      <td>'.$row['suggestionsstart'].'</td>
-                      <td>'.$row['suggestionsend'].'</td>
-                      <td>'.$row['jamstart'].'</td>
+                      <td>'.date($DATETIME_FORMAT, $row['suggestionsstart']).'</td>
+                      <td>'.date($DATETIME_FORMAT, $row['suggestionsend']).'</td>
+                      <td>'.date($DATETIME_FORMAT, $row['jamstart']).'</td>
                     </tr>';
                   }
                 ?>

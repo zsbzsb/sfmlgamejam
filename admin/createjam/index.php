@@ -17,21 +17,21 @@
         <input type="text" class="form-control" id="title" placeholder="Enter Title" />
       </div>
       <div class="form-group">
-        <label for="suggestionsstart">Suggestions Start</label>
+        <label for="suggestionsstart">Suggestions Start*</label>
         <div class="input-group date" id="suggestionsstartcontainer">
           <input type="text" class="form-control" id="suggestionsstart" placeholder="Select a Date" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
       <div class="form-group">
-        <label for="suggestionsend">Suggestions End</label>
+        <label for="suggestionsend">Suggestions End*</label>
         <div class="input-group date" id="suggestionsendcontainer">
           <input type="text" class="form-control" id="suggestionsend" placeholder="Select a Date" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
       <div class="form-group">
-        <label for="jamstart">Jam Start</label>
+        <label for="jamstart">Jam Start*</label>
         <div class="input-group date" id="jamstartcontainer">
           <input type="text" class="form-control" id="jamstart" placeholder="Select a Date" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
@@ -39,6 +39,7 @@
       </div>
       <button type="submit" class="btn btn-success pull-right disabled" id="submit">Create</button>
     </form>
+    <span><small>*All times are entered in UTC</small></small>
   </div>
 </div>
 
@@ -54,22 +55,22 @@ $(function() {
   RegisterTextbox($('#suggestionsstart'));
   RegisterTextbox($('#suggestionsend'));
   RegisterTextbox($('#jamstart'));
-  $("#suggestionsstartcontainer").on("dp.change",function(e) {
-    $('#suggestionsendcontainer').data("DateTimePicker").setMinDate(e.date);
+  $('#suggestionsstartcontainer').on('dp.change', function(e) {
+    $('#suggestionsendcontainer').data('DateTimePicker').setMinDate(e.date);
     RequestValidateForm();
   });
-  $("#suggestionsendcontainer").on("dp.change",function(e) {
-    $('#suggestionsstartcontainer').data("DateTimePicker").setMaxDate(e.date);
-    $('#jamstartcontainer').data("DateTimePicker").setMinDate(e.date);
+  $('#suggestionsendcontainer').on('dp.change', function(e) {
+    $('#suggestionsstartcontainer').data('DateTimePicker').setMaxDate(e.date);
+    $('#jamstartcontainer').data('DateTimePicker').setMinDate(e.date);
     RequestValidateForm();
   });
-  $("#jamstartcontainer").on("dp.change",function(e) {
+  $('#jamstartcontainer').on('dp.change', function(e) {
     RequestValidateForm();
   });
 });
 
 function GetTimeStamp(PickerID) {
-  return moment($(PickerID).val()).valueOf() / 1000;
+  return moment.utc($(PickerID).val() + ' UTC').unix();
 };
 
 function ValidateForm() {

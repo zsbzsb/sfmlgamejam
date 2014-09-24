@@ -5,7 +5,9 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
 if ((isset($RequiresAuthentication) && $RequiresAuthentication) || (isset($RequiresAdmin) && $RequiresAdmin))
   RequireAuthentication(isset($RequiresAdmin) && $RequiresAdmin);
 else if (isset($RequiresGuest) && $RequiresGuest)
-  RequireGuest()
+  RequireGuest();
+
+date_default_timezone_set('UTC');
 
 ?>
 
