@@ -15,7 +15,7 @@ function Error($ErrorMessage)
 function RequirePostVariable($Variable)
 {
   if (!isset($_POST[$Variable])) Error($Variable." is not set.");
-  else return $_POST[$Variable];
+  else return htmlspecialchars(trim($_POST[$Variable]));
 }
 
 ?>

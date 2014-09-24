@@ -19,7 +19,7 @@
       </div>
       <div class="form-group">
         <label for="about">Profile Summary</label>
-         <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+         <ul class="nav nav-tabs" data-tabs="tabs">
            <li class="active"><a href="#edit" data-toggle="tab">Edit</a></li>
            <li><a href="#preview" data-toggle="tab">Preview</a></li>
          </ul>
@@ -31,7 +31,7 @@
            </div>
          </div>
       </div>
-      <button type="submit" class="btn btn-success pull-right" id="submit">Save</button>
+      <button type="button" class="btn btn-success pull-right" id="submit">Save</button>
     </form>
   </div>
 </div>

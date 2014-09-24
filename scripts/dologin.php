@@ -3,9 +3,9 @@
 include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
 include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/feedback.php';
 
-$username = htmlspecialchars(trim(RequirePostVariable('username')));
-$password = htmlspecialchars(trim(RequirePostVariable('password')));
-$return = isset($_POST['return']) ? $_POST['return'] : '/account';
+$username = RequirePostVariable('username');
+$password = RequirePostVariable('password');
+$return = isset($_POST['return']) ? trim($_POST['return']) : '/account';
 
 if (strlen($username) > 20) Error('Username max length is 20 characters.');
 else if (strlen($username) == 0) Error('Username can not be blank.');

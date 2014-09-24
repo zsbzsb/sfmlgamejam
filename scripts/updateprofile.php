@@ -6,9 +6,9 @@ include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/validation.php';
 
 RequireAuthentication();
 
-$avatar = htmlspecialchars(trim(RequirePostVariable('avatar')));
-$website = htmlspecialchars(trim(RequirePostVariable('website')));
-$about = htmlspecialchars(trim(RequirePostVariable('about')));
+$avatar = RequirePostVariable('avatar');
+$website = RequirePostVariable('website');
+$about = RequirePostVariable('about');
 
 if (strlen($avatar) > 0 && !URLValid($avatar)) Error('Avatar is not a valid link.');
 else if (strlen($website) > 0 && !URLValid($website)) Error('Website is not a valid link.');
