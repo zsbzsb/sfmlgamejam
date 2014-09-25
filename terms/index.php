@@ -1,4 +1,4 @@
-<?php $Title = "Terms of Use"; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
+<?php $Title = 'Terms of Use'; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
 
 <div class="row">
   <div class="col-md-8 col-md-offset-2">

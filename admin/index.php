@@ -1,4 +1,4 @@
-<?php $Title = "Admin Panel"; $Active = "Admin"; $RequiresAdmin = true; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
+<?php $Title = 'Admin Panel'; $Active = 'Admin'; $RequiresAdmin = true; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
 
 <div class="row">
 
@@ -32,13 +32,13 @@
               </thead>
               <tbody>
                 <?php
-                  $stmt = $dbconnection->prepare("SELECT * FROM jams;");
+                  $stmt = $dbconnection->prepare('SELECT * FROM jams;');
                   $stmt->execute();
                   $rows = $stmt->fetchAll();
                   foreach ($rows as $row)
                   {
                     echo '
-                    <tr>
+                    <tr class="clickablerow" href="/admin/editjam/?id='.$row['id'].'">
                       <td>'.$row['title'].'</td>
                       <td>'.date($DATETIME_FORMAT, $row['suggestionsstart']).'</td>
                       <td>'.date($DATETIME_FORMAT, $row['suggestionsend']).'</td>
@@ -48,7 +48,7 @@
                 ?>
               </tbody>
             </table>
-            <a href="/admin/createjam" class="btn btn-info pull-right" id="newjam">Create Jam</a>
+            <a href="/admin/editjam" class="btn btn-info pull-right" id="newjam">Create Jam</a>
           </div>
           <div class="tab-pane" id="news">
           </div>
@@ -57,5 +57,13 @@
     </div>
   </div>
 </div>
+
+<script>
+$(function() {
+  $('.clickablerow').click(function() {
+    window.document.location = $(this).attr('href');
+  });
+});
+</script>
 
 <?php include_once $_SERVER['DOCUMENT_ROOT'].'/layout/footer.php'; ?>

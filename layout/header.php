@@ -52,11 +52,11 @@ date_default_timezone_set('UTC');
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <?php if(!isset($Active)) $Active = ""; ?>
-            <li<?php if ($Active == "Home") echo ' class="active"'; ?>><a href="/home">Home</a></li>
-            <li<?php if ($Active == "News") echo ' class="active"'; ?>><a href="/news">News</a></li>
-            <li<?php if ($Active == "Jams") echo ' class="active"'; ?>><a href="/jams">Jams</a></li>
-            <li<?php if ($Active == "Rules") echo ' class="active"'; ?>><a href="/rules">Rules</a></li>
+            <?php if(!isset($Active)) $Active = ''; ?>
+            <li<?php if ($Active == 'Home') echo ' class="active"'; ?>><a href="/home">Home</a></li>
+            <li<?php if ($Active == 'News') echo ' class="active"'; ?>><a href="/news">News</a></li>
+            <li<?php if ($Active == 'Jams') echo ' class="active"'; ?>><a href="/jams">Jams</a></li>
+            <li<?php if ($Active == 'Rules') echo ' class="active"'; ?>><a href="/rules">Rules</a></li>
             <?php if ($session->GetStatus() == AccountStatus::Admin) echo '<li'.($Active == "Admin" ? ' class="active"' : '').'><a href="/admin">Admin</a></li>'; ?>
           </ul>
           <ul class="nav navbar-nav navbar-right">

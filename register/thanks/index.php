@@ -1,4 +1,4 @@
-<?php $Title = "Thanks for Registering!"; $RequiresAuthentication = true; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
+<?php $Title = 'Thanks for Registering!'; $RequiresAuthentication = true; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
 
 <div class="row">
   <div class="jumbotron">

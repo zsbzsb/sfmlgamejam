@@ -8,7 +8,7 @@ function RequireAuthentication($AdminLevel = false)
 
   if (!$session->IsLoggedIn() || ($AdminLevel && $session->GetStatus() != AccountStatus::Admin))
   {
-    header('Location: /login?return='.$_SERVER["REQUEST_URI"]);
+    header('Location: /login?return='.$_SERVER['REQUEST_URI']);
     die();
   }
 }
@@ -42,7 +42,7 @@ class LoginSession
 
   private function GetHost()
   {
-    return $_SERVER['REMOTE_ADDR'].(isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : "").(isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : "");
+    return $_SERVER['REMOTE_ADDR'].(isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : '').(isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : '');
   }
 
   private function GetUserAgent()
@@ -61,7 +61,7 @@ class LoginSession
     $this->m_status = AccountStatus::Banned;
     if (isset($_COOKIE[$COOKIE_TOKENID]))
     {
-      $stmt = $dbconnection->prepare("SELECT * FROM user_tokens WHERE tokenid = ?;");
+      $stmt = $dbconnection->prepare('SELECT * FROM user_tokens WHERE tokenid = ?;');
       $stmt->execute(array($_COOKIE[$COOKIE_TOKENID]));
       $rows = $stmt->fetchAll();
       if ($stmt->rowCount() == 0) return;
@@ -77,12 +77,12 @@ class LoginSession
     global $dbconnection;
 
     if ($this->IsLoggedIn()) return false;
-    $stmt = $dbconnection->prepare("SELECT COUNT(*) FROM users WHERE username = ? OR email = ?;");
+    $stmt = $dbconnection->prepare('SELECT COUNT(*) FROM users WHERE username = ? OR email = ?;');
     $stmt->execute(array($Username, $Email));
     $rows = $stmt->fetchAll();
     if ($stmt->rowCount() == 0) return false;
     if ($rows[0]['COUNT(*)'] > 0) return false;
-    $stmt = $dbconnection->prepare("INSERT INTO users (username, password, salt, email, status, specialcode, avatar, about, website) VALUES (?, ?, ?, ?, ?, ?, '', '', '');");
+    $stmt = $dbconnection->prepare('INSERT INTO users (username, password, salt, email, status, specialcode, avatar, about, website) VALUES (?, ?, ?, ?, ?, ?, \'\', \'\', \'\');');
     $salt = uniqid('', true);
     $stmt->execute(array($Username, $this->HashPW($salt, $Password), $salt, $Email, AccountStatus::Normal, ''));
     $this->Login($dbconnection->lastInsertId(), true);
@@ -94,7 +94,7 @@ class LoginSession
     global $dbconnection;
 
     if ($this->IsLoggedIn()) return false;
-    $stmt = $dbconnection->prepare("SELECT id, password, salt FROM users WHERE username = ?;");
+    $stmt = $dbconnection->prepare('SELECT id, password, salt FROM users WHERE username = ?;');
     $stmt->execute(array($Username));
     $rows = $stmt->fetchAll();
     if ($stmt->rowCount() == 0) return false;
@@ -119,7 +119,7 @@ class LoginSession
 
     if ($CreateToken)
     {
-      $stmt = $dbconnection->prepare("INSERT INTO user_tokens (tokenid, expires, user_id, host, useragent) VALUES (?, ?, ?, ?, ?);");
+      $stmt = $dbconnection->prepare('INSERT INTO user_tokens (tokenid, expires, user_id, host, useragent) VALUES (?, ?, ?, ?, ?);');
       $host = $this->GetHost();
       $useragent = $this->GetUserAgent();
       $tokenid = hash("SHA256", $host.$useragent.time().$UserID.uniqid('', true));
@@ -127,7 +127,7 @@ class LoginSession
       setcookie($COOKIE_TOKENID, $tokenid, time() + $SESSION_TIMEOUT, '/');
     }
 
-    $stmt = $dbconnection->prepare("SELECT username, status FROM users WHERE id = ?;");
+    $stmt = $dbconnection->prepare('SELECT username, status FROM users WHERE id = ?;');
     $stmt->execute(array($UserID));
     $rows = $stmt->fetchAll();
 
@@ -144,7 +144,7 @@ class LoginSession
 
     if ($this->IsLoggedIn())
     {
-      $stmt = $dbconnection->prepare("DELETE FROM user_tokens WHERE tokenid = ?;");
+      $stmt = $dbconnection->prepare('DELETE FROM user_tokens WHERE tokenid = ?;');
       $stmt->execute(array($_COOKIE[$COOKIE_TOKENID]));
     }
     setcookie($COOKIE_TOKENID, null, -1, '/');
@@ -181,7 +181,7 @@ class LoginSession
     global $dbconnection;    
 
     if (!$this->IsLoggedIn()) return;
-    $stmt = $dbconnection->prepare("SELECT * FROM users WHERE id = ?;");
+    $stmt = $dbconnection->prepare('SELECT * FROM users WHERE id = ?;');
     $stmt->execute(array($this->m_userid));
     $this->m_info = $stmt->fetchAll()[0];
   }

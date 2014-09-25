@@ -7,7 +7,7 @@
             <li><a href="https://www.github.com/zsbzsb/sfmlgamejam/">Source Code</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="http://www.zbrown.net/">Designed By Zachariah Brown (zsbzsb)</a></li>
+            <li><a href="http://www.zbrown.net/">Developed By Zachariah Brown (zsbzsb)</a></li>
           </ul>
         </div>
       </div>

@@ -1,4 +1,4 @@
-<?php $Title = "Account Panel"; $RequiresAuthentication = true; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
+<?php $Title = 'Account Panel'; $RequiresAuthentication = true; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
 
 <div class="row">
   <h2 class="text-center">Account Panel</h2>

@@ -1,4 +1,4 @@
-<?php $Title = "Login"; $Active = "Login"; $RequiresGuest = true; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
+<?php $Title = 'Login'; $Active = 'Login'; $RequiresGuest = true; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
 
 <div class="row">
   <h2 class="text-center">Login to Your Account</h2>
