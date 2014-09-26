@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="400"
+   height="400"
+   id="svg2"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="SFML Logo.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="745"
+     id="namedview39"
+     showgrid="false"
+     inkscape:zoom="0.7273837"
+     inkscape:cx="-17.872273"
+     inkscape:cy="66.709999"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <title
+     id="title3015">SFML Game Jam Logo</title>
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient6147">
+      <stop
+         id="stop6149"
+         style="stop-color:#b4b4b4;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop6151"
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4987">
+      <stop
+         id="stop4989"
+         style="stop-color:#ee6b52;stop-opacity:1;"
+         offset="0" />
+      <stop
+         id="stop4991"
+         style="stop-color:#880e0e;stop-opacity:1;"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       x1="2343.2"
+       y1="2232"
+       x2="2343.2"
+       y2="2428.3999"
+       id="linearGradient4885"
+       xlink:href="#linearGradient4987"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(3.2572917,0,0,3.3503389,-7363.2082,-7473.9869)" />
+    <linearGradient
+       x1="1278.2"
+       y1="2736.3999"
+       x2="1278.2"
+       y2="2574.3999"
+       id="linearGradient4887"
+       xlink:href="#linearGradient6147"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(4859.7,-2175.4)" />
+    <linearGradient
+       x1="1277"
+       y1="2519.1001"
+       x2="1278.2"
+       y2="2736.3999"
+       id="linearGradient4897"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(4859.7,-2175.4)">
+      <stop
+         id="stop4554"
+         style="stop-color:#7d7d7d;stop-opacity:1"
+         offset="0" />
+      <stop
+         id="stop4556"
+         style="stop-color:#7d7d7d;stop-opacity:1"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       x1="2343.2"
+       y1="2232"
+       x2="2343.2"
+       y2="2361.8999"
+       id="linearGradient4923"
+       xlink:href="#linearGradient4987"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(3.2572917,0,0,3.3503389,-7363.2082,-7473.9869)" />
+    <linearGradient
+       x1="1278.2"
+       y1="2655.6001"
+       x2="1278.2"
+       y2="2574.3999"
+       id="linearGradient4994"
+       xlink:href="#linearGradient6147"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(0.79697,0,0,0.79697,-751.52,-2003.5)" />
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>SFML Game Jam Logo</dc:title>
+        <dc:date>1 May 2013</dc:date>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Michael Bradshaw</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/publicdomain/" />
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <path
+     d="m 262.5872,41.067932 12.65784,9.459012 12.65751,9.459012 12.65783,9.459012 12.65785,9.459012 12.65718,9.459012 12.65784,9.459011 c 64.29242,48.610067 56.7127,68.109037 39.11356,123.821827 l -4.83513,15.30502 -4.8348,15.30468 -4.83479,15.30468 -4.8348,15.30502 -4.8348,15.30502 -4.8348,15.30502 c -25.07887,77.91213 -45.45225,76.52509 -102.40275,76.52509 H 152.36305 C 72.569177,389.54238 67.559462,369.18438 49.960315,313.47327 L 45.125517,298.16825 40.290719,282.86323 35.455921,267.55821 30.621123,252.25353 25.786324,236.94851 20.951201,221.64349 C -3.2836995,143.44658 13.992323,132.2531 60.06476,97.821668 l 12.65751,-9.459012 12.657836,-9.459011 12.65751,-9.459012 12.657514,-9.459347 12.65783,-9.459012 12.65784,-9.459012 c 64.81359,-47.8729927 80.50396,-34.431433 126.5751,3.35e-4 z"
+     id="path6382"
+     style="fill:url(#linearGradient4885)"
+     inkscape:connector-curvature="0" />
+  <path
+     d="m 10.609625,175.73816 c 1.212983,12.28937 4.571609,27.10759 10.382617,45.85943 l 4.784311,15.39079 4.885937,15.28592 4.78431,15.28592 4.885938,15.28593 4.78431,15.28592 4.885938,15.39078 c 17.599147,55.71279 22.60821,75.97229 102.402734,76.42793 h 93.84909 c 56.9505,0 77.3216,1.48387 102.40275,-76.42793 l 4.78431,-15.39078 4.88594,-15.28592 4.78431,-15.28593 3.66445,-11.62165 C 221.51764,240.55381 97.362705,212.23675 10.624283,175.7214 z"
+     id="path4909"
+     style="fill:url(#linearGradient4923)"
+     inkscape:connector-curvature="0" />
+  <g
+     id="g3366"
+     style="fill:#ffffff"
+     transform="matrix(3.2572917,0,0,3.3503389,-22.57566,-23.50315)">
+    <path
+       d="m 88.397,30.201 -4.0625,15.594 1.0626,0.7813 2.6873,1.9375 2.6876,1.9687 2.6874,1.9375 2.6876,1.9688 2.875,2.0624 c 2.3606,1.6117 3.1102,2.4368 3.3437,2.6563 -0.081,0.27935 -0.3067,1.2839 -1.25,4.1875 l -1.0313,3.1875 -1.0312,3.1563 -1.0312,3.1562 -1.0313,3.1562 -1,3.1563 -1.0313,3.1875 -1.0312,3.1562 -1.0312,3.1563 -1.0313,3.1563 -1.0933,3.375 c -0.8129,2.7753 -1.3716,3.7233 -1.5,4 -0.3561,0.009 -1.3152,0.094 -4.3749,0.094 h -33.468 c -2.8617,0.084 -3.933,-0.116 -4.25,-0.1563 -0.099,-0.25144 -0.4714,-0.88861 -1.4375,-4.1562 l -1.0313,-3.1562 -1.0312,-3.1563 -1.0312,-3.1563 -1.0313,-3.1562 -1.0313,-3.1875 -1.0312,-3.1563 -1,-3.1562 -1.0312,-3.1562 -1.0313,-3.1563 -1.0932,-3.375 c -0.9795,-2.7392 -1.0983,-3.8344 -1.1563,-4.125 0.2263,-0.18141 0.7323,-0.668 3.4686,-2.6563 l 2.6876,-1.9374 2.7187,-1.9688 2.6875,-1.9375 2.6875,-1.9687 2.6875,-1.9375 1.0312,-0.75 -4.0624,-15.594 -0.4063,0.2813 -2.6875,1.9687 -2.6875,1.9375 -2.6875,1.9688 -2.7188,1.9375 -2.6873,1.9687 -2.6876,1.9688 -2.6874,1.9375 c -3.2131,2.3343 -6.6834,4.2644 -8.6876,9.1249 -1.9794,4.8008 -0.8511,9.499 0.9691,14.625 l 1.031,3.1561 1.0313,3.1563 1.0313,3.1562 1.0312,3.1875 1.0312,3.1563 1.0313,3.1562 1.0313,3.1562 1,3.1563 1.0312,3.1875 1.0312,3.1562 c 1.2272,3.7771 1.9967,7.6856 5.9999,11.094 3.9487,3.3615 8.7588,3.7082 14.188,3.5625 h 33.251 c 3.9714,0 7.9277,0.4731 12.406,-2.2813 4.415,-2.7154 6.2739,-7.1702 7.8125,-12.375 l 1.0308,-3.1562 1,-3.1875 1.0312,-3.1563 1.0312,-3.1562 1.0313,-3.1562 1.0313,-3.1563 1.0312,-3.1875 1.0311,-3.1562 1.0313,-3.1563 1,-3.1563 c 1.2271,-3.777 2.9231,-7.3895 1.6875,-12.5 -1.2183,-5.0389 -4.8991,-8.1777 -9.3749,-11.25 L 104.9932,42.2638 102.2745,40.295 99.5869,38.3263 96.8995,36.3888 94.2119,34.42 91.5245,32.4825 88.8369,30.5138 88.3995,30.2013 z"
+       id="path6354"
+       style="text-indent:0;text-transform:none;block-progression:tb;color:#000000"
+       inkscape:connector-curvature="0" />
+    <path
+       d="m 67.526,19.176 c -4.3084,0.26351 -7.9562,2.5794 -11.719,5.4688 -0.036,0.027 -0.061,0.065 -0.094,0.094 l 10.312,39.704 4.5,10e-5 10.344,-39.704 -0.094,-0.094 C 77.562,22.3107 74.642,19.6115 69.4,19.2074 c -0.6454,-0.05 -1.2595,-0.069 -1.875,-0.031 z"
+       id="path6356"
+       style="text-indent:0;text-transform:none;block-progression:tb;color:#000000"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
