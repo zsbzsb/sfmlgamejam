@@ -81,11 +81,11 @@ class LoginSession
     $stmt->execute(array($Username, $Email));
     $rows = $stmt->fetchAll();
     if ($stmt->rowCount() == 0) return false;
-    if ((isset($rows[0]['COUNT(*)']) ? $rows[0]['COUNT(*)'] : isset($rows[0]['count']) ? $rows[0]['count'] : 1) > 0) return false;
+    if ($rows[0]['count'] > 0) return false;
     $stmt = $dbconnection->prepare('INSERT INTO users (username, password, salt, email, status, specialcode, avatar, about, website) VALUES (?, ?, ?, ?, ?, ?, \'\', \'\', \'\');');
     $salt = uniqid('', true);
     $stmt->execute(array($Username, $this->HashPW($salt, $Password), $salt, $Email, AccountStatus::Normal, ''));
-    $this->Login($dbconnection->lastInsertId(), true);
+    $this->Login($dbconnection->lastInsertId('users_id_seq'), true);
     return true;
   }
 
