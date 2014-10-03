@@ -36,3 +36,11 @@ textarea {
   color: #FFFFFF;
   cursor: pointer;
 }
+
+.modal {
+  margin-top: 130px;
+}
+
+.inline {
+  display: inline-block;
+}

@@ -7,8 +7,6 @@ if ((isset($RequiresAuthentication) && $RequiresAuthentication) || (isset($Requi
 else if (isset($RequiresGuest) && $RequiresGuest)
   RequireGuest();
 
-date_default_timezone_set('UTC');
-
 ?>
 
 <!DOCTYPE html>

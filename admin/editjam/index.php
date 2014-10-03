@@ -36,21 +36,21 @@ if (!$createjam)
       <div class="form-group">
         <label for="suggestionsstart">Suggestions Start*</label>
         <div class="input-group date" id="suggestionsstartcontainer">
-          <input type="text" class="form-control" id="suggestionsstart" placeholder="Select a Date" value="<?php if (!$createjam) echo date($DATETIME_FORMATISO, $jam['suggestionsstart']); ?>" />
+          <input type="text" class="form-control" id="suggestionsstart" placeholder="Select a Date" value="<?php if (!$createjam) echo date($DATETIME_FORMAT, $jam['suggestionsstart']); ?>" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
       <div class="form-group">
         <label for="suggestionsend">Suggestions End*</label>
         <div class="input-group date" id="suggestionsendcontainer">
-          <input type="text" class="form-control" id="suggestionsend" placeholder="Select a Date" value="<?php if (!$createjam) echo date($DATETIME_FORMATISO, $jam['suggestionsend']); ?>" />
+          <input type="text" class="form-control" id="suggestionsend" placeholder="Select a Date" value="<?php if (!$createjam) echo date($DATETIME_FORMAT, $jam['suggestionsend']); ?>" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
       <div class="form-group">
         <label for="jamstart">Jam Start*</label>
         <div class="input-group date" id="jamstartcontainer">
-          <input type="text" class="form-control" id="jamstart" placeholder="Select a Date" value="<?php if (!$createjam) echo date($DATETIME_FORMATISO, $jam['jamstart']); ?>" />
+          <input type="text" class="form-control" id="jamstart" placeholder="Select a Date" value="<?php if (!$createjam) echo date($DATETIME_FORMAT, $jam['jamstart']); ?>" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
@@ -108,8 +108,7 @@ $(function() {
 });
 
 function GetTimeStamp(PickerID) {
-var d = $(PickerID).val().replace('UTC', '') + ' UTC';
-  return moment.utc($(PickerID).val() + ' UTC').unix();
+  return moment.utc($(PickerID).val().replace('UTC', '') + ' UTC').unix();
 };
 
 function ValidateForm() {

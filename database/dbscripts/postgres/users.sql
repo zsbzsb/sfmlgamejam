@@ -8,4 +8,6 @@ CREATE TABLE users (
   specialcode TEXT NOT NULL,
   avatar TEXT NOT NULL,
   about TEXT NOT NULL,
-  website TEXT NOT NULL );
+  website TEXT NOT NULL,
+  CONSTRAINT "users_PK" PRIMARY KEY (id)
+);

@@ -3,4 +3,6 @@ CREATE TABLE jams (
   title TEXT NOT NULL,
   suggestionsstart BIGINT NOT NULL,
   suggestionsend BIGINT NOT NULL,
-  jamstart BIGINT NOT NULL );
+  jamstart BIGINT NOT NULL,
+  CONSTRAINT "jams_PK" PRIMARY KEY (id)
+);

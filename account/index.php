@@ -52,7 +52,7 @@ function LoadPreview() {
     StopAnimation($('#preview'));
     $('#preview').html(result.message);
   }, 'json');
-}
+};
 
 function ValidateForm() {
   return true;
