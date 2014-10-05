@@ -1,5 +1,3 @@
-<?php $Title = 'Home'; $Active = 'Home'; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
-
 <div class="row">
   <div class="jumbotron">
     <h2 class="text-center">Hello and welcome to the SFML Game Jam website!</h2>
@@ -53,5 +51,3 @@
     ?>
   </div>
 </div>
-
-<?php include_once $_SERVER['DOCUMENT_ROOT'].'/layout/footer.php'; ?>

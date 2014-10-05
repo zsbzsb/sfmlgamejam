@@ -1,5 +1,3 @@
-<?php $Title = 'Login'; $Active = 'Login'; $RequiresGuest = true; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
-
 <div class="row">
   <h2 class="text-center">Login to Your Account</h2>
 </div>
@@ -46,5 +44,3 @@ function Submit() {
   Post('/scripts/dologin.php', {username:username, password:password<?php if (isset($_GET['return'])) echo ', return:"'.$_GET['return'].'"'; ?>})
 };
 </script>
-
-<?php include_once $_SERVER['DOCUMENT_ROOT'].'/layout/footer.php'; ?>

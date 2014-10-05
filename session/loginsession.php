@@ -1,14 +1,13 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
-
 function RequireAuthentication($AdminLevel = false)
 {
   global $session;
+  global $routes;
 
   if (!$session->IsLoggedIn() || ($AdminLevel && $session->GetStatus() != AccountStatus::Admin))
   {
-    header('Location: /login?return='.$_SERVER['REQUEST_URI']);
+    header('Location: '.$routes->generate('login', array('return' => $_SERVER['REQUEST_URI'])));
     die();
   }
 }
@@ -16,10 +15,11 @@ function RequireAuthentication($AdminLevel = false)
 function RequireGuest()
 {
   global $session;
+  global $routes;
 
   if ($session->IsLoggedIn())
   {
-    header('Location: /account');
+    header('Location: '.$routes->generate('account'));
     die();
   }
 }
@@ -186,7 +186,5 @@ class LoginSession
     $this->m_info = $stmt->fetchAll()[0];
   }
 }
-
-$session = new LoginSession();
 
 ?>

@@ -1,5 +1,3 @@
-<?php $Title = 'Register'; $Active = 'Register'; $RequiresGuest = true; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
-
 <div class="row">
   <h2 class="text-center">Create an Account</h2>
 </div>
@@ -66,5 +64,3 @@ function Submit() {
   Post('/scripts/doregister.php', {username:username, password:password, email:email});
 };
 </script>
-
-<?php include_once $_SERVER['DOCUMENT_ROOT'].'/layout/footer.php'; ?>

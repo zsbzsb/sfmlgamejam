@@ -1,5 +1,3 @@
-<?php $Title = 'Account Panel'; $RequiresAuthentication = true; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
-
 <div class="row">
   <h2 class="text-center">Account Panel</h2>
   <h3 class="text-center">Edit Profile</h3>
@@ -66,5 +64,3 @@ function Submit() {
   Post('/scripts/updateprofile.php', {avatar:avatar, website:website, about:about}, 'Profile was updated successfully.')
 };
 </script>
-
-<?php include_once $_SERVER['DOCUMENT_ROOT'].'/layout/footer.php'; ?>

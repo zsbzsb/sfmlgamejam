@@ -10,6 +10,4 @@ function CreateDBConnection()
   return new PDO($DATABASE_CONNECTION, $DATABASE_USERNAME, $DATABASE_PASSWORD, array(PDO::ATTR_EMULATE_PREPARES => false, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 
-$dbconnection = CreateDBConnection();
-
 ?>
