@@ -4,8 +4,8 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <form role="form" id="form">
-      <div class="alert alert-dismissible hide" role="alert" id="feedback"><button type="button" class="close" id="feedback-hide"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><span id="feedback-content"></span></div>
+    <form role="form" id="loginform">
+      <?php require TEMPLATEROOT.'formfeedback.php'; ?>
       <div class="form-group">
         <label for="username">Username</label>
         <input type="text" class="form-control" id="username" placeholder="JohnFourteenSix" />
@@ -14,33 +14,67 @@
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password" placeholder="Enter Password" />
       </div>
-      <button type="submit" class="btn btn-success pull-right disabled" id="submit">Login</button>
+      <button type="submit" class="btn btn-success pull-right disabled" id="loginsubmit">Login</button>
     </form>
   </div>
 </div>
 
-<!-- Custom Feedback -->
-<script src="/js/feedback.js"></script>
-
 <script>
 $(function() {
-  RegisterTextbox($('#username'));
-  RegisterTextbox($('#password'));
+  BindButtonClick($('#loginsubmit'), OnSubmit);
+  BindTextboxChanged($('#username'), ValidateForm);
+  BindTextboxChanged($('#password'), ValidateForm);
 });
 
+function OnSubmit()
+{
+  if (ValidateForm()) {
+    Submit();
+  }
+};
+
 function ValidateForm() {
-  var valid = true;
+  valid = true;
 
   if ($('#username').val().length == 0) valid = false;
   if ($('#password').val().length == 0) valid = false;
 
+
+  EnableButton($('#loginsubmit'), valid);
   return valid;
 };
 
 function Submit() {
-  var username = $('#username').val();
-  var password = $('#password').val();
+  EnableButton($('#loginsubmit'), false);
+  EnableFormInput('#loginform', false);
 
-  Post('/scripts/dologin.php', {username:username, password:password<?php if (isset($_GET['return'])) echo ', return:"'.$_GET['return'].'"'; ?>})
+  animation = DotAnimation($('#loginsubmit'));
+
+  username = $('#username').val();
+  password = $('#password').val();
+
+  success = false;
+
+  Post('/api/v1/account/login', { username:username, password:password })
+    .done(function(result) {
+      if (result.success) {
+        SuccessFeedback('You have been successfully logged in, redirecting...');
+        success = true;
+        Redirect('<?php echo $routes->generate('account'); ?>');
+      }
+      else ErrorFeedback(result.message);
+    })
+    .fail(function() {
+      ErrorFeedback('An unexpected error happened, please try again.');
+    })
+    .always(function() {
+      if (!success) {
+        EnableButton($('#loginsubmit'), true);
+        EnableFormInput('#loginform', true);
+      }
+
+      StopAnimation(animation);
+      $('#loginsubmit').html('Login');
+    });
 };
 </script>

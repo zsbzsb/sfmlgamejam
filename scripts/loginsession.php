@@ -1,29 +1,5 @@
 <?php
 
-function RequireAuthentication($AdminLevel = false)
-{
-  global $session;
-  global $routes;
-
-  if (!$session->IsLoggedIn() || ($AdminLevel && $session->GetStatus() != AccountStatus::Admin))
-  {
-    header('Location: '.$routes->generate('login', array('return' => $_SERVER['REQUEST_URI'])));
-    die();
-  }
-}
-
-function RequireGuest()
-{
-  global $session;
-  global $routes;
-
-  if ($session->IsLoggedIn())
-  {
-    header('Location: '.$routes->generate('account'));
-    die();
-  }
-}
-
 abstract class AccountStatus
 {
   const Banned = -1;
@@ -47,7 +23,8 @@ class LoginSession
 
   private function GetUserAgent()
   {
-    return $_SERVER['HTTP_USER_AGENT'];
+    if (isset($_SERVER['HTTP_USER_AGENT'])) return $_SERVER['HTTP_USER_AGENT'];
+    else return '';
   }
 
   public function __construct()
