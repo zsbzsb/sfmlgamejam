@@ -32,7 +32,7 @@ $routes->map('GET', '/jams', array('source' => 'jams.php', 'title' => 'Jams', 'a
 $routes->map('GET', '/rules', array('source' => 'rules.php', 'title' => 'Rules', 'active' => 'rules'), 'rules');
 
 // Admin Panel
-$routes->map('GET', '/admin', array('source' => 'admin.php', 'title' => 'Admin Panel', 'active' => 'admin'), 'admin');
+$routes->map('GET', '/admin', array('source' => 'admin.php', 'title' => 'Admin Panel', 'active' => 'admin', 'adminsonly' => true), 'admin');
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // API | HTTP POST requests only

@@ -29,17 +29,17 @@ class LoginSession
 
   public function __construct()
   {
-    global $COOKIE_TOKENID;
+    global $SESSION;
     global $dbconnection;
 
     $this->m_loggedin = false;
     $this->m_userid = -1;
     $this->m_username = 'Guest';
     $this->m_status = AccountStatus::Banned;
-    if (isset($_COOKIE[$COOKIE_TOKENID]))
+    if (isset($_COOKIE[$SESSION['tokenid']]))
     {
       $stmt = $dbconnection->prepare('SELECT * FROM user_tokens WHERE tokenid = ?;');
-      $stmt->execute(array($_COOKIE[$COOKIE_TOKENID]));
+      $stmt->execute(array($_COOKIE[$SESSION['tokenid']]));
       $rows = $stmt->fetchAll();
       if ($stmt->rowCount() == 0) return;
       if ($rows[0]['expires'] > time() && $rows[0]['host'] == $this->GetHost() && $rows[0]['useragent'] == $this->GetUserAgent())
@@ -90,8 +90,7 @@ class LoginSession
 
   private function Login($UserID, $CreateToken)
   {
-    global $COOKIE_TOKENID;
-    global $SESSION_TIMEOUT;
+    global $SESSION;
     global $dbconnection;
 
     if ($CreateToken)
@@ -100,8 +99,9 @@ class LoginSession
       $host = $this->GetHost();
       $useragent = $this->GetUserAgent();
       $tokenid = hash("SHA256", $host.$useragent.time().$UserID.uniqid('', true));
-      $stmt->execute(array($tokenid, time() + $SESSION_TIMEOUT, $UserID, $host, $useragent));
-      setcookie($COOKIE_TOKENID, $tokenid, time() + $SESSION_TIMEOUT, '/');
+      $stmt->execute(array($tokenid, time() + $SESSION['timeout'], $UserID, $host, $useragent));
+      $_COOKIE[$SESSION['tokenid']] = $tokenid;
+      setcookie($SESSION['tokenid'], $tokenid, time() + $SESSION['timeout'], '/');
     }
 
     $stmt = $dbconnection->prepare('SELECT username, status FROM users WHERE id = ?;');
@@ -116,15 +116,16 @@ class LoginSession
 
   public function Logout()
   {
-    global $COOKIE_TOKENID;
+    global $SESSION;
     global $dbconnection;
 
     if ($this->IsLoggedIn())
     {
       $stmt = $dbconnection->prepare('DELETE FROM user_tokens WHERE tokenid = ?;');
-      $stmt->execute(array($_COOKIE[$COOKIE_TOKENID]));
+      $stmt->execute(array($_COOKIE[$SESSION['tokenid']]));
     }
-    setcookie($COOKIE_TOKENID, null, -1, '/');
+    setcookie($SESSION['tokenid'], null, -1, '/');
+    unset($_COOKIE[$SESSION['tokenid']]);
   }
 
   public function IsLoggedIn()

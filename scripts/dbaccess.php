@@ -2,11 +2,9 @@
 
 function CreateDBConnection()
 {
-  global $DATABASE_CONNECTION;
-  global $DATABASE_USERNAME;
-  global $DATABASE_PASSWORD;
+  global $DATABASE;
 
-  return new PDO($DATABASE_CONNECTION, $DATABASE_USERNAME, $DATABASE_PASSWORD, array(PDO::ATTR_EMULATE_PREPARES => false, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+  return new PDO($DATABASE['connection'], $DATABASE['username'], $DATABASE['password'], array(PDO::ATTR_EMULATE_PREPARES => false, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 }
 
 ?>

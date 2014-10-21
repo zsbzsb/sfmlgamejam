@@ -50,7 +50,9 @@ else
   if ($apirequest)
   {
     $_POST = json_decode(file_get_contents('php://input'), true);
-    if (isset($_POST[$COOKIE_TOKENID]) && !isset($_COOKIE[$COOKIE_TOKENID])) $_COOKIE[$COOKIE_TOKENID] = $_POST[$COOKIE_TOKENID]; 
+
+    // also if the POST values contained the session id and it wasn't set in the headers we will set it here
+    if (isset($_POST['token'])) $_COOKIE[$SESSION['tokenid']] = $_POST['token'];
   }
 
   // setup db access
@@ -73,18 +75,14 @@ else
   {
     if (!$session->IsLoggedIn() || ($requiresadmin && $session->GetStatus() != AccountStatus::Admin))
     {
-        if ($apirequest)
-        {
-          http_response_code(401);
-          // TODO return actual 401 page
-          echo 'Oops, something went wrong [401] :(';
-          die();
-        }
-        else
-        {
-          header('Location: '.$routes->generate('login'));
-          die();
-        }
+      if ($apirequest)
+      {
+        http_response_code(401);
+        // TODO return actual 401 page
+        echo 'Oops, something went wrong [401] :(';
+      }
+      else header('Location: '.$routes->generate('login'));
+      die();
     }
   }
   // check that we should *not* be logged in
@@ -92,7 +90,13 @@ else
   {
     if ($session->IsLoggedIn())
     {
-      header('Location: '.$routes->generate('account'));
+      if ($apirequest)
+      {
+        http_response_code(401);
+        // TODO return actual 401 page
+        echo 'Oops, something went wrong [401] :(';
+      }
+      else header('Location: '.$routes->generate('account'));
       die();
     }
   }
