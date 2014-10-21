@@ -1,12 +1,20 @@
 <?php
 
-$DATABASE_CONNECTION = 'pgsql:host=localhost;dbname=sfmlgamejam;';
-$DATABASE_USERNAME = 'postgres';
-$DATABASE_PASSWORD = 'zsbzsb';
+// global settings
+// adjust this per install
 
-$COOKIE_TOKENID = 'TokenID';
+$DATABASE = array
+(
+    'connection' => 'pgsql:host=localhost;dbname=sfmlgamejam;',
+    'username' => 'postgres',
+    'password' => 'password'
+);
 
-$SESSION_TIMEOUT = 30 * 24 * 60 * 60;
+$SESSION = array
+(
+    'tokenid' => 'SessionID',
+    'timeout' => (30/*days*/) * (24/*hours*/) * (60/*minutes*/) * (60/*seconds*/)
+);
 
 $DATETIME_FORMAT = 'm/d/Y h:i A';
 
