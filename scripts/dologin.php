@@ -1,7 +1,7 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
-include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/feedback.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/session/loginsession.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/feedback.php';
 
 $username = RequirePostVariable('username');
 $password = RequirePostVariable('password');
