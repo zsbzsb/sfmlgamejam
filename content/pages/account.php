@@ -46,7 +46,7 @@ function LoadPreview() {
   $('#preview').css('min-height', $('#edit').css('height'));
   DotAnimation($('#preview'), 'Loading');
   var text = $('#about').val();
-  $.post('/scripts/markdownpreview.php', {text:text}, function(result) {
+  $.post('/markdownpreview', {text:text}, function(result) {
     StopAnimation($('#preview'));
     $('#preview').html(result.message);
   }, 'json');
@@ -61,6 +61,6 @@ function Submit() {
   var website = $('#website').val();
   var about = $('#about').val();
 
-  Post('/scripts/updateprofile.php', {avatar:avatar, website:website, about:about}, 'Profile was updated successfully.')
+  Post('/updateprofile', {avatar:avatar, website:website, about:about}, 'Profile was updated successfully.')
 };
 </script>

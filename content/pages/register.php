@@ -61,6 +61,6 @@ function Submit() {
   var password = $('#password').val();
   var email = $('#email').val();
   
-  Post('/scripts/doregister.php', {username:username, password:password, email:email});
+  Post('/doregister', {username:username, password:password, email:email});
 };
 </script>

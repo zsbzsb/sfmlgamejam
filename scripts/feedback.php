@@ -2,12 +2,14 @@
 
 function Success($URL, $Message = '')
 {
+	header('Content-Type: application/json');
   echo '{ "success": true, "error": "", "url": "'.$URL.'", "message": "'.$Message.'" }';
   exit();
 }
 
 function Error($ErrorMessage)
 {
+	header('Content-Type: application/json');
   echo '{ "success": false, "error": "'.$ErrorMessage.'", "message": "" }';
   exit();
 }
