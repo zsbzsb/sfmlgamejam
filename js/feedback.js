@@ -47,7 +47,8 @@ function ErrorFeedback(Message) {
   $('#feedback').addClass('alert-danger');
 };
 
-function Post(URL, Data, SuccessMessage = 'Success! You are now being redirected...') {
+function Post(URL, Data, SuccessMessage) {
+	if(typeof(SuccessMessage)==='undefined') SuccessMessage = 'Success! You are now being redirected...' 
   $.post(URL, Data, function(result) {
     if (!result.success) {
       InProgress = false;
