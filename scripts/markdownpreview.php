@@ -1,7 +1,7 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/feedback.php';
-include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/parsedown/Parsedown.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/feedback.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/parsedown/Parsedown.php';
 
 $text = RequirePostVariable('text');
 

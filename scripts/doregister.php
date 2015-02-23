@@ -1,8 +1,8 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/loginsession.php';
-include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/feedback.php';
-include_once $_SERVER['DOCUMENT_ROOT'].'/scripts/validation.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/session/loginsession.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/feedback.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/scripts/validation.php';
 
 $username = RequirePostVariable('username');
 $password = RequirePostVariable('password');

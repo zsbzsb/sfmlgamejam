@@ -6,6 +6,10 @@ define('SCRIPTROOT', ROOT.'/scripts/');
 define('TEMPLATEROOT', ROOT.'/content/templates/');
 define('PAGEROOT', ROOT.'/content/pages/');
 
+// activate error reporting
+ini_set('error_reporting', E_ALL);
+ini_set('display_errors', 1);
+
 // set timezone
 date_default_timezone_set('UTC');
 
@@ -55,20 +59,33 @@ else
   if ($requiresauthentication || $requiresadmin) RequireAuthentication($requiresadmin);
   else if ($requiresguest) RequireGuest();
 
-  // page header and body
-  require TEMPLATEROOT.'header.php';
-  require TEMPLATEROOT.'body.php';
-
   // extract any route parameters
   extract($route['params']);
 
   // now get the actual page
   $method = $_SERVER['REQUEST_METHOD'];
 
-  if ($method == 'GET') require PAGEROOT.$target['source'];
+	if (!isset($target['controller']))
+	{
+		if ($method == 'GET')
+		{
+			// page header and body
+		  require TEMPLATEROOT.'header.php';
+		  require TEMPLATEROOT.'body.php';
 
-  // page footer
-  require TEMPLATEROOT.'footer.php';
+			require PAGEROOT.$target['source'];
+
+		  // page footer
+		  require TEMPLATEROOT.'footer.php';
+		}
+	}
+	elseif ($target['controller'] == 'script')	
+	{
+		if ($method == 'POST')
+		{
+			require SCRIPTROOT.$target['source'];
+		}
+	}
 }
 
 ?>

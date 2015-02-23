@@ -1,6 +1,6 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
 
 $addnews = !isset($_GET['id']);
 $newsid = ($addnews ? -1 : trim($_GET['id']));

@@ -1,6 +1,6 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
 
 $createjam = !isset($_GET['id']);
 $jamid = ($createjam ? -1 : trim($_GET['id']));

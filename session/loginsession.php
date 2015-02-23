@@ -77,7 +77,7 @@ class LoginSession
     global $dbconnection;
 
     if ($this->IsLoggedIn()) return false;
-    $stmt = $dbconnection->prepare('SELECT COUNT(*) FROM users WHERE username = ? OR email = ?;');
+    $stmt = $dbconnection->prepare('SELECT COUNT(*) AS count FROM users WHERE username = ? OR email = ?;');
     $stmt->execute(array($Username, $Email));
     $rows = $stmt->fetchAll();
     if ($stmt->rowCount() == 0) return false;

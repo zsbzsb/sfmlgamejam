@@ -41,6 +41,6 @@ function Submit() {
   var username = $('#username').val();
   var password = $('#password').val();
 
-  Post('/scripts/dologin.php', {username:username, password:password<?php if (isset($_GET['return'])) echo ', return:"'.$_GET['return'].'"'; ?>})
+  Post('/dologin', {username:username, password:password<?php if (isset($_GET['return'])) echo ', return:"'.$_GET['return'].'"'; ?>})
 };
 </script>

@@ -1,8 +1,8 @@
 <?php
 
-$DATABASE_CONNECTION = 'pgsql:host=localhost;dbname=sfmlgamejam;';
-$DATABASE_USERNAME = 'postgres';
-$DATABASE_PASSWORD = 'zsbzsb';
+$DATABASE_CONNECTION = 'mysql:host=localhost;dbname=sfmlprojects_jam;';
+$DATABASE_USERNAME = 'sfmlprojects';
+$DATABASE_PASSWORD = 'RfaqMUFbPaTacCyF';
 
 $COOKIE_TOKENID = 'TokenID';
 

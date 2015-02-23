@@ -6,7 +6,8 @@ function StopAnimation(Element) {
   Element.html(Animations[Element]['defaulttext']);
 };
 
-function DotAnimation(Element, AnimatedText = '') {
+function DotAnimation(Element, AnimatedText) {
+  if(typeof(AnimatedText) === 'undefined') AnimatedText = '';
   var defaulttext = Element.html();
   Element.html(AnimatedText + '.');
   var id = window.setInterval(function() {
