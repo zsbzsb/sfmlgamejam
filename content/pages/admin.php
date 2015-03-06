@@ -1,5 +1,3 @@
-<?php $Title = 'Admin Panel'; $Active = 'Admin'; $RequiresAdmin = true; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
-
 <div class="row">
   <h2 class="text-center">Administration Panel</h2>
 </div>
@@ -108,5 +106,3 @@ $(function() {
   });
 });
 </script>
-
-<?php include_once $_SERVER['DOCUMENT_ROOT'].'/layout/footer.php'; ?>

@@ -38,7 +38,10 @@ $routes->map('GET', '/admin', array('source' => 'admin.php', 'title' => 'Admin P
 // API | HTTP POST requests only
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+// Login
 $routes->map('POST', '/api/v1/account/login', array('source' => 'dologin.php', 'postvariables' => array('username', 'password')), null);
+
+// Register
 $routes->map('POST', '/api/v1/account/register', array('source' => 'doregister.php', 'postvariables' => array('username', 'password', 'email')), null);
 
 ?>
