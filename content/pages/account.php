@@ -5,8 +5,8 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <form role="form" id="form">
-      <div class="alert alert-dismissible hide" role="alert" id="feedback"><button type="button" class="close" id="feedback-hide"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><span id="feedback-content"></span></div>
+    <form role="form" id="profileform">
+      <?php require TEMPLATEROOT.'formfeedback.php'; ?>
       <div class="form-group">
         <label for="avatar">Avatar</label>
         <input type="text" class="form-control" id="avatar" placeholder="Image Link" value="<?php echo $session->GetInfo()['avatar']; ?>" />
@@ -29,38 +29,58 @@
            </div>
          </div>
       </div>
-      <button type="button" class="btn btn-success pull-right" id="submit">Save</button>
+      <button type="button" class="btn btn-success pull-right" id="profilesubmit">Save</button>
     </form>
   </div>
 </div>
 
-<!-- Custom Feedback -->
-<script src="/js/feedback.js"></script>
-
 <script>
 $(function() {
   $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) { if (e.target.childNodes[0].data == 'Preview') { LoadPreview(); } })
+  BindButtonClick($('#profilesubmit'), Submit);
 });
 
 function LoadPreview() {
   $('#preview').css('min-height', $('#edit').css('height'));
-  DotAnimation($('#preview'), 'Loading');
-  var text = $('#about').val();
-  $.post('/scripts/markdownpreview.php', {text:text}, function(result) {
-    StopAnimation($('#preview'));
-    $('#preview').html(result.message);
-  }, 'json');
-};
 
-function ValidateForm() {
-  return true;
+  animation = DotAnimation($('#preview'), 'Loading');
+  text = $('#about').val();
+
+  Post('/api/v1/markdown/preview', { text:text })
+    .done(function(result) {
+      StopAnimation(animation);
+      $('#preview').html(result.result);
+    })
+    .fail(function() {
+      StopAnimation(animation);
+      $('#preview').html('Failed to load the preview :(');
+    });
 };
 
 function Submit() {
+  EnableButton($('#profilesubmit'), false);
+  EnableFormInput('#profileform', false);
+
+  animation = DotAnimation($('#profilesubmit'));
+
   var avatar = $('#avatar').val();
   var website = $('#website').val();
   var about = $('#about').val();
 
-  Post('/scripts/updateprofile.php', {avatar:avatar, website:website, about:about}, 'Profile was updated successfully.')
+  Post('/api/v1/profile/update', { avatar:avatar, website:website, about:about })
+    .done(function(result) {
+      if (result.success) SuccessFeedback('Your profile has been updated successfully');
+      else ErrorFeedback(result.message);
+    })
+    .fail(function() {
+      ErrorFeedback('An unexpected error happened when trying to update your profile');
+    })
+    .always(function() {
+      EnableButton($('#profilesubmit'), true);
+      EnableFormInput('#profileform', true);
+
+      StopAnimation(animation);
+      $('#profilesubmit').html('Save');
+    });
 };
 </script>

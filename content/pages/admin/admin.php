@@ -36,7 +36,7 @@
                   foreach ($rows as $row)
                   {
                     echo '
-                    <tr class="jamrow" id="'.$row['id'].'">
+                    <tr class="jamrow" id="'.$row['id'].'" jamtitle="'.$row['title'].'">
                       <td>'.$row['title'].'</td>
                       <td>'.date($DATETIME_FORMAT, $row['suggestionsstart']).'</td>
                       <td>'.date($DATETIME_FORMAT, $row['suggestionsend']).'</td>
@@ -102,6 +102,7 @@ $(function() {
   $('.jamrow').click(function() {
     $('#editjam').attr('href', '/admin/editjam/?id=' +  $(this).attr('id'));
     $('#viewthemes').attr('href', '/admin/viewthemes/?id=' +  $(this).attr('id'));
+    $('#jammodal-title').html('Jame Options - [' +  $(this).attr('jamtitle') + ']');
     $('#jammodal').modal('show');
   });
 });

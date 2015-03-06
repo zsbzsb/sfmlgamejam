@@ -85,6 +85,7 @@ else
       die();
     }
   }
+
   // check that we should *not* be logged in
   else if ($requiresguest)
   {
@@ -129,6 +130,7 @@ else
       require APIROOT.$target['source'];
     }
   }
+
   // handle a normal page request
   else
   {

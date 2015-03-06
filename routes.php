@@ -32,16 +32,22 @@ $routes->map('GET', '/jams', array('source' => 'jams.php', 'title' => 'Jams', 'a
 $routes->map('GET', '/rules', array('source' => 'rules.php', 'title' => 'Rules', 'active' => 'rules'), 'rules');
 
 // Admin Panel
-$routes->map('GET', '/admin', array('source' => 'admin.php', 'title' => 'Admin Panel', 'active' => 'admin', 'adminsonly' => true), 'admin');
+$routes->map('GET', '/admin', array('source' => 'admin/admin.php', 'title' => 'Admin Panel', 'active' => 'admin', 'adminsonly' => true), 'admin');
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // API | HTTP POST requests only
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Login
-$routes->map('POST', '/api/v1/account/login', array('source' => 'dologin.php', 'postvariables' => array('username', 'password')), null);
+$routes->map('POST', '/api/v1/account/login', array('source' => 'dologin.php', 'postvariables' => array('username', 'password'), 'guestsonly' => true), null);
 
 // Register
-$routes->map('POST', '/api/v1/account/register', array('source' => 'doregister.php', 'postvariables' => array('username', 'password', 'email')), null);
+$routes->map('POST', '/api/v1/account/register', array('source' => 'doregister.php', 'postvariables' => array('username', 'password', 'email'), 'guestsonly' => true), null);
+
+// Markdown Preview
+$routes->map('POST', '/api/v1/markdown/preview', array('source' => 'getmarkdownpreview.php', 'postvariables' => array('text')), null);
+
+// Profile Update
+$routes->map('POST', '/api/v1/profile/update', array('source' => 'doprofileupdate.php', 'postvariables' => array('avatar', 'website', 'about'), 'usersonly' => true), null);
 
 ?>
