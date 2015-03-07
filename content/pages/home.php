@@ -28,7 +28,7 @@
   <div class="col-md-3 col-md-offset-2">
     <h3 id="jams">Upcoming Jams</h3>
     <?php
-      $jams = $cache->get("home_jams");
+      $jams = $cache->get('home_jams');
       if ($jams == null)
       {
         $stmt = $dbconnection->prepare('SELECT id, title, jamstart FROM jams WHERE jamstart >= ? ORDER BY jamstart ASC;');
@@ -49,5 +49,7 @@
       }
       echo $jams;
     ?>
+
+
   </div>
 </div>

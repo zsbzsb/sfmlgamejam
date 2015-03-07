@@ -50,4 +50,7 @@ $routes->map('POST', '/api/v1/markdown/preview', array('source' => 'getmarkdownp
 // Profile Update
 $routes->map('POST', '/api/v1/profile/update', array('source' => 'doprofileupdate.php', 'postvariables' => array('avatar', 'website', 'about'), 'usersonly' => true), null);
 
+// Jams
+$routes->map('POST', '/api/v1/jams', array('source' => 'getjams.php', 'postvariables' => array(), 'optionalvariables' => array('startdate', 'enddate')), null);
+
 ?>
