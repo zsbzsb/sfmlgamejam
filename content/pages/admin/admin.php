@@ -36,7 +36,7 @@
                   foreach ($rows as $row)
                   {
                     echo '
-                    <tr class="jamrow" id="'.$row['id'].'" jamtitle="'.$row['title'].'">
+                    <tr class="jamrow" jamtitle="'.$row['title'].'" jamediturl="'.$routes->generate('jamadmin', array('id' => $row['id'])).'" themesediturl="'.$routes->generate('themeadmin', array('id' => $row['id'])).'">
                       <td>'.$row['title'].'</td>
                       <td>'.date($DATETIME_FORMAT, $row['suggestionsstart']).'</td>
                       <td>'.date($DATETIME_FORMAT, $row['suggestionsend']).'</td>
@@ -46,7 +46,7 @@
                 ?>
               </tbody>
             </table>
-            <a href="/admin/editjam" class="btn btn-info pull-right" id="newjam">Create Jam</a>
+            <a href="<?php echo $routes->generate('jamadmin'); ?>" class="btn btn-info pull-right" id="newjam">Create Jam</a>
           </div>
           <div class="tab-pane" id="news">
             <table class="table table-striped">
@@ -100,8 +100,8 @@
 <script>
 $(function() {
   $('.jamrow').click(function() {
-    $('#editjam').attr('href', '/admin/editjam/?id=' +  $(this).attr('id'));
-    $('#viewthemes').attr('href', '/admin/viewthemes/?id=' +  $(this).attr('id'));
+    $('#editjam').attr('href', $(this).attr('jamediturl'));
+    $('#viewthemes').attr('href', $(this).attr('themesediturl'));
     $('#jammodal-title').html('Jame Options - [' +  $(this).attr('jamtitle') + ']');
     $('#jammodal').modal('show');
   });

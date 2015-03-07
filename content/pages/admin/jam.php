@@ -1,17 +1,15 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
+$createjam = !isset($id);
 
-$createjam = !isset($_GET['id']);
-$jamid = ($createjam ? -1 : trim($_GET['id']));
 if (!$createjam)
 {
   $stmt = $dbconnection->prepare('SELECT * FROM jams WHERE id = ?;');
-  $stmt->execute(array($jamid));
+  $stmt->execute(array($id));
   $rows = $stmt->fetchAll();
   if ($stmt->rowCount() == 0)
   {
-    header('Location: /admin');
+    header('Location: '.$routes->generate('admin'));
     die();
   }
   $jam = $rows[0];
@@ -19,16 +17,14 @@ if (!$createjam)
 
 ?>
 
-<?php $Title = ($createjam ? 'Create' : 'Edit').' Jam'; $RequiresAdmin = true; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
-
 <div class="row">
   <h2 class="text-center"><?php echo $createjam ? 'Create' : 'Edit' ?> Jam</h2>
 </div>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <form role="form" id="form">
-      <div class="alert alert-dismissible hide" role="alert" id="feedback"><button type="button" class="close" id="feedback-hide"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><span id="feedback-content"></span></div>
+    <form role="form" id="jamform">
+      <?php require TEMPLATEROOT.'formfeedback.php'; ?>
       <div class="form-group">
         <label for="title">Title</label>
         <input type="text" class="form-control" id="title" placeholder="Enter Title" value="<?php if (!$createjam) echo $jam['title']; ?>" />
@@ -54,23 +50,15 @@ if (!$createjam)
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
-      <button type="submit" class="btn btn-success pull-right disabled" id="submit"><?php echo $createjam ? 'Create' : 'Save' ?></button>
+      <button type="submit" class="btn btn-success pull-right disabled" id="jamsubmit"><?php echo $createjam ? 'Create' : 'Save' ?></button>
     </form>
     <span><small>*All times are entered in UTC</small></span>
   </div>
 </div>
 
-<!-- Custom Feedback -->
-<script src="/js/feedback.js"></script>
-
-<!-- DateTime Picker -->
-<script src="/js/moment.min.js"></script>
-<script src="/js/bootstrap-datetimepicker.min.js"></script>
-<link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-
 <script>
-var CreateJam = <?php echo $createjam ? 'true' : 'false'; ?>;
-var JamID = <?php echo $jamid; ?>;
+CreateJam = <?php echo $createjam ? 'true' : 'false'; ?>;
+JamID = <?php echo !$createjam ? $id : -1; ?>;
 
 $(function() {
   // initialize the date-time pickers
@@ -83,27 +71,28 @@ $(function() {
     $('#suggestionsendcontainer').data('DateTimePicker').setMinDate($('#suggestionsstart').val());
     $('#suggestionsstartcontainer').data('DateTimePicker').setMaxDate($('#suggestionsend').val());
     $('#jamstartcontainer').data('DateTimePicker').setMinDate($('#suggestionsend').val());
-    RequestValidateForm();
+
+    ValidateForm();
   }
 
-  // register textboxes for validation
-  RegisterTextbox($('#title'));
-  RegisterTextbox($('#suggestionsstart'));
-  RegisterTextbox($('#suggestionsend'));
-  RegisterTextbox($('#jamstart'));
+  BindButtonClick($('#jamsubmit'), OnSubmit);
+  BindTextboxChanged($('#title'), ValidateForm);
+  BindTextboxChanged($('#suggestionsstart'), ValidateForm);
+  BindTextboxChanged($('#suggestionsend'), ValidateForm);
+  BindTextboxChanged($('#jamstart'), ValidateForm);
 
   // validate form and update min/max dates when the selected date-time changes
   $('#suggestionsstartcontainer').on('dp.change', function(e) {
     $('#suggestionsendcontainer').data('DateTimePicker').setMinDate(e.date);
-    RequestValidateForm();
+    ValidateForm();
   });
   $('#suggestionsendcontainer').on('dp.change', function(e) {
     $('#suggestionsstartcontainer').data('DateTimePicker').setMaxDate(e.date);
     $('#jamstartcontainer').data('DateTimePicker').setMinDate(e.date);
-    RequestValidateForm();
+    ValidateForm();
   });
   $('#jamstartcontainer').on('dp.change', function(e) {
-    RequestValidateForm();
+    ValidateForm();
   });
 });
 
@@ -111,8 +100,15 @@ function GetTimeStamp(PickerID) {
   return moment.utc($(PickerID).val().replace('UTC', '') + ' UTC').unix();
 };
 
+function OnSubmit() {
+  if (ValidateForm()) {
+    Submit();
+  }
+};
+
+
 function ValidateForm() {
-  var valid = true;
+  valid = true;
 
   if ($('#title').val().length == 0) valid = false;
   if ($('#suggestionsstart').val().length == 0) valid = false;
@@ -121,17 +117,43 @@ function ValidateForm() {
   if (GetTimeStamp('#suggestionsstart') >= GetTimeStamp('#suggestionsend')) valid = false;
   if (GetTimeStamp('#suggestionsend') >= GetTimeStamp('#jamstart')) valid = false;
 
+  EnableButton($('#jamsubmit'), valid);
   return valid;
 };
 
 function Submit() {
-  var title = $('#title').val();
-  var suggestionsstart = GetTimeStamp('#suggestionsstart');
-  var suggestionsend = GetTimeStamp('#suggestionsend');
-  var jamstart = GetTimeStamp('#jamstart');
+  EnableButton($('#jamsubmit'), false);
+  EnableFormInput('#jamform', false);
+
+  animation = DotAnimation($('#jamsubmit'));
+
+  title = $('#title').val();
+  suggestionsstart = GetTimeStamp('#suggestionsstart');
+  suggestionsend = GetTimeStamp('#suggestionsend');
+  jamstart = GetTimeStamp('#jamstart');
+
+  success = false;
   
-  Post(CreateJam ? '/scripts/createjam.php' : '/scripts/updatejam.php', {id:JamID, title:title, suggestionsstart:suggestionsstart, suggestionsend:suggestionsend, jamstart:jamstart});
+  Post(CreateJam ? '/api/v1/jams/create' : '/api/v1/jams/update', { id:JamID, title:title, suggestionsstart:suggestionsstart, suggestionsend:suggestionsend, jamstart:jamstart })
+    .done(function(result) {
+      if (result.success) {
+        SuccessFeedback('Jam has been successfully ' + (CreateJam ? 'created' : 'updated') + ', redirecting...');
+        success = true;
+        Redirect('<?php echo $routes->generate('admin'); ?>');
+      }
+      else ErrorFeedback(result.message);
+    })
+    .fail(function() {
+      ErrorFeedback('An unexpected error happened, please try again.');
+    })
+    .always(function() {
+      if (!success) {
+        EnableButton($('#jamsubmit'), true);
+        EnableFormInput('#jamform', true);
+      }
+
+      StopAnimation(animation);
+      $('#jamsubmit').html(CreateJam ? 'Create' : 'Save');
+    });
 };
 </script>
-
-<?php include_once $_SERVER['DOCUMENT_ROOT'].'/layout/footer.php'; ?>

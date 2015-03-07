@@ -26,8 +26,7 @@ $(function() {
   BindTextboxChanged($('#password'), ValidateForm);
 });
 
-function OnSubmit()
-{
+function OnSubmit() {
   if (ValidateForm()) {
     Submit();
   }

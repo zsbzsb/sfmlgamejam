@@ -42,8 +42,7 @@ $(function() {
   $('#acceptterms').bind("change", function() { ValidateForm(); });
 });
 
-function OnSubmit()
-{
+function OnSubmit() {
   if (ValidateForm()) {
     Submit();
   }

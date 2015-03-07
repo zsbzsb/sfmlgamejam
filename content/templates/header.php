@@ -20,7 +20,10 @@
 
     <!-- Bootstrap JS -->
     <script src="/public/js/bootstrap.min.js"></script>
+
+    <!-- DateTime Picker -->
     <script src="/public/js/bootstrap-datetimepicker.min.js"></script>
+    <link href="/public/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
     <!-- Custom JS -->
     <script src="/public/js/animation.js"></script>
