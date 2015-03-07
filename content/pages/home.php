@@ -32,7 +32,7 @@
             </div>';
         }
         if ($stmt->rowCount() == 0) $news = '<h4 class="pull-left">Nothing was found :(</h4>';
-        $cache->set('home_news', $news, 60 * 2);
+        $cache->set('home_news', $news, CACHE_TIME);
       }
       echo $news;
     ?>
@@ -59,7 +59,7 @@
             </div>';
         }
         if ($stmt->rowCount() == 0) $jams = '<h4 class="pull-left">Nothing was found :(</h4>';
-        $cache->set('home_jams', $jams, 60 * 2);
+        $cache->set('home_jams', $jams, CACHE_TIME);
       }
       echo $jams;
     ?>

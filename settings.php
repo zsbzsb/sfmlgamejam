@@ -18,4 +18,6 @@ $SESSION = array
 
 $DATETIME_FORMAT = 'm/d/Y h:i A';
 
+define('CACHE_TIME', 60 * 2);
+
 ?>
