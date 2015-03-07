@@ -18,7 +18,7 @@ if (!$createjam)
 ?>
 
 <div class="row">
-  <h2 class="text-center"><?php echo $createjam ? 'Create' : 'Edit' ?> Jam</h2>
+  <h2 class="text-center"><?php echo $createjam ? 'Create' : 'Edit' ?> Jam<?php if (!$createjam) echo ' - ['.$jam['title'].']' ?></h2>
 </div>
 
 <div class="row">
@@ -75,7 +75,10 @@ $(function() {
     ValidateForm();
   }
 
+  // hookup the submit button
   BindButtonClick($('#jamsubmit'), OnSubmit);
+
+  // register textboxes for validation
   BindTextboxChanged($('#title'), ValidateForm);
   BindTextboxChanged($('#suggestionsstart'), ValidateForm);
   BindTextboxChanged($('#suggestionsend'), ValidateForm);
@@ -96,16 +99,11 @@ $(function() {
   });
 });
 
-function GetTimeStamp(PickerID) {
-  return moment.utc($(PickerID).val().replace('UTC', '') + ' UTC').unix();
-};
-
 function OnSubmit() {
   if (ValidateForm()) {
     Submit();
   }
 };
-
 
 function ValidateForm() {
   valid = true;

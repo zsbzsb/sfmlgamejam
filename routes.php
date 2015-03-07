@@ -40,6 +40,9 @@ $routes->map('GET', '/admin/jam/[i:id]?', array('source' => 'admin/jam.php', 'ti
 // Themes Admin
 $routes->map('GET', '/admin/themes/[i:id]', array('source' => 'admin/theme.php', 'title' => 'Theme Admin', 'active' => 'admin', 'adminsonly' => true), 'themeadmin');
 
+// News Admin
+$routes->map('GET', '/admin/news/[i:id]?', array('source' => 'admin/news.php', 'title' => 'News Admin', 'active' => 'admin', 'adminsonly' => true), 'newsadmin');
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // API | HTTP POST requests only
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -56,7 +59,7 @@ $routes->map('POST', '/api/v1/markdown/preview', array('source' => 'getmarkdownp
 // Profile Update
 $routes->map('POST', '/api/v1/profile/update', array('source' => 'doprofileupdate.php', 'postvariables' => array('avatar', 'website', 'about'), 'usersonly' => true), null);
 
-// Jams
+// Get Jams
 $routes->map('POST', '/api/v1/jams', array('source' => 'getjams.php', 'optionalvariables' => array('startdate', 'enddate')), null);
 
 // Jam Create
@@ -64,5 +67,14 @@ $routes->map('POST', '/api/v1/jams/create', array('source' => 'dojamcreate.php',
 
 // Jam Update
 $routes->map('POST', '/api/v1/jams/update', array('source' => 'dojamupdate.php', 'postvariables' => array('id', 'title', 'suggestionsstart', 'suggestionsend', 'jamstart'), 'adminsonly' => true), null);
+
+// Get News
+$routes->map('POST', '/api/v1/news', array('source' => 'getnews.php', 'optionalvariables' => array('beforedate', 'afterdate')), null);
+
+// News Add
+$routes->map('POST', '/api/v1/news/add', array('source' => 'donewsadd.php', 'postvariables' => array('title', 'date', 'summary', 'content'), 'adminsonly' => true), null);
+
+// News Update
+$routes->map('POST', '/api/v1/news/update', array('source' => 'donewsupdate.php', 'postvariables' => array('id', 'title', 'date', 'summary', 'content'), 'adminsonly' => true), null);
 
 ?>

@@ -65,7 +65,7 @@
                   foreach ($rows as $row)
                   {
                     echo '
-                    <tr class="newsrow" id="'.$row['id'].'">
+                    <tr class="newsrow" newstitle="'.$row['title'].'" newsediturl="'.$routes->generate('newsadmin', array('id' => $row['id'])).'">
                       <td>'.$row['title'].'</td>
                       <td>'.date($DATETIME_FORMAT, $row['date']).'</td>
                       <td>'.$row['summary'].'</td>
@@ -74,7 +74,7 @@
                 ?>
               </tbody>
             </table>
-            <a href="/admin/editnews" class="btn btn-info pull-right" id="newjam">Add News</a>
+            <a href="<?php echo $routes->generate('newsadmin'); ?>" class="btn btn-info pull-right" id="newjam">Add News</a>
           </div>
         </div>
       </div>
@@ -97,13 +97,33 @@
   </div>
 </div>
 
+<div class="modal" id="newsmodal" role="dialog" aria-hidden="true" aria-labelledby="newsmodal-title">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="newsmodal-title">News Options</h4>
+      </div>
+      <div class="modal-body">
+        <a href="#" class="btn btn-info" id="editnews">Edit News</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 $(function() {
   $('.jamrow').click(function() {
     $('#editjam').attr('href', $(this).attr('jamediturl'));
     $('#viewthemes').attr('href', $(this).attr('themesediturl'));
-    $('#jammodal-title').html('Jame Options - [' +  $(this).attr('jamtitle') + ']');
+    $('#jammodal-title').html('Jam Options - [' +  $(this).attr('jamtitle') + ']');
     $('#jammodal').modal('show');
+  });
+
+  $('.newsrow').click(function() {
+    $('#editnews').attr('href', $(this).attr('newsediturl'));
+    $('#newsmodal-title').html('News Options - [' +  $(this).attr('newstitle') + ']');
+    $('#newsmodal').modal('show');
   });
 });
 </script>

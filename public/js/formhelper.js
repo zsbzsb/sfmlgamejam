@@ -34,6 +34,27 @@ function Redirect(URL)
   window.location.replace(URL);
 };
 
+function LoadPreview(EditContainer, PreviewContainer) {
+  PreviewContainer.css('min-height', EditContainer.css('height'));
+
+  animation = DotAnimation(PreviewContainer, 'Loading');
+  text = EditContainer.val();
+
+  Post('/api/v1/markdown/preview', { text:text })
+    .done(function(result) {
+      StopAnimation(animation);
+      PreviewContainer.html(result.result);
+    })
+    .fail(function() {
+      StopAnimation(animation);
+      PreviewContainer.html('Failed to load the preview :(');
+    });
+};
+
+function GetTimeStamp(PickerID) {
+  return moment.utc($(PickerID).val().replace('UTC', '') + ' UTC').unix();
+};
+
 function Post(URL, Data)
 {
   jsondata = JSON.stringify(Data);

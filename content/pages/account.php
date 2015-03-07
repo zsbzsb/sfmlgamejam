@@ -36,26 +36,9 @@
 
 <script>
 $(function() {
-  $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) { if (e.target.childNodes[0].data == 'Preview') { LoadPreview(); } })
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) { if (e.target.childNodes[0].data == 'Preview') { LoadPreview($('#about'), $('#preview')); } })
   BindButtonClick($('#profilesubmit'), Submit);
 });
-
-function LoadPreview() {
-  $('#preview').css('min-height', $('#edit').css('height'));
-
-  animation = DotAnimation($('#preview'), 'Loading');
-  text = $('#about').val();
-
-  Post('/api/v1/markdown/preview', { text:text })
-    .done(function(result) {
-      StopAnimation(animation);
-      $('#preview').html(result.result);
-    })
-    .fail(function() {
-      StopAnimation(animation);
-      $('#preview').html('Failed to load the preview :(');
-    });
-};
 
 function Submit() {
   EnableButton($('#profilesubmit'), false);

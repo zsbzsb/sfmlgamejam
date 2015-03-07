@@ -1,17 +1,15 @@
 <?php
 
-include_once $_SERVER['DOCUMENT_ROOT'].'/database/dbaccess.php';
+$addnews = !isset($id);
 
-$addnews = !isset($_GET['id']);
-$newsid = ($addnews ? -1 : trim($_GET['id']));
 if (!$addnews)
 {
   $stmt = $dbconnection->prepare('SELECT * FROM news WHERE id = ?;');
-  $stmt->execute(array($newsid));
+  $stmt->execute(array($id));
   $rows = $stmt->fetchAll();
   if ($stmt->rowCount() == 0)
   {
-    header('Location: /admin');
+    header('Location: '.$routes->generate('admin'));
     die();
   }
   $news = $rows[0];
@@ -19,16 +17,14 @@ if (!$addnews)
 
 ?>
 
-<?php $Title = ($addnews ? 'Add' : 'Edit').' News'; $RequiresAdmin = true; include_once $_SERVER['DOCUMENT_ROOT'].'/layout/header.php'; ?>
-
 <div class="row">
-  <h2 class="text-center"><?php echo $addnews ? 'Add' : 'Edit' ?> News</h2>
+  <h2 class="text-center"><?php echo $addnews ? 'Add' : 'Edit' ?> News<?php if (!$addnews) echo ' - ['.$news['title'].']' ?></h2>
 </div>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <form role="form" id="form">
-      <div class="alert alert-dismissible hide" role="alert" id="feedback"><button type="button" class="close" id="feedback-hide"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><span id="feedback-content"></span></div>
+    <form role="form" id="newsform">
+      <?php require TEMPLATEROOT.'formfeedback.php'; ?>
       <div class="form-group">
         <label for="title">Title</label>
         <input type="text" class="form-control" id="title" placeholder="Enter Title" value="<?php if (!$addnews) echo $news['title']; ?>" />
@@ -58,77 +54,90 @@ if (!$addnews)
            </div>
          </div>
       </div>
-      <button type="submit" class="btn btn-success pull-right disabled" id="submit"><?php echo $addnews ? 'Add' : 'Save' ?></button>
+      <button type="submit" class="btn btn-success pull-right disabled" id="newssubmit"><?php echo $addnews ? 'Add' : 'Save' ?></button>
     </form>
     <span><small>*All times are entered in UTC</small></span>
   </div>
 </div>
 
-<!-- Custom Feedback -->
-<script src="/js/feedback.js"></script>
-
-<!-- DateTime Picker -->
-<script src="/js/moment.min.js"></script>
-<script src="/js/bootstrap-datetimepicker.min.js"></script>
-<link href="/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-
 <script>
-var AddNews = <?php echo $addnews ? 'true' : 'false'; ?>;
-var NewsID = <?php echo $newsid; ?>;
+AddNews = <?php echo $addnews ? 'true' : 'false'; ?>;
+NewsID = <?php echo !$addnews ? $id : -1; ?>;
 
 $(function() {
   // initialize the date-time picker
   $('#datecontainer').datetimepicker();
 
+  // hookup the submit button
+  BindButtonClick($('#newssubmit'), OnSubmit);
+
   // register textboxes for validation
-  RegisterTextbox($('#title'));
-  RegisterTextbox($('#date'));
-  RegisterTextbox($('#summary'));
-  RegisterTextbox($('#content'));
+  BindTextboxChanged($('#title'), ValidateForm);
+  BindTextboxChanged($('#date'), ValidateForm);
+  BindTextboxChanged($('#summary'), ValidateForm);
+  BindTextboxChanged($('#content'), ValidateForm);
 
 
   // validate form when the selected date-time changes
   $('#datecontainer').on('dp.change', function(e) {
-    RequestValidateForm();
+    ValidateForm();
   });
 
   // handle activation of the preview tab
-  $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) { if (e.target.childNodes[0].data == 'Preview') { LoadPreview(); } })
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) { if (e.target.childNodes[0].data == 'Preview') { LoadPreview($('#content'), $('#preview')); } })
 });
 
-function LoadPreview() {
-  $('#preview').css('min-height', $('#edit').css('height'));
-  DotAnimation($('#preview'), 'Loading');
-  var text = $('#content').val();
-  $.post('/scripts/markdownpreview.php', {text:text}, function(result) {
-    StopAnimation($('#preview'));
-    $('#preview').html(result.message);
-  }, 'json');
-};
-
-function GetTimeStamp(PickerID) {
-  return moment.utc($(PickerID).val().replace('UTC', '') + ' UTC').unix();
+function OnSubmit() {
+  if (ValidateForm()) {
+    Submit();
+  }
 };
 
 function ValidateForm() {
-  var valid = true;
+  valid = true;
 
   if ($('#title').val().length == 0) valid = false;
   if ($('#date').val().length == 0) valid = false;
   if ($('#summary').val().length == 0) valid = false;
   if ($('#content').val().length == 0) valid = false;
 
+  EnableButton($('#newssubmit'), valid);
   return valid;
 };
 
 function Submit() {
-  var title = $('#title').val();
-  var date = GetTimeStamp('#date');
-  var summary = $('#suggestionsend').val();
-  var jamstart = $('#jamstart').val();
+  EnableButton($('#newssubmit'), false);
+  EnableFormInput('#newsform', false);
 
-  Post(AddNews ? '/scripts/addnews.php' : '/scripts/updatenews.php', {id:NewsID, title:title, date:date, summary:summary, content:content});
+  animation = DotAnimation($('#newssubmit'));
+
+  title = $('#title').val();
+  date = GetTimeStamp('#date');
+  summary = $('#summary').val();
+  content = $('#content').val();
+
+  success = false;
+  
+  Post(AddNews ? '/api/v1/news/add' : '/api/v1/news/update', { id:NewsID, title:title, date:date, summary:summary, content:content })
+    .done(function(result) {
+      if (result.success) {
+        SuccessFeedback('News has been successfully ' + (AddNews ? 'added' : 'updated') + ', redirecting...');
+        success = true;
+        Redirect('<?php echo $routes->generate('admin'); ?>');
+      }
+      else ErrorFeedback(result.message);
+    })
+    .fail(function() {
+      ErrorFeedback('An unexpected error happened, please try again.');
+    })
+    .always(function() {
+      if (!success) {
+        EnableButton($('#newssubmit'), true);
+        EnableFormInput('#newsform', true);
+      }
+
+      StopAnimation(animation);
+      $('#newssubmit').html(AddNews ? 'Add' : 'Save');
+    });
 };
 </script>
-
-<?php include_once $_SERVER['DOCUMENT_ROOT'].'/layout/footer.php'; ?>
