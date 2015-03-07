@@ -48,33 +48,33 @@ $routes->map('GET', '/admin/news/[i:id]?', array('source' => 'admin/news.php', '
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Login
-$routes->map('POST', '/api/v1/account/login', array('source' => 'dologin.php', 'postvariables' => array('username', 'password'), 'guestsonly' => true), null);
+$routes->map('POST', '/api/v1/account/login', array('source' => 'v1/dologin.php', 'postvariables' => array('username', 'password'), 'guestsonly' => true), null);
 
 // Register
-$routes->map('POST', '/api/v1/account/register', array('source' => 'doregister.php', 'postvariables' => array('username', 'password', 'email'), 'guestsonly' => true), null);
+$routes->map('POST', '/api/v1/account/register', array('source' => 'v1/doregister.php', 'postvariables' => array('username', 'password', 'email'), 'guestsonly' => true), null);
 
 // Markdown Preview
-$routes->map('POST', '/api/v1/markdown/preview', array('source' => 'getmarkdownpreview.php', 'postvariables' => array('text')), null);
+$routes->map('POST', '/api/v1/markdown/preview', array('source' => 'v1/getmarkdownpreview.php', 'postvariables' => array('text')), null);
 
 // Profile Update
-$routes->map('POST', '/api/v1/profile/update', array('source' => 'doprofileupdate.php', 'postvariables' => array('avatar', 'website', 'about'), 'usersonly' => true), null);
+$routes->map('POST', '/api/v1/profile/update', array('source' => 'v1/doprofileupdate.php', 'postvariables' => array('avatar', 'website', 'about'), 'usersonly' => true), null);
 
 // Get Jams
-$routes->map('POST', '/api/v1/jams', array('source' => 'getjams.php', 'optionalvariables' => array('startdate', 'enddate')), null);
+$routes->map('POST', '/api/v1/jams', array('source' => 'v1/getjams.php', 'optionalvariables' => array('startdate', 'enddate')), null);
 
 // Jam Create
-$routes->map('POST', '/api/v1/jams/create', array('source' => 'dojamcreate.php', 'postvariables' => array('title', 'suggestionsstart', 'suggestionsend', 'jamstart'), 'adminsonly' => true), null);
+$routes->map('POST', '/api/v1/jams/create', array('v1/source' => 'dojamcreate.php', 'postvariables' => array('title', 'suggestionsstart', 'suggestionsend', 'jamstart'), 'adminsonly' => true), null);
 
 // Jam Update
-$routes->map('POST', '/api/v1/jams/update', array('source' => 'dojamupdate.php', 'postvariables' => array('id', 'title', 'suggestionsstart', 'suggestionsend', 'jamstart'), 'adminsonly' => true), null);
+$routes->map('POST', '/api/v1/jams/update', array('v1/source' => 'dojamupdate.php', 'postvariables' => array('id', 'title', 'suggestionsstart', 'suggestionsend', 'jamstart'), 'adminsonly' => true), null);
 
 // Get News
-$routes->map('POST', '/api/v1/news', array('source' => 'getnews.php', 'optionalvariables' => array('beforedate', 'afterdate')), null);
+$routes->map('POST', '/api/v1/news', array('v1/source' => 'getnews.php', 'optionalvariables' => array('beforedate', 'afterdate')), null);
 
 // News Add
-$routes->map('POST', '/api/v1/news/add', array('source' => 'donewsadd.php', 'postvariables' => array('title', 'date', 'summary', 'content'), 'adminsonly' => true), null);
+$routes->map('POST', '/api/v1/news/add', array('v1/source' => 'donewsadd.php', 'postvariables' => array('title', 'date', 'summary', 'content'), 'adminsonly' => true), null);
 
 // News Update
-$routes->map('POST', '/api/v1/news/update', array('source' => 'donewsupdate.php', 'postvariables' => array('id', 'title', 'date', 'summary', 'content'), 'adminsonly' => true), null);
+$routes->map('POST', '/api/v1/news/update', array('v1/source' => 'donewsupdate.php', 'postvariables' => array('id', 'title', 'date', 'summary', 'content'), 'adminsonly' => true), null);
 
 ?>
