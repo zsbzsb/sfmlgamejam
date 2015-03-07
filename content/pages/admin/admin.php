@@ -36,12 +36,12 @@
                   foreach ($rows as $row)
                   {
                     echo '
-                    <tr class="jamrow" jamtitle="'.$row['title'].'" jamediturl="'.$routes->generate('jamadmin', array('id' => $row['id'])).'" themesediturl="'.$routes->generate('themeadmin', array('id' => $row['id'])).'">
-                      <td>'.$row['title'].'</td>
-                      <td>'.date($DATETIME_FORMAT, $row['suggestionsstart']).'</td>
-                      <td>'.date($DATETIME_FORMAT, $row['suggestionsend']).'</td>
-                      <td>'.date($DATETIME_FORMAT, $row['jamstart']).'</td>
-                    </tr>';
+                      <tr class="jamrow" jamtitle="'.$row['title'].'" jamediturl="'.$routes->generate('jamadmin', array('id' => $row['id'])).'" themesediturl="'.$routes->generate('themeadmin', array('id' => $row['id'])).'">
+                        <td>'.$row['title'].'</td>
+                        <td>'.date($DATETIME_FORMAT, $row['suggestionsstart']).'</td>
+                        <td>'.date($DATETIME_FORMAT, $row['suggestionsend']).'</td>
+                        <td>'.date($DATETIME_FORMAT, $row['jamstart']).'</td>
+                      </tr>';
                   }
                 ?>
               </tbody>
@@ -65,11 +65,11 @@
                   foreach ($rows as $row)
                   {
                     echo '
-                    <tr class="newsrow" newstitle="'.$row['title'].'" newsediturl="'.$routes->generate('newsadmin', array('id' => $row['id'])).'">
-                      <td>'.$row['title'].'</td>
-                      <td>'.date($DATETIME_FORMAT, $row['date']).'</td>
-                      <td>'.$row['summary'].'</td>
-                    </tr>';
+                      <tr class="newsrow" newstitle="'.$row['title'].'" newsediturl="'.$routes->generate('newsadmin', array('id' => $row['id'])).'">
+                        <td>'.$row['title'].'</td>
+                        <td>'.date($DATETIME_FORMAT, $row['date']).'</td>
+                        <td>'.$row['summary'].'</td>
+                      </tr>';
                   }
                 ?>
               </tbody>

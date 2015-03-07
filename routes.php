@@ -27,8 +27,8 @@ $routes->map('GET', '/logout', array('source' => 'logout.php'), 'logout');
 $routes->map('GET', '/terms', array('source' => 'terms.php', 'title' => 'Terms of Use'), 'terms');
 
 // NON EXISTANT ROUTES
-$routes->map('GET', '/news', array('source' => 'news.php', 'title' => 'News', 'active' => 'news'), 'news');
-$routes->map('GET', '/jams', array('source' => 'jams.php', 'title' => 'Jams', 'active' => 'jams'), 'jams');
+$routes->map('GET', '/news/[i:id]?', array('source' => 'news.php', 'title' => 'News', 'active' => 'news'), 'news');
+$routes->map('GET', '/jams/[i:id]?', array('source' => 'jams.php', 'title' => 'Jams', 'active' => 'jams'), 'jams');
 $routes->map('GET', '/rules', array('source' => 'rules.php', 'title' => 'Rules', 'active' => 'rules'), 'rules');
 
 // Admin Panel
