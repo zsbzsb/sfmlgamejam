@@ -105,14 +105,12 @@ else
   // handle an API request
   if ($apirequest)
   {
-    $valid = true;
     if (isset($target['postvariables']))
     {
       foreach ($target['postvariables'] as $variable)
       {
         if (!isset($_POST[$variable]))
         {
-          $valid = false;
           http_response_code(400);
           // TODO return actual 400 page
           echo 'Oops, something went wrong [400] :(';
@@ -124,11 +122,20 @@ else
         }
       }
     }
-    if ($valid)
+
+    if (isset($target['optionalvariables']))
     {
-      require SCRIPTROOT.'apiresponse.php';
-      require APIROOT.$target['source'];
+      foreach ($target['optionalvariables'] as $variable)
+      {
+        if (isset($_GET[$variable]))
+        {
+          $$variable = htmlspecialchars(trim($_POST[$variable]));
+        }
+      }
     }
+
+    require SCRIPTROOT.'apiresponse.php';
+    require APIROOT.$target['source'];
   }
 
   // handle a normal page request
