@@ -1,9 +1,7 @@
 <?php
 
-REQUIRE SCRIPTROOT.'parsedown/Parsedown.php';
+REQUIRE SCRIPTROOT.'markdown.php';
 
-$parser = new Parsedown();
-
-SendResponse(array('result' => preg_replace("/\r\n|\r|\n/", '', $parser->text($text))));
+SendResponse(array('result' => ParseMarkdown($text)));
 
 ?>
