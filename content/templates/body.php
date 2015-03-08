@@ -16,7 +16,7 @@
           <?php $active = isset($target['active']) ? $target['active'] : ''; ?>
           <li<?php if ($active == 'home') echo ' class="active"'; ?>><a href="<?php echo $routes->generate('home'); ?>">Home</a></li>
           <li<?php if ($active == 'news') echo ' class="active"'; ?>><a href="<?php echo $routes->generate('news'); ?>">News</a></li>
-          <li<?php if ($active == 'hams') echo ' class="active"'; ?>><a href="<?php echo $routes->generate('jams'); ?>">Jams</a></li>
+          <li<?php if ($active == 'jams') echo ' class="active"'; ?>><a href="<?php echo $routes->generate('jams'); ?>">Jams</a></li>
           <li<?php if ($active == 'rules') echo ' class="active"'; ?>><a href="<?php echo $routes->generate('rules'); ?>">Rules</a></li>
           <?php if ($session->GetStatus() == AccountStatus::Admin) echo '<li'.($active == "admin" ? ' class="active"' : '').'><a href="'.$routes->generate('admin').'">Admin</a></li>'; ?>
         </ul>
