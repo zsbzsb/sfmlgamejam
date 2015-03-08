@@ -16,7 +16,9 @@ date_default_timezone_set('UTC');
 // setup cache
 require SCRIPTROOT.'phpfastcache/phpfastcache.php';
 
-phpFastCache::setup('storage', 'auto');
+phpFastCache::setup('storage', 'files');
+phpFastCache::setup('path', ROOT.'cache');
+
 $cache = phpFastCache();
 
 // setup routing
