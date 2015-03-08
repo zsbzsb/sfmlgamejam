@@ -3,4 +3,5 @@ CREATE TABLE user_tokens (
   expires BIGINT NOT NULL,
   user_id INT NOT NULL,
   host TEXT NOT NULL,
-  useragent TEXT NOT NULL);
+  useragent TEXT NOT NULL
+);
