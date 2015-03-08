@@ -8,7 +8,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/"><img src="/public/images/logo.png" alt="" class="navbar-logo"></a>
+        <a class="navbar-brand" href="/"><img src="/assets/images/logo.png" alt="" class="navbar-logo"></a>
         <a class="navbar-brand" href="/">SFML Game Jam</a>
       </div>
       <div class="collapse navbar-collapse">
