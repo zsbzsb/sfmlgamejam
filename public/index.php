@@ -75,7 +75,7 @@ else
   // check if we need to be authenticated
   if ($requiresauthentication || $requiresadmin)
   {
-    if (!$session->IsLoggedIn() || ($requiresadmin && $session->GetStatus() != AccountStatus::Admin))
+    if (!$session->IsLoggedIn() || ($requiresadmin && ($session->GetStatus() != AccountStatus::Admin && $session->GetStatus() != AccountStatus::Owner)))
     {
       if ($apirequest)
       {

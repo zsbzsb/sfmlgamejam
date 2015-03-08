@@ -6,6 +6,7 @@ abstract class AccountStatus
   const WaitingActivation = 0;
   const Normal = 1;
   const Admin = 2;
+  const Owner = 3;
 }
 
 class LoginSession
