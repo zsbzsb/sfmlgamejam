@@ -8,27 +8,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/public/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="/public/css/custom-theme.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/assets/css/custom-theme.css" rel="stylesheet">
 
     <!-- Moment JS -->
-    <script src="/public/js/moment.min.js"></script>
+    <script src="/assets/js/moment.min.js"></script>
 
     <!-- JQuery -->
-    <script src="/public/js/jquery-2.1.1.min.js"></script>
+    <script src="/assets/js/jquery-2.1.1.min.js"></script>
 
     <!-- Bootstrap JS -->
-    <script src="/public/js/bootstrap.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
 
     <!-- DateTime Picker -->
-    <script src="/public/js/bootstrap-datetimepicker.min.js"></script>
-    <link href="/public/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <script src="/assets/js/bootstrap-datetimepicker.min.js"></script>
+    <link href="/assets/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
     <!-- Custom JS -->
-    <script src="/public/js/animation.js"></script>
-    <script src="/public/js/formhelper.js"></script>
+    <script src="/assets/js/animation.js"></script>
+    <script src="/assets/js/formhelper.js"></script>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/public/images/logo.png" />
+    <link rel="icon" type="image/png" href="/assets/images/logo.png" />
   </head>

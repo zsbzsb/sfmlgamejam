@@ -1,7 +1,7 @@
 <?php
 
 // global defines
-define('ROOT', $_SERVER['DOCUMENT_ROOT'].'/');
+define('ROOT', '../');
 define('SCRIPTROOT', ROOT.'/scripts/');
 define('TEMPLATEROOT', ROOT.'/content/templates/');
 define('PAGEROOT', ROOT.'/content/pages/');
