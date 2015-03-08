@@ -34,10 +34,9 @@ $route = $routes->match();
 
 if (!$route)
 {
-  // route wasn't found - return 404
   http_response_code(404);
-  // TODO return actual 404 page
-  echo 'Oops, something went wrong [404] :(';
+  $error = 404;
+  require PAGEROOT.'error.php';
   die();
 }
 else
@@ -80,8 +79,8 @@ else
       if ($apirequest)
       {
         http_response_code(401);
-        // TODO return actual 401 page
-        echo 'Oops, something went wrong [401] :(';
+        $error = 401;
+        require PAGEROOT.'error.php';
       }
       else header('Location: '.$routes->generate('login'));
       die();
@@ -96,8 +95,8 @@ else
       if ($apirequest)
       {
         http_response_code(401);
-        // TODO return actual 401 page
-        echo 'Oops, something went wrong [401] :(';
+        $error = 401;
+        require PAGEROOT.'error.php';
       }
       else header('Location: '.$routes->generate('account'));
       die();
@@ -114,8 +113,8 @@ else
         if (!isset($_POST[$variable]))
         {
           http_response_code(400);
-          // TODO return actual 400 page
-          echo 'Oops, something went wrong [400] :(';
+          $error = 400;
+          require PAGEROOT.'error.php';
           die();
         }
         else
