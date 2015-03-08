@@ -30,6 +30,7 @@
               </thead>
               <tbody>
                 <?php
+
                   $stmt = $dbconnection->prepare('SELECT * FROM jams ORDER BY jamstart ASC;');
                   $stmt->execute();
                   $rows = $stmt->fetchAll();
@@ -43,6 +44,7 @@
                         <td>'.date($DATETIME_FORMAT, $row['jamstart']).'</td>
                       </tr>';
                   }
+
                 ?>
               </tbody>
             </table>
@@ -59,6 +61,7 @@
               </thead>
               <tbody>
                 <?php
+
                   $stmt = $dbconnection->prepare('SELECT * FROM news ORDER BY date DESC;');
                   $stmt->execute();
                   $rows = $stmt->fetchAll();
@@ -71,6 +74,7 @@
                         <td>'.$row['summary'].'</td>
                       </tr>';
                   }
+
                 ?>
               </tbody>
             </table>
