@@ -9,19 +9,19 @@ $routes->map('GET', '/', array('source' => 'home.php', 'title' => 'Home', 'activ
 $routes->map('GET', '/home', array('source' => 'home.php', 'title' => 'Home', 'active' => 'home'), 'home');
 
 // Register
-$routes->map('GET', '/register', array('source' => 'register.php', 'title' => 'Register', 'active' => 'register', 'guestsonly' => true), 'register');
+$routes->map('GET', '/account/register', array('source' => 'register.php', 'title' => 'Register', 'active' => 'register', 'guestsonly' => true), 'register');
 
 // Register Thanks
-$routes->map('GET', '/register/thanks', array('source' => 'register_thanks.php', 'title' => 'Thanks for Registering!', 'usersonly' => true), 'register_thanks');
+$routes->map('GET', '/account/register/thanks', array('source' => 'register_thanks.php', 'title' => 'Thanks for Registering!', 'usersonly' => true), 'register_thanks');
 
 // Login
-$routes->map('GET', '/login', array('source' => 'login.php', 'title' => 'Login', 'active' => 'login', 'guestsonly' => true), 'login');
+$routes->map('GET', '/account/login', array('source' => 'login.php', 'title' => 'Login', 'active' => 'login', 'guestsonly' => true), 'login');
 
 // Account Panel
-$routes->map('GET', '/account', array('source' => 'account.php', 'title' => 'Account Panel', 'usersonly' => true), 'account');
+$routes->map('GET', '/account/panel', array('source' => 'account.php', 'title' => 'Account Panel', 'usersonly' => true), 'account');
 
 // Logout
-$routes->map('GET', '/logout', array('source' => 'logout.php'), 'logout');
+$routes->map('GET', '/account/logout', array('source' => 'logout.php'), 'logout');
 
 // Terms of Use
 $routes->map('GET', '/terms', array('source' => 'terms.php', 'title' => 'Terms of Use'), 'terms');
@@ -30,7 +30,7 @@ $routes->map('GET', '/terms', array('source' => 'terms.php', 'title' => 'Terms o
 $routes->map('GET', '/news/[i:id]?', array('source' => 'news.php', 'title' => 'News', 'active' => 'news'), 'news');
 
 // Jams
-$routes->map('GET', '/jams/[i:id]?', array('source' => 'jams.php', 'title' => 'Jams', 'active' => 'jams'), 'jams');
+$routes->map('GET', '/jams/[i:id]?', array('source' => 'jams.php', 'title' => 'Game Jams', 'active' => 'jams'), 'jams');
 
 // Rules
 $routes->map('GET', '/rules', array('source' => 'rules.php', 'title' => 'Rules', 'active' => 'rules'), 'rules');
