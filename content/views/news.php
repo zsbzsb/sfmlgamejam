@@ -23,6 +23,8 @@
           <hr />';
       }
 
+      if (count($news) == 0) echo '<h4 class="text-center">Nothing was found :(</h4>';
+
     ?>
   </div>
 </div>
