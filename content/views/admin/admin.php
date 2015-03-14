@@ -68,7 +68,7 @@
                   foreach ($rows as $row)
                   {
                     echo '
-                      <tr class="newsrow" newstitle="'.$row['title'].'" newsediturl="'.$routes->generate('newsadmin', array('id' => $row['id'])).'">
+                      <tr class="newsrow" newsid ="'.$row['id'].'" newstitle="'.$row['title'].'" newsediturl="'.$routes->generate('newsadmin', array('id' => $row['id'])).'">
                         <td>'.$row['title'].'</td>
                         <td>'.date($DATETIME_FORMAT, $row['date']).'</td>
                         <td>'.$row['summary'].'</td>
@@ -110,6 +110,7 @@
       </div>
       <div class="modal-body">
         <a href="#" class="btn btn-info" id="editnews">Edit News</a>
+        <button type="button" class="btn btn-danger" id="deletenews" newsid="-1" newstitle="">Delete News</button>
       </div>
     </div>
   </div>
@@ -126,8 +127,21 @@ $(function() {
 
   $('.newsrow').click(function() {
     $('#editnews').attr('href', $(this).attr('newsediturl'));
+    $('#deletenews').attr('newsid', $(this).attr('newsid'));
+    $('#deletenews').attr('newstitle', $(this).attr('newstitle'));
     $('#newsmodal-title').html('News Options - [' +  $(this).attr('newstitle') + ']');
     $('#newsmodal').modal('show');
+  });
+
+  $('#deletenews').click(function() {
+    if (confirm('Are you sure you want to delete the news article "' + $(this).attr('newstitle') + '"?')) {
+      id = $(this).attr('newsid');
+
+      Post('/api/v1/news/delete', { id:id })
+        .always(function() {
+          Redirect('<?=$routes->generate('admin')?>');
+        });
+    }
   });
 });
 </script>

@@ -84,4 +84,7 @@ $routes->map('POST', '/api/v1/news/add', array('source' => 'v1/donewsadd', 'post
 // News Update
 $routes->map('POST', '/api/v1/news/update', array('source' => 'v1/donewsupdate', 'postvariables' => array('id', 'title', 'date', 'summary', 'content'), 'adminsonly' => true), null);
 
+// News Delete
+$routes->map('POST', '/api/v1/news/delete', array('source' => 'v1/donewsdelete', 'postvariables' => array('id')), null);
+
 ?>
