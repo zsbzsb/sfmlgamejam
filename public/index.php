@@ -12,6 +12,9 @@ define('EXT', '.php');
 // grab the settings
 require ROOT.'settings.php';
 
+// grab status definitions
+require SCRIPTROOT.'statusdefs.php';
+
 // set timezone
 date_default_timezone_set('UTC');
 

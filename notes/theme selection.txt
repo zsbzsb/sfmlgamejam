@@ -1,8 +1,9 @@
 theme suggestions open for about 1 week
+each user suggests 5 themes max
 manually prefilter down to 30 themes
-4 rounds of voting
+4 total rounds of voting
 1 round per day
 each round has 10 themes
 1st-3rd rounds has unique themes
 4th round has top 9 themes
-each round the user can vote -1 | 0 | +1 for each theme
+each round the user can vote 5 times (-1 | 0 | +1) up to twice per theme
