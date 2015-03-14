@@ -14,7 +14,7 @@
       foreach ($news as $article)
       {
         echo '
-          <a href="'.$routes->generate('news', array('id' => $article['id'])).'">
+          <a href="'.$routes->generate('news_article', array('id' => $article['id'])).'">
             <div class="row">
               <h4 class="pull-left inline">'.$article['title'].'</h4>
               <h4 class="pull-right inline">'.date($DATETIME_FORMAT, $article['date']).'</h4>

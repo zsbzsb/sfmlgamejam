@@ -27,7 +27,10 @@ $routes->map('GET', '/account/logout', array('source' => 'logout'), 'logout');
 $routes->map('GET', '/terms', array('source' => 'terms', 'title' => 'Terms of Use'), 'terms');
 
 // News
-$routes->map('GET', '/news/[i:id]?', array('source' => 'news', 'title' => 'News', 'active' => 'news'), 'news');
+$routes->map('GET', '/news', array('source' => 'news', 'title' => 'News', 'active' => 'news'), 'news');
+
+// News Article
+$routes->map('GET', '/news/[i:id]', array('source' => 'news_article', 'title' => 'News', 'active' => 'news'), 'news_article');
 
 // Jams
 $routes->map('GET', '/jams/[i:id]?', array('source' => 'jams', 'title' => 'Game Jams', 'active' => 'jams'), 'jams');
