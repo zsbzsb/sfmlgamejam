@@ -67,18 +67,18 @@ $routes->map('POST', '/api/v1/profile/update', array('source' => 'v1/doprofileup
 $routes->map('POST', '/api/v1/jams', array('source' => 'v1/getjams.php', 'optionalvariables' => array('startdate', 'enddate')), null);
 
 // Jam Create
-$routes->map('POST', '/api/v1/jams/create', array('v1/source' => 'dojamcreate.php', 'postvariables' => array('title', 'suggestionsstart', 'suggestionsend', 'jamstart'), 'adminsonly' => true), null);
+$routes->map('POST', '/api/v1/jams/create', array('source' => 'v1/dojamcreate.php', 'postvariables' => array('title', 'suggestionsstart', 'suggestionsend', 'jamstart'), 'adminsonly' => true), null);
 
 // Jam Update
-$routes->map('POST', '/api/v1/jams/update', array('v1/source' => 'dojamupdate.php', 'postvariables' => array('id', 'title', 'suggestionsstart', 'suggestionsend', 'jamstart'), 'adminsonly' => true), null);
+$routes->map('POST', '/api/v1/jams/update', array('source' => 'v1/dojamupdate.php', 'postvariables' => array('id', 'title', 'suggestionsstart', 'suggestionsend', 'jamstart'), 'adminsonly' => true), null);
 
 // Get News
-$routes->map('POST', '/api/v1/news', array('v1/source' => 'getnews.php', 'optionalvariables' => array('beforedate', 'afterdate')), null);
+$routes->map('POST', '/api/v1/news', array('source' => 'v1/getnews.php', 'optionalvariables' => array('beforedate', 'afterdate')), null);
 
 // News Add
-$routes->map('POST', '/api/v1/news/add', array('v1/source' => 'donewsadd.php', 'postvariables' => array('title', 'date', 'summary', 'content'), 'adminsonly' => true), null);
+$routes->map('POST', '/api/v1/news/add', array('source' => 'v1/donewsadd.php', 'postvariables' => array('title', 'date', 'summary', 'content'), 'adminsonly' => true), null);
 
 // News Update
-$routes->map('POST', '/api/v1/news/update', array('v1/source' => 'donewsupdate.php', 'postvariables' => array('id', 'title', 'date', 'summary', 'content'), 'adminsonly' => true), null);
+$routes->map('POST', '/api/v1/news/update', array('source' => 'v1/donewsupdate.php', 'postvariables' => array('id', 'title', 'date', 'summary', 'content'), 'adminsonly' => true), null);
 
 ?>
