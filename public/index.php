@@ -1,13 +1,13 @@
 <?php
 
 // global defines
-define('ROOT', '../');
-define('SCRIPTROOT', ROOT.'/scripts/');
-define('TEMPLATEROOT', ROOT.'/content/templates/');
-define('PAGEROOT', ROOT.'/content/pages/');
-define('APIROOT', ROOT.'/api/');
+define('ROOT', realpath('..').'/');
+define('SCRIPTROOT', ROOT.'scripts/');
+define('TEMPLATEROOT', ROOT.'content/templates/');
+define('PAGEROOT', ROOT.'content/pages/');
+define('APIROOT', ROOT.'api/');
 
-// grab the settings settings
+// grab the settings
 require ROOT.'settings.php';
 
 // set timezone

@@ -12,7 +12,6 @@
     <?php
 
       $news = $cache->get('home_news');
-$news = null;
       if ($news == null)
       {
         $stmt = $dbconnection->prepare('SELECT id, title, date, summary FROM news WHERE date <= ? ORDER BY date DESC LIMIT 3;');
