@@ -4,8 +4,10 @@
 define('ROOT', realpath('..').'/');
 define('SCRIPTROOT', ROOT.'scripts/');
 define('TEMPLATEROOT', ROOT.'content/templates/');
-define('PAGEROOT', ROOT.'content/pages/');
+define('VIEWROOT', ROOT.'content/views/');
+define('MODALROOT', ROOT.'content/modals/');
 define('APIROOT', ROOT.'api/');
+define('EXT', '.php');
 
 // grab the settings
 require ROOT.'settings.php';
@@ -136,7 +138,7 @@ else
     }
 
     require SCRIPTROOT.'apiresponse.php';
-    require APIROOT.$target['source'];
+    require APIROOT.$target['source'].EXT;
   }
 
   // handle a normal page request
@@ -149,8 +151,11 @@ else
     require TEMPLATEROOT.'header.php';
     require TEMPLATEROOT.'body.php';
 
-    // page source
-    require PAGEROOT.$target['source'];
+    // page modal
+    if (file_exists(MODALROOT.$target['source'].EXT)) require MODALROOT.$target['source'].EXT;
+
+    // page view
+    require VIEWROOT.$target['source'].EXT;
 
     // page footer
     require TEMPLATEROOT.'footer.php';

@@ -1,6 +1,6 @@
 <?php
 
-REQUIRE SCRIPTROOT.'markdown.php';
+require SCRIPTROOT.'markdown.php';
 
 $showfeed = !isset($id);
 
