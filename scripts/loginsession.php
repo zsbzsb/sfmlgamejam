@@ -45,7 +45,7 @@ class LoginSession
       if ($stmt->rowCount() == 0) return;
       if ($rows[0]['expires'] > time() && $rows[0]['host'] == $this->GetHost() && $rows[0]['useragent'] == $this->GetUserAgent())
       {
-        $this->Login($rows[0]['user_id'], false);
+        $this->Login($rows[0]['userid'], false);
       }
     }
   }
@@ -96,7 +96,7 @@ class LoginSession
 
     if ($CreateToken)
     {
-      $stmt = $dbconnection->prepare('INSERT INTO user_tokens (tokenid, expires, user_id, host, useragent) VALUES (?, ?, ?, ?, ?);');
+      $stmt = $dbconnection->prepare('INSERT INTO user_tokens (tokenid, expires, userid, host, useragent) VALUES (?, ?, ?, ?, ?);');
       $host = $this->GetHost();
       $useragent = $this->GetUserAgent();
       $tokenid = hash("SHA256", $host.$useragent.time().$UserID.uniqid('', true));
