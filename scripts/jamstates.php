@@ -23,32 +23,33 @@ echo 'ver'; // todo remove this line
   global $dbconnection;
 
   $time = time();
+  $length = $Jam['suggestionsbegin'] + $Jam['suggestionslength'] + $Jam['approvallength'] + $Jam['votinglength'] + $Jam['themeannouncelength'] + $Jam['jamlength'] + $Jam['submissionslength']
 
-  if ($time > $Jam['suggestionsbegin'] + $Jam['suggestionslength'] + $Jam['approvallength'] + $Jam['votinglength'] + $Jam['themeannouncelength'] + $Jam['jamlength'] + $Jam['submissionslength'])
+  if ($time > $length)
   {
     $status = JamStatus::Complete;
   }
-  else if ($time > $Jam['suggestionsbegin'] + $Jam['suggestionslength'] + $Jam['approvallength'] + $Jam['votinglength'] + $Jam['themeannouncelength'] + $Jam['jamlength'])
+  else if ($time > $length -= $Jam['submissionslength'])
   {
     $status = JamStatus::RecievingGameSubmissions;
   }
-  else if ($time > $Jam['suggestionsbegin'] + $Jam['suggestionslength'] + $Jam['approvallength'] + $Jam['votinglength'] + $Jam['themeannouncelength'])
+  else if ($time > $length -= $Jam['jamlength'])
   {
     $status = JamStatus::JamRunning;
   }
-  else if ($time > $Jam['suggestionsbegin'] + $Jam['suggestionslength'] + $Jam['approvallength'] + $Jam['votinglength'])
+  else if ($time > $length -= $Jam['themeannouncelength'])
   {
     $status = JamStatus::ThemeAnnounced;
   }
-  else if ($time > $Jam['suggestionsbegin'] + $Jam['suggestionslength'] + $Jam['approvallength'])
+  else if ($time > $length -= $Jam['votinglength'])
   {
     $status = JamStatus::ThemeVoting;
   }
-  else if ($time > $Jam['suggestionsbegin'] + $Jam['suggestionslength'])
+  else if ($time > $length -= $Jam['approvallength'])
   {
     $status = JamStatus::WaitingThemeApprovals;
   }
-  else if ($time > $Jam['suggestionsbegin'])
+  else if ($time > $length -= $Jam['suggestionslength'])
   {
     $status = JamStatus::RecievingSuggestions;
   }

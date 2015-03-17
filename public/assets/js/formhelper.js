@@ -19,18 +19,15 @@ function EnableFormInput(Form, Enabled) {
   $(Form + ' :input').attr('disabled', !Enabled);
 };
 
-function BindTextboxChanged(Textbox, Callback)
-{
+function BindTextboxChanged(Textbox, Callback) {
   Textbox.bind('change keypress paste input', function() { Callback(); });
 };
 
-function BindButtonClick(Button, Callback)
-{
+function BindButtonClick(Button, Callback) {
   Button.bind("click", function() { Callback(); return false; });
 };
 
-function Redirect(URL)
-{
+function Redirect(URL) {
   window.location.replace(URL);
 };
 
@@ -51,8 +48,7 @@ function LoadPreview(EditContainer, PreviewContainer) {
     });
 };
 
-function GetPicker(PickerID)
-{
+function GetPicker(PickerID) {
   return $(PickerID).data('DateTimePicker');
 };
 
@@ -63,8 +59,11 @@ function GetTimeStamp(PickerID) {
   return datetime.add(datetime.utcOffset(), 'minutes').unix();
 };
 
-function Post(URL, Data)
-{
+function IsNumber(Element) {
+  return $(Element).val().match(/^[0-9]$/);
+};
+
+function Post(URL, Data) {
   jsondata = JSON.stringify(Data);
 
   return $.ajax({
