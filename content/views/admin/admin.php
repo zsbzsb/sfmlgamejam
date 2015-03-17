@@ -23,25 +23,22 @@
               <thead>
                 <tr>
                   <th>Title</th>
-                  <th>Theme Suggestions Start</th>
-                  <th>Theme Suggestions End</th>
+                  <th>Suggestions Open</th>
                   <th>Jam Start</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>
                 <?php
 
-                  $stmt = $dbconnection->prepare('SELECT * FROM jams ORDER BY jamstart ASC;');
-                  $stmt->execute();
-                  $rows = $stmt->fetchAll();
-                  foreach ($rows as $row)
+                  foreach ($jams as $jam)
                   {
                     echo '
-                      <tr class="jamrow" jamtitle="'.$row['title'].'" jamediturl="'.$routes->generate('jamadmin', array('id' => $row['id'])).'" themesediturl="'.$routes->generate('themeadmin', array('id' => $row['id'])).'">
+                      <tr class="jamrow" jamtitle="'.$jam['title'].'" jamediturl="'.$routes->generate('jamadmin', array('id' => $jam['id'])).'" themesediturl="'.$routes->generate('themeadmin', array('id' => $jam['id'])).'">
                         <td>'.$row['title'].'</td>
-                        <td>'.date($DATETIME_FORMAT, $row['suggestionsstart']).'</td>
-                        <td>'.date($DATETIME_FORMAT, $row['suggestionsend']).'</td>
-                        <td>'.date($DATETIME_FORMAT, $row['jamstart']).'</td>
+                        <td>'.date($DATETIME_FORMAT, $jam['suggestionsbegin']).'</td>
+                        <td>'.date($DATETIME_FORMAT, $jam['suggestionsbegin'] + $jam['suggestionslength'] + $jam['approvallength'] + $jam['themeannouncelength']).'</td>
+                        <td>'.JamStatusString($Jam['status']).'</td>
                       </tr>';
                   }
 

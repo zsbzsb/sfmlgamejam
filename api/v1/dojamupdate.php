@@ -1,5 +1,8 @@
 <?php
 
+// TODO *READ THIS*
+// on update reset status and currentround
+
 if (strlen($title) == 0) $error = 'Title can not be blank';
 else if ($suggestionsstart >= $suggestionsend) $error = 'Suggestions Start must come before Suggestions End';
 else if ($suggestionsend >= $jamstart) $error = 'Suggestions End must come before Jam Start';

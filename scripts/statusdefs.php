@@ -16,7 +16,7 @@ abstract class JamStatus
   const RecievingSuggestions = 1;
   const WaitingThemeApprovals = 2;
   const ThemeVoting = 3;
-  const WaitingJamStart = 4;
+  const ThemeAnnounced = 4;
   const JamRunning = 5;
   const RecievingGameSubmissions = 6;
   const Complete = 7;
@@ -24,7 +24,13 @@ abstract class JamStatus
 
 abstract class CurrentRound
 {
-  const Final = 0;
+  const NotSelected = -1;
+  const FinalRound = 0;
+}
+
+abstract class SelectedTheme
+{
+  const NotSelected = -1;
 }
 
 ?>

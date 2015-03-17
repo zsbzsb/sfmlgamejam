@@ -14,8 +14,8 @@ if ($news == null)
 $jams = $cache->get('home_jams');
 if ($jams == null)
 {
-  $stmt = $dbconnection->prepare('SELECT id, title, jamstart FROM jams WHERE jamstart >= ? ORDER BY jamstart ASC;');
-  $stmt->execute(array(time()));
+  $stmt = $dbconnection->prepare('SELECT id, title, suggestionsbegin FROM jams WHERE suggestionsbegin >= ? AND status != ? ORDER BY suggestionsbegin ASC;');
+  $stmt->execute(array(time(), JamStatus::Disabled));
   $jams = $stmt->fetchAll();
 
   $cache->set('home_jams', $jams, CACHE_TIME);

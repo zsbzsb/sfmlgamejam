@@ -85,6 +85,8 @@ $(function() {
 
   // handle activation of the preview tab
   $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) { if (e.target.childNodes[0].data == 'Preview') { LoadPreview($('#content'), $('#preview')); } })
+
+  if (!AddNews) ValidateForm();
 });
 
 function OnSubmit() {
@@ -112,7 +114,7 @@ function Submit() {
   animation = DotAnimation($('#newssubmit'));
 
   title = $('#title').val();
-  date = GetTimeStamp('#date');
+  date = GetTimeStamp('#datecontainer');
   summary = $('#summary').val();
   content = $('#content').val();
 

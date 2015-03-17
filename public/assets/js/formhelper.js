@@ -51,8 +51,16 @@ function LoadPreview(EditContainer, PreviewContainer) {
     });
 };
 
+function GetPicker(PickerID)
+{
+  return $(PickerID).data('DateTimePicker');
+};
+
 function GetTimeStamp(PickerID) {
-  return moment.utc($(PickerID).val().replace('UTC', '') + ' UTC').unix();
+  datetime = GetPicker(PickerID).date();
+  // convert local time into utc time *without* changing the offset
+  // this ensures that times are entered as utc
+  return datetime.add(datetime.utcOffset(), 'minutes').unix();
 };
 
 function Post(URL, Data)

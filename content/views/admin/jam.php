@@ -1,22 +1,3 @@
-<?php
-
-$createjam = !isset($id);
-
-if (!$createjam)
-{
-  $stmt = $dbconnection->prepare('SELECT * FROM jams WHERE id = ?;');
-  $stmt->execute(array($id));
-  $rows = $stmt->fetchAll();
-  if ($stmt->rowCount() == 0)
-  {
-    header('Location: '.$routes->generate('admin'));
-    die();
-  }
-  $jam = $rows[0];
-}
-
-?>
-
 <div class="row">
   <h2 class="text-center"><?php echo $createjam ? 'Create' : 'Edit' ?> Jam<?php if (!$createjam) echo ' - ['.$jam['title'].']' ?></h2>
 </div>
@@ -30,23 +11,77 @@ if (!$createjam)
         <input type="text" class="form-control" id="title" placeholder="Enter Title" value="<?php if (!$createjam) echo $jam['title']; ?>" />
       </div>
       <div class="form-group">
-        <label for="suggestionsstart">Suggestions Start*</label>
-        <div class="input-group date" id="suggestionsstartcontainer">
-          <input type="text" class="form-control" id="suggestionsstart" placeholder="Select a Date" value="<?php if (!$createjam) echo date($DATETIME_FORMAT, $jam['suggestionsstart']); ?>" />
+        <label for="themesperuser">Theme Submissions Per User</label>
+        <br>
+        <input type="number" class="form-control" id="themesperuser" min="1" value="5" />
+      </div>
+      <div class="checkbox">
+        <label for="autoapprovethemes">
+          <input type="checkbox" id="autoapprovethemes" checked />
+          Auto Approve Themes
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="initialvotingrounds">Initial Voting Rounds</label>
+        <br>
+        <input type="number" class="form-control" id="initialvotingrounds" min="1" value="3" />
+      </div>
+      <div class="form-group">
+        <label for="votesperuser">Votes Per User</label>
+        <br>
+        <input type="number" class="form-control" id="votesperuser" min="1" value="5" />
+      </div>
+      <div class="form-group">
+        <label for="topthemesinfinal">Top Themes in Final</label>
+        <br>
+        <input type="number" class="form-control" id="topthemesinfinal" min="1" value="3" />
+      </div>
+      <div class="form-group">
+        <label for="suggestionsbegin">Suggestions Begin*</label>
+        <div class="input-group date" id="suggestionsbeginpicker">
+          <input type="text" class="form-control" id="suggestionsbegin" placeholder="Select a Date" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
       <div class="form-group">
-        <label for="suggestionsend">Suggestions End*</label>
-        <div class="input-group date" id="suggestionsendcontainer">
-          <input type="text" class="form-control" id="suggestionsend" placeholder="Select a Date" value="<?php if (!$createjam) echo date($DATETIME_FORMAT, $jam['suggestionsend']); ?>" />
+        <label for="approvalsbegin">Approvals Begin*</label>
+        <div class="input-group date" id="approvalsbeginpicker">
+          <input type="text" class="form-control" id="approvalsbegin" placeholder="Select a Date" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
       <div class="form-group">
-        <label for="jamstart">Jam Start*</label>
-        <div class="input-group date" id="jamstartcontainer">
-          <input type="text" class="form-control" id="jamstart" placeholder="Select a Date" value="<?php if (!$createjam) echo date($DATETIME_FORMAT, $jam['jamstart']); ?>" />
+        <label for="votingbegins">Voting Begins*</label>
+        <div class="input-group date" id="votingbeginspicker">
+          <input type="text" class="form-control" id="votingbegins" placeholder="Select a Date" />
+          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="themeannounce">Theme Announce*</label>
+        <div class="input-group date" id="themeannouncepicker">
+          <input type="text" class="form-control" id="themeannounce" placeholder="Select a Date" />
+          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="jambegins">Jam Begins*</label>
+        <div class="input-group date" id="jambeginspicker">
+          <input type="text" class="form-control" id="jambegins" placeholder="Select a Date" />
+          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="jamends">Jam Ends*</label>
+        <div class="input-group date" id="jamendspicker">
+          <input type="text" class="form-control" id="jamends" placeholder="Select a Date" />
+          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="submissionsend">Game Submissions End*</label>
+        <div class="input-group date" id="submissionsendpicker">
+          <input type="text" class="form-control" id="submissionsend" placeholder="Select a Date" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
@@ -58,20 +93,21 @@ if (!$createjam)
 
 <script>
 CreateJam = <?php echo $createjam ? 'true' : 'false'; ?>;
-JamID = <?php echo !$createjam ? $id : -1; ?>;
+JamID = <?php echo !$createjam ? $jam['id'] : -1; ?>;
 
 $(function() {
   // initialize the date-time pickers
-  $('#suggestionsstartcontainer').datetimepicker();
-  $('#suggestionsendcontainer').datetimepicker();
-  $('#jamstartcontainer').datetimepicker();
+  $('#suggestionsbeginpicker').datetimepicker();
+  $('#approvalsbeginpicker').datetimepicker();
+  $('#votingbeginspicker').datetimepicker();
+  $('#themeannouncepicker').datetimepicker();
+  $('#jambeginspicker').datetimepicker();
+  $('#jamendspicker').datetimepicker();
+  $('#submissionsendpicker').datetimepicker();
 
   // set min/max dates if we are editing a jam
   if (!CreateJam) {
-    $('#suggestionsendcontainer').data('DateTimePicker').setMinDate($('#suggestionsstart').val());
-    $('#suggestionsstartcontainer').data('DateTimePicker').setMaxDate($('#suggestionsend').val());
-    $('#jamstartcontainer').data('DateTimePicker').setMinDate($('#suggestionsend').val());
-
+    
     ValidateForm();
   }
 
@@ -80,9 +116,17 @@ $(function() {
 
   // register textboxes for validation
   BindTextboxChanged($('#title'), ValidateForm);
-  BindTextboxChanged($('#suggestionsstart'), ValidateForm);
-  BindTextboxChanged($('#suggestionsend'), ValidateForm);
-  BindTextboxChanged($('#jamstart'), ValidateForm);
+  BindTextboxChanged($('#themesperuser'), ValidateForm);
+  BindTextboxChanged($('#initialvotingrounds'), ValidateForm);
+  BindTextboxChanged($('#votesperuser'), ValidateForm);
+  BindTextboxChanged($('#topthemesinfinal'), ValidateForm);
+  BindTextboxChanged($('#suggestionsbegin'), ValidateForm);
+  BindTextboxChanged($('#approvalsbegin'), ValidateForm);
+  BindTextboxChanged($('#votingbegins'), ValidateForm);
+  BindTextboxChanged($('#themeannounce'), ValidateForm);
+  BindTextboxChanged($('#jambegins'), ValidateForm);
+  BindTextboxChanged($('#jamends'), ValidateForm);
+  BindTextboxChanged($('#submissionsend'), ValidateForm);
 
   // validate form and update min/max dates when the selected date-time changes
   $('#suggestionsstartcontainer').on('dp.change', function(e) {
@@ -112,8 +156,8 @@ function ValidateForm() {
   if ($('#suggestionsstart').val().length == 0) valid = false;
   if ($('#suggestionsend').val().length == 0) valid = false;
   if ($('#jamstart').val().length == 0) valid = false;
-  if (GetTimeStamp('#suggestionsstart') >= GetTimeStamp('#suggestionsend')) valid = false;
-  if (GetTimeStamp('#suggestionsend') >= GetTimeStamp('#jamstart')) valid = false;
+  if (GetTimeStamp('#suggestionsstartcontainer') >= GetTimeStamp('#suggestionsendcontainer')) valid = false;
+  if (GetTimeStamp('#suggestionsendcontainer') >= GetTimeStamp('#jamstartcontainer')) valid = false;
 
   EnableButton($('#jamsubmit'), valid);
   return valid;
@@ -126,8 +170,8 @@ function Submit() {
   animation = DotAnimation($('#jamsubmit'));
 
   title = $('#title').val();
-  suggestionsstart = GetTimeStamp('#suggestionsstart');
-  suggestionsend = GetTimeStamp('#suggestionsend');
+  suggestionsstart = GetTimeStamp('#suggestionsstartcontainer');
+  suggestionsend = GetTimeStamp('#suggestionsendcontainer');
   jamstart = GetTimeStamp('#jamstart');
 
   success = false;
