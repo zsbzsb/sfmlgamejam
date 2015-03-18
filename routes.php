@@ -35,6 +35,9 @@ $routes->map('GET', '/news/[i:id]', array('source' => 'news_article', 'title' =>
 // Jams
 $routes->map('GET', '/jams', array('source' => 'jams_list', 'title' => 'Game Jams', 'active' => 'jams'), 'jams');
 
+// Jam Page
+$routes->map('GET', '/jams/[i:id]', array('source' => 'jam_page', 'title' => 'Game Jams', 'active' => 'jams'), 'jam_page');
+
 // Rules
 $routes->map('GET', '/rules', array('source' => 'rules', 'title' => 'Rules', 'active' => 'rules'), 'rules');
 

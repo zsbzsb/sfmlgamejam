@@ -15,7 +15,7 @@
       <div class="form-group">
         <label for="themesperuser">Theme Submissions Per User</label>
         <br>
-        <input type="number" class="form-control" id="themesperuser" min="1" value="5" />
+        <input type="number" class="form-control" id="themesperuser" min="1" value="<?= !$createjam ? $jam['themesperuser'] : 5 ?>" />
       </div>
       <div class="checkbox">
         <label for="autoapprovethemes">
@@ -26,17 +26,17 @@
       <div class="form-group">
         <label for="initialvotingrounds">Initial Voting Rounds</label>
         <br>
-        <input type="number" class="form-control" id="initialvotingrounds" min="1" value="3" />
+        <input type="number" class="form-control" id="initialvotingrounds" min="1" value="<?= !$createjam ? $jam['initialvotingrounds'] : 3 ?>" />
       </div>
       <div class="form-group">
         <label for="votesperuser">Votes Per User</label>
         <br>
-        <input type="number" class="form-control" id="votesperuser" min="1" value="5" />
+        <input type="number" class="form-control" id="votesperuser" min="1" value="<?= !$createjam ? $jam['votesperuser'] : 5 ?>" />
       </div>
       <div class="form-group">
         <label for="topthemesinfinal">Top Themes in Final</label>
         <br>
-        <input type="number" class="form-control" id="topthemesinfinal" min="1" value="3" />
+        <input type="number" class="form-control" id="topthemesinfinal" min="1" value="<?= !$createjam ? $jam['topthemesinfinal'] : 3 ?>" />
       </div>
       <div class="form-group">
         <label for="suggestionsbegin">Suggestions Begin*</label>

@@ -20,6 +20,13 @@
 
               foreach ($jams as $jam)
               {
+                echo '
+                  <tr class="jamrow" jamviewurl="'.$routes->generate('jam_page', array('id' => $jam['id'])).'">
+                    <td>'.$jam['title'].'</td>
+                    <td>'.date($DATETIME_FORMAT, $jam['suggestionsbegin']).'</td>
+                    <td>'.date($DATETIME_FORMAT, $jam['suggestionsbegin'] + $jam['suggestionslength'] + $jam['approvallength'] + $jam['themeannouncelength']).'</td>
+                    <td>'.JamStatusString($jam['status']).'</td>
+                  </tr>';
               }
 
             ?>
@@ -30,3 +37,11 @@
     </div>
   </div>
 </div>
+
+<script>
+$(function() {
+  $('.jamrow').click(function() {
+    Redirect($(this).attr('jamviewurl'));
+  });
+});
+</script>
