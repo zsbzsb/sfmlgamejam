@@ -13,12 +13,12 @@ abstract class JamStatus
 {
   const Disabled = -1;
   const WaitingSuggestionsStart = 0;
-  const RecievingSuggestions = 1;
+  const ReceivingSuggestions = 1;
   const WaitingThemeApprovals = 2;
   const ThemeVoting = 3;
   const ThemeAnnounced = 4;
   const JamRunning = 5;
-  const RecievingGameSubmissions = 6;
+  const ReceivingGameSubmissions = 6;
   const Complete = 7;
 }
 

@@ -1,7 +1,8 @@
 <?php
 
+require SCRIPTROOT.'jamstates.php';
+
 $jams = $cache->get('jams_list_jams');
-$jams = null; // todo remove this line
 if ($jams == null)
 {
   $stmt = $dbconnection->prepare('SELECT * FROM jams WHERE status != ? ORDER BY suggestionsbegin DESC;');

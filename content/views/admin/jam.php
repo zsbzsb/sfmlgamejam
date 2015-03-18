@@ -19,7 +19,7 @@
       </div>
       <div class="checkbox">
         <label for="autoapprovethemes">
-          <input type="checkbox" id="autoapprovethemes" checked />
+          <input type="checkbox" id="autoapprovethemes" <?php if (!$createjam && $jam['autoapprovethemes']) echo 'checked="" '; ?>/>
           Auto Approve Themes
         </label>
       </div>
@@ -108,8 +108,8 @@ $(function() {
   // set min/max dates if we are editing a jam
   if (!CreateJam) {
     for (var i = 0; i < Pickers.length; i++) {
-      if (i > 0) GetPicker(Pickers[i] + 'picker').maxDate(GetPicker(Pickers[i - 1] + 'picker').date());
-      if (i + 1 < Pickers.length) GetPicker(Pickers[i] + 'picker').minDate(GetPicker(Pickers[i + 1] + 'picker').date());
+      if (i > 0) GetPicker(Pickers[i] + 'picker').minDate(GetPicker(Pickers[i - 1] + 'picker').date());
+      if (i + 1 < Pickers.length) GetPicker(Pickers[i] + 'picker').maxDate(GetPicker(Pickers[i + 1] + 'picker').date());
     }
     
     ValidateForm();
@@ -172,7 +172,7 @@ function Submit() {
 
   title = $('#title').val();
   themesperuser = parseInt($('#themesperuser').val(), 10);
-  autoapprovethemes = $('autoapprovethemes').is(':checked');
+  autoapprovethemes = $('#autoapprovethemes').is(':checked');
   initialvotingrounds = parseInt($('#initialvotingrounds').val(), 10);
   votesperuser = parseInt($('#votesperuser').val(), 10);
   topthemesinfinal = parseInt($('#topthemesinfinal').val(), 10);

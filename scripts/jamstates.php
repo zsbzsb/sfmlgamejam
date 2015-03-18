@@ -5,13 +5,14 @@ function JamStatusString($Status)
   switch ($Status)
   {
     case JamStatus::Complete: return 'Jam Finished';
-    case JamStatus::RecievingGameSubmissions: return 'Recieving Game Submissions';
+    case JamStatus::ReceivingGameSubmissions: return 'Receiving Game Submissions';
     case JamStatus::JamRunning: return 'In Progress';
     case JamStatus::ThemeAnnounced: return 'Preparing to Start';
     case JamStatus::ThemeVoting: return 'Voting on Theme';
     case JamStatus::WaitingThemeApprovals: return 'Preparing to Vote';
-    case JamStatus::RecievingSuggestions: return 'Recieving Theme Suggestions';
+    case JamStatus::ReceivingSuggestions: return 'Receiving Theme Suggestions';
     case JamStatus::WaitingSuggestionsStart: return 'Scheduled';
+    case JamStatus::Disabled: return 'Disabled';
   }
 }
 
@@ -19,11 +20,12 @@ function JamStatusString($Status)
 // ensure that it is only called when a cache expires
 function VerifyJamState(&$Jam)
 {
-echo 'ver'; // todo remove this line
   global $dbconnection;
 
+  if ($Jam['status'] == JamStatus::Disabled) return;
+
   $time = time();
-  $length = $Jam['suggestionsbegin'] + $Jam['suggestionslength'] + $Jam['approvallength'] + $Jam['votinglength'] + $Jam['themeannouncelength'] + $Jam['jamlength'] + $Jam['submissionslength']
+  $length = $Jam['suggestionsbegin'] + $Jam['suggestionslength'] + $Jam['approvallength'] + $Jam['votinglength'] + $Jam['themeannouncelength'] + $Jam['jamlength'] + $Jam['submissionslength'];
 
   if ($time > $length)
   {
@@ -31,7 +33,7 @@ echo 'ver'; // todo remove this line
   }
   else if ($time > $length -= $Jam['submissionslength'])
   {
-    $status = JamStatus::RecievingGameSubmissions;
+    $status = JamStatus::ReceivingGameSubmissions;
   }
   else if ($time > $length -= $Jam['jamlength'])
   {
@@ -51,7 +53,7 @@ echo 'ver'; // todo remove this line
   }
   else if ($time > $length -= $Jam['suggestionslength'])
   {
-    $status = JamStatus::RecievingSuggestions;
+    $status = JamStatus::ReceivingSuggestions;
   }
   else
   {
@@ -75,7 +77,7 @@ echo 'ver'; // todo remove this line
     $roundlength = $Jam['votinglength'] / ($Jam['initialvotingrounds'] + 1);
 
     // track the round offset - after each iteration it will be increased by the round length
-    $roundoffet = 0;
+    $roundoffset = 0;
 
     // if no round is selected setup rounds
     if ($round == CurrentRound::NotSelected)
@@ -108,7 +110,7 @@ echo 'ver'; // todo remove this line
         $round = $i;
       }
 
-      $roundoffet += $roundlength;
+      $roundoffset += $roundlength;
     }
 
     if ($status > JamStatus::ThemeVoting && $selectedtheme == SelectedTheme::NotSelected)
@@ -119,7 +121,7 @@ echo 'ver'; // todo remove this line
     if ($status != $Jam['status'] || $round != $Jam['currentround'] || $selectedtheme != $Jam['selectedthemeid'])
     {
       $stmt = $dbconnection->prepare('UPDATE jams SET status = ?, currentround = ?, selectedthemeid = ? WHERE id = ?;');
-      $stmt->execute(array($status, $round, $selectedtheme));
+      $stmt->execute(array($status, $round, $selectedtheme, $Jam['id']));
       $Jam['status'] = $status;
       $Jam['currentround'] = $round;
       $Jam['selectedthemeid'] = $selectedtheme;
@@ -221,8 +223,8 @@ function SetupFinalRound($JamID, $RoundCount, $TopThemesinFinal)
 
 function CompareThemeVotes($A, $B)
 {
-  if ($A['votes'] == $B['votes'] return 0;
-  else return ($A['votes'] < $B['votes']) ? 1 : -1;
+  if ($A['votes'] == $B['votes']) return 0;
+  else return $A['votes'] < $B['votes'] ? 1 : -1;
 }
 
 ?>

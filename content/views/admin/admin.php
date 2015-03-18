@@ -35,10 +35,10 @@
                   {
                     echo '
                       <tr class="jamrow" jamtitle="'.$jam['title'].'" jamediturl="'.$routes->generate('jamadmin', array('id' => $jam['id'])).'" themesediturl="'.$routes->generate('themeadmin', array('id' => $jam['id'])).'">
-                        <td>'.$row['title'].'</td>
+                        <td>'.$jam['title'].'</td>
                         <td>'.date($DATETIME_FORMAT, $jam['suggestionsbegin']).'</td>
                         <td>'.date($DATETIME_FORMAT, $jam['suggestionsbegin'] + $jam['suggestionslength'] + $jam['approvallength'] + $jam['themeannouncelength']).'</td>
-                        <td>'.JamStatusString($Jam['status']).'</td>
+                        <td>'.JamStatusString($jam['status']).'</td>
                       </tr>';
                   }
 
@@ -59,16 +59,13 @@
               <tbody>
                 <?php
 
-                  $stmt = $dbconnection->prepare('SELECT * FROM news ORDER BY date DESC;');
-                  $stmt->execute();
-                  $rows = $stmt->fetchAll();
-                  foreach ($rows as $row)
+                  foreach ($news as $article)
                   {
                     echo '
-                      <tr class="newsrow" newsid ="'.$row['id'].'" newstitle="'.$row['title'].'" newsediturl="'.$routes->generate('newsadmin', array('id' => $row['id'])).'">
-                        <td>'.$row['title'].'</td>
-                        <td>'.date($DATETIME_FORMAT, $row['date']).'</td>
-                        <td>'.$row['summary'].'</td>
+                      <tr class="newsrow" newsid ="'.$article['id'].'" newstitle="'.$article['title'].'" newsediturl="'.$routes->generate('newsadmin', array('id' => $article['id'])).'">
+                        <td>'.$article['title'].'</td>
+                        <td>'.date($DATETIME_FORMAT, $article['date']).'</td>
+                        <td>'.$article['summary'].'</td>
                       </tr>';
                   }
 
