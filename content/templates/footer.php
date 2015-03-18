@@ -20,6 +20,7 @@
         UpdateTime();
       }, 1000);
     });
+
     function UpdateTime() {
       $('#timedisplay').html(moment.utc().format('MM/DD/YYYY hh:mm A'));
     };

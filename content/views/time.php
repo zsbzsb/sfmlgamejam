@@ -13,6 +13,7 @@ $(function() {
     UpdateBigTime();
   }, 100);
 });
+
 function UpdateBigTime() {
   $('#timebigdisplay').html(moment.utc().format('MM/DD/YYYY hh:mm:ss A'));
 };
