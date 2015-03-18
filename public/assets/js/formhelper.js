@@ -60,7 +60,8 @@ function GetTimeStamp(PickerID) {
 };
 
 function IsNumber(Element) {
-  return $(Element).val().match(/^[0-9]$/);
+  numbermatch = /^[0-9]*$/;
+  return numbermatch.test($(Element).val());
 };
 
 function Post(URL, Data) {

@@ -148,10 +148,10 @@ function ValidateForm() {
   valid = true;
 
   if ($('#title').val().length == 0) valid = false;
-  if (!IsNumber('#themesperuser')) valid = false;
-  if (!IsNumber('#initialvotingrounds')) valid = false;
-  if (!IsNumber('#votesperuser')) valid = false;
-  if (!IsNumber('#topthemesinfinal')) valid = false;
+  if (!IsNumber('#themesperuser') || parseInt($('#themesperuser').val(), 10) <= 0) valid = false;
+  if (!IsNumber('#initialvotingrounds') || parseInt($('#initialvotingrounds').val(), 10) <= 0) valid = false;
+  if (!IsNumber('#votesperuser') || parseInt($('#votesperuser').val(), 10) <= 0) valid = false;
+  if (!IsNumber('#topthemesinfinal') || parseInt($('#topthemesinfinal').val(), 10) <= 0) valid = false;
 
   for (var i = 0; i < Pickers.length; i++) {
     if ($(Pickers[i]).val().length == 0) {
@@ -171,13 +171,38 @@ function Submit() {
   animation = DotAnimation($('#jamsubmit'));
 
   title = $('#title').val();
-  suggestionsstart = GetTimeStamp('#suggestionsstartcontainer');
-  suggestionsend = GetTimeStamp('#suggestionsendcontainer');
-  jamstart = GetTimeStamp('#jamstart');
+  themesperuser = parseInt($('#themesperuser').val(), 10);
+  autoapprovethemes = $('autoapprovethemes').is(':checked');
+  initialvotingrounds = parseInt($('#initialvotingrounds').val(), 10);
+  votesperuser = parseInt($('#votesperuser').val(), 10);
+  topthemesinfinal = parseInt($('#topthemesinfinal').val(), 10);
+
+  suggestionsbegin = GetTimeStamp('#suggestionsbeginpicker');
+  suggestionslength = GetTimeStamp('#approvalsbeginpicker') - GetTimeStamp('#suggestionsbeginpicker');
+  approvallength = GetTimeStamp('#votingbeginspicker') - GetTimeStamp('#approvalsbeginpicker');
+  votinglength = GetTimeStamp('#themeannouncepicker') - GetTimeStamp('#votingbeginspicker');
+  themeannouncelength = GetTimeStamp('#jambeginspicker') - GetTimeStamp('#themeannouncepicker');
+  jamlength = GetTimeStamp('#jamendspicker') - GetTimeStamp('#jambeginspicker');
+  submissionslength = GetTimeStamp('#submissionsendpicker') - GetTimeStamp('#jamendspicker');
 
   success = false;
   
-  Post(CreateJam ? '/api/v1/jams/create' : '/api/v1/jams/update', { id:JamID, title:title, suggestionsstart:suggestionsstart, suggestionsend:suggestionsend, jamstart:jamstart })
+  Post(CreateJam ? '/api/v1/jams/create' : '/api/v1/jams/update', {
+      id:JamID,
+      title:title,
+      themesperuser:themesperuser,
+      autoapprovethemes:autoapprovethemes,
+      initialvotingrounds:initialvotingrounds,
+      votesperuser:votesperuser,
+      topthemesinfinal:topthemesinfinal,
+      suggestionsbegin:suggestionsbegin,
+      suggestionslength:suggestionslength,
+      approvallength:approvallength,
+      votinglength:votinglength,
+      themeannouncelength:themeannouncelength,
+      jamlength:jamlength,
+      submissionslength
+    })
     .done(function(result) {
       if (result.success) {
         SuccessFeedback('Jam has been successfully ' + (CreateJam ? 'created' : 'updated') + ', redirecting...');
