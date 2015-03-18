@@ -7,7 +7,7 @@ function JamStatusString($Status)
     case JamStatus::Complete: return 'Jam Finished';
     case JamStatus::ReceivingGameSubmissions: return 'Receiving Game Submissions';
     case JamStatus::JamRunning: return 'In Progress';
-    case JamStatus::ThemeAnnounced: return 'Preparing to Start';
+    case JamStatus::ThemeAnnounced: return 'Theme Announced';
     case JamStatus::ThemeVoting: return 'Voting on Theme';
     case JamStatus::WaitingThemeApprovals: return 'Preparing to Vote';
     case JamStatus::ReceivingSuggestions: return 'Receiving Theme Suggestions';
@@ -27,31 +27,31 @@ function VerifyJamState(&$Jam)
   $time = time();
   $length = $Jam['suggestionsbegin'] + $Jam['suggestionslength'] + $Jam['approvallength'] + $Jam['votinglength'] + $Jam['themeannouncelength'] + $Jam['jamlength'] + $Jam['submissionslength'];
 
-  if ($time > $length)
+  if ($time >= $length)
   {
     $status = JamStatus::Complete;
   }
-  else if ($time > $length -= $Jam['submissionslength'])
+  else if ($time >= ($length -= $Jam['submissionslength']))
   {
     $status = JamStatus::ReceivingGameSubmissions;
   }
-  else if ($time > $length -= $Jam['jamlength'])
+  else if ($time >= ($length -= $Jam['jamlength']))
   {
     $status = JamStatus::JamRunning;
   }
-  else if ($time > $length -= $Jam['themeannouncelength'])
+  else if ($time >= ($length -= $Jam['themeannouncelength']))
   {
     $status = JamStatus::ThemeAnnounced;
   }
-  else if ($time > $length -= $Jam['votinglength'])
+  else if ($time >= ($length -= $Jam['votinglength']))
   {
     $status = JamStatus::ThemeVoting;
   }
-  else if ($time > $length -= $Jam['approvallength'])
+  else if ($time >= ($length -= $Jam['approvallength']))
   {
     $status = JamStatus::WaitingThemeApprovals;
   }
-  else if ($time > $length -= $Jam['suggestionslength'])
+  else if ($time >= ($length -= $Jam['suggestionslength']))
   {
     $status = JamStatus::ReceivingSuggestions;
   }
@@ -112,20 +112,21 @@ function VerifyJamState(&$Jam)
 
       $roundoffset += $roundlength;
     }
+  }
 
-    if ($status > JamStatus::ThemeVoting && $selectedtheme == SelectedTheme::NotSelected)
-    {
-      // todo calculate the theme that won
-    }
+  if ($status > JamStatus::ThemeVoting && $selectedtheme == SelectedTheme::NotSelected)
+  {
+    // todo calculate the theme that won
+  }
 
-    if ($status != $Jam['status'] || $round != $Jam['currentround'] || $selectedtheme != $Jam['selectedthemeid'])
-    {
-      $stmt = $dbconnection->prepare('UPDATE jams SET status = ?, currentround = ?, selectedthemeid = ? WHERE id = ?;');
-      $stmt->execute(array($status, $round, $selectedtheme, $Jam['id']));
-      $Jam['status'] = $status;
-      $Jam['currentround'] = $round;
-      $Jam['selectedthemeid'] = $selectedtheme;
-    }
+  if ($status != $Jam['status'] || $round != $Jam['currentround'] || $selectedtheme != $Jam['selectedthemeid'])
+  {
+
+    $stmt = $dbconnection->prepare('UPDATE jams SET status = ?, currentround = ?, selectedthemeid = ? WHERE id = ?;');
+    $stmt->execute(array($status, $round, $selectedtheme, $Jam['id']));
+    $Jam['status'] = $status;
+    $Jam['currentround'] = $round;
+    $Jam['selectedthemeid'] = $selectedtheme;
   }
 }
 

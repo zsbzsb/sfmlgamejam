@@ -13,11 +13,13 @@ $DATABASE = array
 $SESSION = array
 (
     'tokenid' => 'SessionID',
+    /* 30 days is the default time a user will stay logged in */
     'timeout' => (30/*days*/) * (24/*hours*/) * (60/*minutes*/) * (60/*seconds*/)
 );
 
 $DATETIME_FORMAT = 'm/d/Y h:i A';
 
-define('CACHE_TIME', 60 * 2);
+// 1 minute is default time to cache content
+define('CACHE_TIME', 60);
 
 ?>

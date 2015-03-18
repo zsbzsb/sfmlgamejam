@@ -41,6 +41,9 @@ $routes->map('GET', '/jams/[i:id]', array('source' => 'jam_page', 'title' => 'Ga
 // Rules
 $routes->map('GET', '/rules', array('source' => 'rules', 'title' => 'Rules', 'active' => 'rules'), 'rules');
 
+// Time
+$routes->map('GET', '/time', array('source' => 'time', 'title' => 'Time'), 'time');
+
 // Admin Panel
 $routes->map('GET', '/admin', array('source' => 'admin/admin', 'title' => 'Admin Panel', 'active' => 'admin', 'adminsonly' => true), 'admin');
 

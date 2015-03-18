@@ -140,15 +140,15 @@ else
     {
       foreach ($target['optionalvariables'] as $variable)
       {
-        if (isset($_GET[$variable]))
+        if (isset($_POST[$variable]))
         {
-          if (is_string($_GET[$variable]))
+          if (is_string($_POST[$variable]))
           {
-            $$variable = htmlspecialchars(trim($_GET[$variable]));
+            $$variable = htmlspecialchars(trim($_POST[$variable]));
           }
           else
           {
-            $$variable = $_GET[$variable];
+            $$variable = $_POST[$variable];
           }
         }
       }
