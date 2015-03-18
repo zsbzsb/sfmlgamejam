@@ -41,7 +41,7 @@ if (!$route)
 {
   http_response_code(404);
   $error = 404;
-  require PAGEROOT.'error.php';
+  require VIEWROOT.'error.php';
   die();
 }
 else
@@ -85,7 +85,7 @@ else
       {
         http_response_code(401);
         $error = 401;
-        require PAGEROOT.'error.php';
+        require VIEWROOT.'error.php';
       }
       else header('Location: '.$routes->generate('login'));
       die();
@@ -101,7 +101,7 @@ else
       {
         http_response_code(401);
         $error = 401;
-        require PAGEROOT.'error.php';
+        require VIEWROOT.'error.php';
       }
       else header('Location: '.$routes->generate('account'));
       die();
@@ -119,7 +119,7 @@ else
         {
           http_response_code(400);
           $error = 400;
-          require PAGEROOT.'error.php';
+          require VIEWROOT.'error.php';
           die();
         }
         else

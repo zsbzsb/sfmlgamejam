@@ -1,5 +1,6 @@
 <div class="row">
   <h2 class="text-center">Create an Account</h2>
+  <h4 class="text-center">Or <a href="<?= $routes->generate('login') ?>">login</a> to your account</h4>
 </div>
 
 <div class="row">

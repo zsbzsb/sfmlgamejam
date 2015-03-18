@@ -8,17 +8,21 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="<?= $routes->generate('time') ?>" id="timedisplay"></a></li>
-            <li><a href="http://www.zbrown.net/" target="_blank">Developed By Zachariah Brown (zsbzsb)</a></li>
+            <li><a href="http://www.zbrown.net/" target="_blank">Copyright &copy; Zachariah Brown (zsbzsb)</a></li>
           </ul>
         </div>
       </div>
     </nav>
     <script>
     $(function() {
+      UpdateTime();
       window.setInterval(function() {
-        $('#timedisplay').html(moment.utc().format('MM/DD/YYYY hh:mm A'));
+        UpdateTime();
       }, 1000);
     });
+    function UpdateTime() {
+      $('#timedisplay').html(moment.utc().format('MM/DD/YYYY hh:mm A'));
+    };
     </script>
   </body>
 </html>
