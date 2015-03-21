@@ -8,8 +8,8 @@ if ($news == null)
 
   if ($stmt->rowCount() == 0)
   {
-    //header('Location: '.$routes->generate('news'));
-    //die();
+    header('Location: '.$routes->generate('news'));
+    die();
   }
   else
   {
