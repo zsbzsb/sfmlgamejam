@@ -17,9 +17,11 @@ $SESSION = array
     'timeout' => (30/*days*/) * (24/*hours*/) * (60/*minutes*/) * (60/*seconds*/)
 );
 
-$DATETIME_FORMAT = 'm/d/Y h:i A';
+define('DATETIME_FORMAT', 'm/d/Y h:i A');
 
-// 1 minute is default time to cache content
+// one minute is default time to cache content
 define('CACHE_TIME', 60);
+
+define('SHOW_ERRORS', false);
 
 ?>

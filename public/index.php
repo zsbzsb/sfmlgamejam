@@ -9,6 +9,19 @@ define('MODALROOT', ROOT.'content/modals/');
 define('APIROOT', ROOT.'api/');
 define('EXT', '.php');
 
+// setup error handling
+set_error_handler(function($errno, $errstr, $errfile, $errline)
+{
+  if (SHOW_ERRORS)
+  {
+    echo '<b>Error Number:</b> '.$errno;
+    echo '<br><b>Error String:</b> '.$errstr;
+    echo '<br><b>Error File:</b> '.$errfile;
+    echo '<br><b>Error Line:</b> '.$errline;
+  }
+  else throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+});
+
 // grab the settings
 require ROOT.'settings.php';
 
@@ -164,18 +177,40 @@ else
     // extract any route parameters
     extract($route['params']);
 
-    // page header and body
-    require TEMPLATEROOT.'header.php';
-    require TEMPLATEROOT.'body.php';
+    try
+    {
+      // start output buffering
+      ob_start();
 
-    // page modal
-    if (file_exists(MODALROOT.$target['source'].EXT)) require MODALROOT.$target['source'].EXT;
+      // page body
+      require TEMPLATEROOT.'body.php';
 
-    // page view
-    require VIEWROOT.$target['source'].EXT;
+      // page modal
+      if (file_exists(MODALROOT.$target['source'].EXT)) require MODALROOT.$target['source'].EXT;
 
-    // page footer
-    require TEMPLATEROOT.'footer.php';
+      // page view
+      require VIEWROOT.$target['source'].EXT;
+
+      // get page output
+      $page = ob_get_clean();
+
+      // page header
+      require TEMPLATEROOT.'header.php';
+
+      // page
+      echo $page;
+
+      // page footer
+      require TEMPLATEROOT.'footer.php';
+    }
+    catch (Exception $e)
+    {
+      ob_get_clean();
+
+      http_response_code(500);
+      $error = 500;
+      require VIEWROOT.'error.php';
+    }
   }
 }
 

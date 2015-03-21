@@ -36,8 +36,8 @@
                     echo '
                       <tr class="jamrow" jamtitle="'.$jam['title'].'" jamediturl="'.$routes->generate('jamadmin', array('id' => $jam['id'])).'" themesediturl="'.$routes->generate('themeadmin', array('id' => $jam['id'])).'">
                         <td>'.$jam['title'].'</td>
-                        <td>'.date($DATETIME_FORMAT, $jam['suggestionsbegin']).'</td>
-                        <td>'.date($DATETIME_FORMAT, $jam['suggestionsbegin'] + $jam['suggestionslength'] + $jam['approvallength'] + $jam['themeannouncelength']).'</td>
+                        <td>'.date(DATETIME_FORMAT, $jam['suggestionsbegin']).'</td>
+                        <td>'.date(DATETIME_FORMAT, $jam['suggestionsbegin'] + $jam['suggestionslength'] + $jam['approvallength'] + $jam['themeannouncelength']).'</td>
                         <td>'.JamStatusString($jam['status']).'</td>
                       </tr>';
                   }
@@ -64,7 +64,7 @@
                     echo '
                       <tr class="newsrow" newsid ="'.$article['id'].'" newstitle="'.$article['title'].'" newsediturl="'.$routes->generate('newsadmin', array('id' => $article['id'])).'">
                         <td>'.$article['title'].'</td>
-                        <td>'.date($DATETIME_FORMAT, $article['date']).'</td>
+                        <td>'.date(DATETIME_FORMAT, $article['date']).'</td>
                         <td>'.$article['summary'].'</td>
                       </tr>';
                   }
