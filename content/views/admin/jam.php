@@ -41,49 +41,49 @@
       <div class="form-group">
         <label for="suggestionsbegin">Suggestions Begin*</label>
         <div class="input-group date" id="suggestionsbeginpicker">
-          <input type="text" class="form-control" id="suggestionsbegin" placeholder="Select a Date" value="<?php if (!$createjam) echo date($DATETIME_FORMAT, $offset += $jam['suggestionsbegin']); ?>" />
+          <input type="text" class="form-control" id="suggestionsbegin" placeholder="Select a Date" value="<?php if (!$createjam) echo date(DATETIME_FORMAT, $offset += $jam['suggestionsbegin']); ?>" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
       <div class="form-group">
         <label for="approvalsbegin">Approvals Begin*</label>
         <div class="input-group date" id="approvalsbeginpicker">
-          <input type="text" class="form-control" id="approvalsbegin" placeholder="Select a Date" value="<?php if (!$createjam) echo date($DATETIME_FORMAT, $offset += $jam['suggestionslength']); ?>" />
+          <input type="text" class="form-control" id="approvalsbegin" placeholder="Select a Date" value="<?php if (!$createjam) echo date(DATETIME_FORMAT, $offset += $jam['suggestionslength']); ?>" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
       <div class="form-group">
         <label for="votingbegins">Voting Begins*</label>
         <div class="input-group date" id="votingbeginspicker">
-          <input type="text" class="form-control" id="votingbegins" placeholder="Select a Date" value="<?php if (!$createjam) echo date($DATETIME_FORMAT, $offset += $jam['approvallength']); ?>" />
+          <input type="text" class="form-control" id="votingbegins" placeholder="Select a Date" value="<?php if (!$createjam) echo date(DATETIME_FORMAT, $offset += $jam['approvallength']); ?>" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
       <div class="form-group">
         <label for="themeannounce">Theme Announce*</label>
         <div class="input-group date" id="themeannouncepicker">
-          <input type="text" class="form-control" id="themeannounce" placeholder="Select a Date" value="<?php if (!$createjam) echo date($DATETIME_FORMAT, $offset += $jam['votinglength']); ?>" />
+          <input type="text" class="form-control" id="themeannounce" placeholder="Select a Date" value="<?php if (!$createjam) echo date(DATETIME_FORMAT, $offset += $jam['votinglength']); ?>" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
       <div class="form-group">
         <label for="jambegins">Jam Begins*</label>
         <div class="input-group date" id="jambeginspicker">
-          <input type="text" class="form-control" id="jambegins" placeholder="Select a Date" value="<?php if (!$createjam) echo date($DATETIME_FORMAT, $offset += $jam['themeannouncelength']); ?>" />
+          <input type="text" class="form-control" id="jambegins" placeholder="Select a Date" value="<?php if (!$createjam) echo date(DATETIME_FORMAT, $offset += $jam['themeannouncelength']); ?>" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
       <div class="form-group">
         <label for="jamends">Jam Ends*</label>
         <div class="input-group date" id="jamendspicker">
-          <input type="text" class="form-control" id="jamends" placeholder="Select a Date" value="<?php if (!$createjam) echo date($DATETIME_FORMAT, $offset += $jam['jamlength']); ?>" />
+          <input type="text" class="form-control" id="jamends" placeholder="Select a Date" value="<?php if (!$createjam) echo date(DATETIME_FORMAT, $offset += $jam['jamlength']); ?>" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
       <div class="form-group">
         <label for="submissionsend">Game Submissions End*</label>
         <div class="input-group date" id="submissionsendpicker">
-          <input type="text" class="form-control" id="submissionsend" placeholder="Select a Date" value="<?php if (!$createjam) echo date($DATETIME_FORMAT, $offset += $jam['submissionslength']); ?>" />
+          <input type="text" class="form-control" id="submissionsend" placeholder="Select a Date" value="<?php if (!$createjam) echo date(DATETIME_FORMAT, $offset += $jam['submissionslength']); ?>" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>

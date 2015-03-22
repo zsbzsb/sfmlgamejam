@@ -18,9 +18,9 @@ $SESSION = array
 );
 
 define('DATETIME_FORMAT', 'm/d/Y h:i A');
+define('DATE_FORMAT', 'F jS');
 
-// one minute is default time to cache content
-define('CACHE_TIME', 60);
+define('CACHE_TIME', 30);
 
 define('SHOW_ERRORS', false);
 

@@ -13,13 +13,13 @@ function DotAnimation(Element, AnimatedText) {
   }, 500);
 };
 
-function TimerAnimation(Element, EndTime) {
-  lastseconds = -1;
+function TimerAnimation(Element, RemainingTime) {
   milliseconds = 1000;
-  interval = 28;
+  interval = 500;
+  starttime = moment();
 
-  return window.setInterval(function() {
-    difference = Math.max(0, moment.unix(EndTime - moment().unix()).unix());
+  function UpdateElement() {
+    difference = Math.max(0, RemainingTime - (moment().unix() - starttime.unix()));
     days = Math.floor(difference / 86400);
     difference -= days * 86400;
     hours = Math.floor(difference / 3600);
@@ -27,13 +27,12 @@ function TimerAnimation(Element, EndTime) {
     minutes = Math.floor(difference / 60);
     seconds = difference - minutes * 60;
 
-   if (lastseconds != seconds && seconds != 0) {
-     lastseconds = seconds;
-     milliseconds = 1000;
-   }
-   else if (seconds == 0) milliseconds = 0;
-   else milliseconds = Math.max(0, milliseconds - interval);
+    Element.html((days > 0 ? (days + ' day' + (days > 1 ? 's, ' : ', ')) : '') + hours + ':' + ('00' + minutes).slice(-2) + ':' + ('00' + seconds).slice(-2));
+  };
 
-    Element.html(days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's ' + milliseconds + 'ms');
+  UpdateElement();
+
+  return window.setInterval(function() {
+    UpdateElement();
   }, interval);
 };

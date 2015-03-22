@@ -30,13 +30,13 @@ $routes->map('GET', '/terms', array('source' => 'terms', 'title' => 'Terms of Us
 $routes->map('GET', '/news', array('source' => 'news_feed', 'title' => 'News', 'active' => 'news'), 'news');
 
 // News Article
-$routes->map('GET', '/news/[i:id]', array('source' => 'news_article', 'title' => 'News', 'active' => 'news'), 'news_article');
+$routes->map('GET', '/news/[i:id]', array('source' => 'news_article', 'active' => 'news'), 'news_article');
 
 // Jams
 $routes->map('GET', '/jams', array('source' => 'jams_list', 'title' => 'Game Jams', 'active' => 'jams'), 'jams');
 
 // Jam Page
-$routes->map('GET', '/jams/[i:id]', array('source' => 'jam_page', 'title' => 'Game Jams', 'active' => 'jams'), 'jam_page');
+$routes->map('GET', '/jams/[i:id]', array('source' => 'jam_page', 'active' => 'jams'), 'jam_page');
 
 // Rules
 $routes->map('GET', '/rules', array('source' => 'rules', 'title' => 'Rules', 'active' => 'rules'), 'rules');

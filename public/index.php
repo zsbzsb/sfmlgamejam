@@ -194,6 +194,9 @@ else
       // get page output
       $page = ob_get_clean();
 
+      // page title
+      if (!isset($title) && isset($target['title'])) $title = $target['title'];
+
       // page header
       require TEMPLATEROOT.'header.php';
 

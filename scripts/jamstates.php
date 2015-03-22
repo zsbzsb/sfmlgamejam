@@ -16,6 +16,69 @@ function JamStatusString($Status)
   }
 }
 
+function JamCountdownString($Status)
+{
+  switch ($Status)
+  {
+    case JamStatus::Complete: return 'until infinity???';
+    case JamStatus::ReceivingGameSubmissions: return 'until game submissions end';
+    case JamStatus::JamRunning: return 'until jam ends';
+    case JamStatus::ThemeAnnounced: return 'until theme is announced';
+    case JamStatus::ThemeVoting: return 'until theme voting ends';
+    case JamStatus::WaitingThemeApprovals: return 'until voting begins';
+    case JamStatus::ReceivingSuggestions: return 'until theme suggestions close';
+    case JamStatus::WaitingSuggestionsStart: return 'until theme suggestions begin';
+    case JamStatus::Disabled: return 'until infinity???';
+  }
+}
+
+function SuggestionsBegin($Jam)
+{
+  return $Jam['suggestionsbegin'];
+}
+
+function ApprovalsBegin($Jam)
+{
+  return SuggestionsBegin($Jam) + $Jam['suggestionslength'];
+}
+
+function VotingBegins($Jam)
+{
+  return ApprovalsBegin($Jam) + $Jam['approvallength'];
+}
+
+function ThemeAnnounce($Jam)
+{
+  return VotingBegins($Jam) + $Jam['votinglength'];
+}
+
+function JamBegins($Jam)
+{
+  return ThemeAnnounce($Jam) + $Jam['themeannouncelength'];
+}
+
+function SubmissionsBegin($Jam)
+{
+  return JamBegins($Jam) + $Jam['jamlength'];
+}
+
+function SubmissionsEnd($Jam)
+{
+  return SubmissionsBegin($Jam) + $Jam['submissionslength'];
+}
+
+function JamRemainingTime($Jam)
+{
+  if ($Jam['status'] == JamStatus::Disabled || $Jam['status'] == JamStatus::Complete) return 0;
+  else if ($Jam['status'] == JamStatus::ReceivingGameSubmissions) return SubmissionsEnd($Jam) - time();
+  else if ($Jam['status'] == JamStatus::JamRunning) return SubmissionsBegin($Jam) - time();
+  else if ($Jam['status'] == JamStatus::ThemeAnnounced) return JamBegins($Jam) - time();
+  else if ($Jam['status'] == JamStatus::ThemeVoting) return ThemeAnnounce($Jam) - time();
+  else if ($Jam['status'] == JamStatus::WaitingThemeApprovals) return VotingBegins($Jam) - time();
+  else if ($Jam['status'] == JamStatus::ReceivingSuggestions) return ApprovalsBegin($Jam) - time();
+  else if ($Jam['status'] == JamStatus::WaitingSuggestionsStart) return SuggestionsBegin($Jam) - time();
+}
+
 // this function can possibly be very heavy with DB operations
 // ensure that it is only called when a cache expires
 function VerifyJamState(&$Jam)
@@ -25,7 +88,7 @@ function VerifyJamState(&$Jam)
   if ($Jam['status'] == JamStatus::Disabled) return;
 
   $time = time();
-  $length = $Jam['suggestionsbegin'] + $Jam['suggestionslength'] + $Jam['approvallength'] + $Jam['votinglength'] + $Jam['themeannouncelength'] + $Jam['jamlength'] + $Jam['submissionslength'];
+  $length = SubmissionsEnd($Jam);
 
   if ($time >= $length)
   {

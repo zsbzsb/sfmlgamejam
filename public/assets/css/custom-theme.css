@@ -44,3 +44,17 @@ textarea {
 .inline {
   display: inline-block;
 }
+
+.timer {
+  position: relative;
+}
+
+.timer:after {
+  content: attr(timer-tag);
+  position: absolute;
+  white-space: nowrap;
+  margin-left: 8px;
+  color: gray;
+  font-size: 50%;
+  line-height: 300%;
+}
