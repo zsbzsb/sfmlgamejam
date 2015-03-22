@@ -32,7 +32,7 @@ if (!$addnews)
       <div class="form-group">
         <label for="date">Date*</label>
         <div class="input-group date" id="datecontainer">
-          <input type="text" class="form-control" id="date" placeholder="Select a Date" value="<?php if (!$addnews) echo date($DATETIME_FORMAT, $news['date']); ?>" />
+          <input type="text" class="form-control" id="date" placeholder="Select a Date" value="<?php if (!$addnews) echo date(DATETIME_FORMAT, $news['date']); ?>" />
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>

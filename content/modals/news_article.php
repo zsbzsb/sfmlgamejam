@@ -18,5 +18,6 @@ if ($news == null)
   }
 }
 
+$title = $news['title'];
 
 ?>
