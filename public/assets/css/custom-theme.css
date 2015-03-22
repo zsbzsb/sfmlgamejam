@@ -46,7 +46,7 @@ textarea {
 }
 
 .timer {
-  position: relative;
+  cursor: pointer;
 }
 
 .timer:after {

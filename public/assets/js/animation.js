@@ -17,24 +17,34 @@ function TimerAnimation(Element, RemainingTime) {
   milliseconds = 1000;
   interval = 500;
   starttime = moment();
+  shortdisplay = true;
+  autochange = true;
 
-  function UpdateElement() {
+  Element.click(function() {
+    autochange = false;
+    shortdisplay = !shortdisplay;
+    UpdateDisplay();
+  });
+
+  function UpdateDisplay() {
     duration = moment.duration(Math.max(0, RemainingTime - (moment().unix() - starttime.unix())), 'seconds');
     days = duration.days();
 
-    if (days <= 0) {
+    if (autochange) shortdisplay = days > 0;
+
+    if (!shortdisplay) {
       hours = duration.hours();
       minutes = duration.minutes();
       seconds = duration.seconds();
 
-      Element.html(hours + ':' + ('00' + minutes).slice(-2) + ':' + ('00' + seconds).slice(-2));
+      Element.html((days > 0 ? (days + ' day' + (days > 1 ? 's, ' : ', ')) : '') + hours + ':' + ('00' + minutes).slice(-2) + ':' + ('00' + seconds).slice(-2));
     }
     else Element.html(duration.humanize());
   };
 
-  UpdateElement();
+  UpdateDisplay();
 
   return window.setInterval(function() {
-    UpdateElement();
+    UpdateDisplay();
   }, interval);
 };
