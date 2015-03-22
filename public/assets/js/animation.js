@@ -19,15 +19,17 @@ function TimerAnimation(Element, RemainingTime) {
   starttime = moment();
 
   function UpdateElement() {
-    difference = Math.max(0, RemainingTime - (moment().unix() - starttime.unix()));
-    days = Math.floor(difference / 86400);
-    difference -= days * 86400;
-    hours = Math.floor(difference / 3600);
-    difference -= hours * 3600;
-    minutes = Math.floor(difference / 60);
-    seconds = difference - minutes * 60;
+    duration = moment.duration(Math.max(0, RemainingTime - (moment().unix() - starttime.unix())), 'seconds');
+    days = duration.days();
 
-    Element.html((days > 0 ? (days + ' day' + (days > 1 ? 's, ' : ', ')) : '') + hours + ':' + ('00' + minutes).slice(-2) + ':' + ('00' + seconds).slice(-2));
+    if (days <= 0) {
+      hours = duration.hours();
+      minutes = duration.minutes();
+      seconds = duration.seconds();
+
+      Element.html(hours + ':' + ('00' + minutes).slice(-2) + ':' + ('00' + seconds).slice(-2));
+    }
+    else Element.html(duration.humanize());
   };
 
   UpdateElement();
