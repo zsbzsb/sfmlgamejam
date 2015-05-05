@@ -112,7 +112,7 @@ function Submit() {
             SendSuggestion(Suggestions, Index + 1, Count);
           else {
             SuccessFeedback('Your theme suggestions have been saved.');
-            ResumeInput();
+            Redirect('<?=$routes->generate('jam_page', array('id' => $id))?>');
           }
         }
         else {
