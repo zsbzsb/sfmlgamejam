@@ -14,9 +14,10 @@ if ($news == null)
 
 
 $jams = $cache->get('home_jams');
+$jams = null;
 if ($jams == null)
 {
-  $stmt = $dbconnection->prepare('SELECT * FROM jams WHERE suggestionsbegin >= ? AND status != ? ORDER BY suggestionsbegin ASC;');
+  $stmt = $dbconnection->prepare('SELECT * FROM jams WHERE (suggestionsbegin + suggestionslength + approvallength + themeannouncelength + jamlength) >= ? AND status != ? ORDER BY suggestionsbegin ASC;');
   $stmt->execute(array(time(), JamStatus::Disabled));
   $jams = $stmt->fetchAll();
 

@@ -42,7 +42,7 @@
       {
         echo '
           <div class="row">
-            <a href="'.$routes->generate('jams', array('id' => $jam['id'])).'">
+            <a href="'.$routes->generate('jam_page', array('id' => $jam['id'])).'">
               <h4 class="pull-left inline">'.$jam['title'].'</h4>
               <h4 class="pull-right inline">'.date(DATETIME_FORMAT, JamBegins($jam)).'</h4>
             </a>
