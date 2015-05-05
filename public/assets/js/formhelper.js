@@ -21,6 +21,17 @@ function EnableFormInput(Form, Enabled) {
 
 function BindTextboxChanged(Textbox, Callback) {
   Textbox.bind('change keypress paste input', function() { Callback(); });
+
+  var last = Textbox.val();
+
+  window.setInterval(function() {
+    var text = Textbox.val();
+
+    if (text != last) {
+      last = text;
+      Callback();
+    }
+  }, 100);
 };
 
 function BindButtonClick(Button, Callback) {
