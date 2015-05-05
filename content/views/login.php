@@ -34,7 +34,7 @@ function OnSubmit() {
 };
 
 function ValidateForm() {
-  valid = true;
+  var valid = true;
 
   if ($('#username').val().length == 0) valid = false;
   if ($('#password').val().length == 0) valid = false;
@@ -48,12 +48,12 @@ function Submit() {
   EnableButton($('#loginsubmit'), false);
   EnableFormInput('#loginform', false);
 
-  animation = DotAnimation($('#loginsubmit'));
+  var animation = DotAnimation($('#loginsubmit'));
 
-  username = $('#username').val();
-  password = $('#password').val();
+  var username = $('#username').val();
+  var password = $('#password').val();
 
-  success = false;
+  var success = false;
 
   Post('/api/v1/account/login', { username:username, password:password })
     .done(function(result) {

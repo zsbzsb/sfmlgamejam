@@ -28,7 +28,7 @@ function TimerAnimation(Element, RemainingTime) {
 
   function UpdateDisplay() {
     duration = moment.duration(Math.max(0, RemainingTime - (moment().unix() - starttime.unix())), 'seconds');
-    days = duration.days();
+    days = Math.floor(duration.asDays());
 
     if (autochange) shortdisplay = days > 0;
 

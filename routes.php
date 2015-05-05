@@ -38,6 +38,15 @@ $routes->map('GET', '/jams', array('source' => 'jams_list', 'title' => 'Game Jam
 // Jam Page
 $routes->map('GET', '/jams/[i:id]', array('source' => 'jam_page', 'active' => 'jams'), 'jam_page');
 
+// Theme Suggestions
+$routes->map('GET', '/jams/[i:id]/suggestions', array('source' => 'theme_suggestions', 'active' => 'jams'), 'theme_suggestions');
+
+// Theme Voting
+$routes->map('GET', '/jams/[i:id]/voting', array('source' => 'theme_voting', 'active' => 'jams'), 'theme_voting');
+
+// Game Submissions
+$routes->map('GET', '/jams/[i:id]/submissions', array('source' => 'game_submissions', 'active' => 'jams'), 'game_submissions');
+
 // Rules
 $routes->map('GET', '/rules', array('source' => 'rules', 'title' => 'Rules', 'active' => 'rules'), 'rules');
 
@@ -51,7 +60,7 @@ $routes->map('GET', '/admin', array('source' => 'admin/admin', 'title' => 'Admin
 $routes->map('GET', '/admin/jam/[i:id]?', array('source' => 'admin/jam', 'title' => 'Jam Admin', 'active' => 'admin', 'adminsonly' => true), 'jamadmin');
 
 // Themes Admin
-$routes->map('GET', '/admin/themes/[i:id]', array('source' => 'admin/theme', 'title' => 'Theme Admin', 'active' => 'admin', 'adminsonly' => true), 'themeadmin');
+$routes->map('GET', '/admin/themes/[i:id]', array('source' => 'admin/themes', 'title' => 'Theme Admin', 'active' => 'admin', 'adminsonly' => true), 'themeadmin');
 
 // News Admin
 $routes->map('GET', '/admin/news/[i:id]?', array('source' => 'admin/news', 'title' => 'News Admin', 'active' => 'admin', 'adminsonly' => true), 'newsadmin');
@@ -92,5 +101,9 @@ $routes->map('POST', '/api/v1/news/update', array('source' => 'v1/donewsupdate',
 
 // News Delete
 $routes->map('POST', '/api/v1/news/delete', array('source' => 'v1/donewsdelete', 'postvariables' => array('id')), null);
+
+// Suggestion Submit
+$routes->map('POST', '/api/v1/suggestions/submit', array('source' => 'v1/dosuggestionsubmit', 'postvariables' => array('jamid', 'themename'), 'optionalvariables' => array('themeid'), 'usersonly' => true), null);
+
 
 ?>
