@@ -202,14 +202,18 @@ function SetupInitialRounds($JamID, $RoundCount)
   global $dbconnection;
 
   $stmt = $dbconnection->prepare('SELECT * FROM themes WHERE jamid = ? AND isapproved = ?;');
-  $stmt->execute(array($JamID, true));
+  $stmt->execute(array($JamID, 1));
   $themes = $stmt->fetchAll();
 
-  if ($count = count($themes) == 0) return;
+  $themecount = count($themes);
 
-  $themesperround = intval(floor(floatval($count) / floatval($RoundCount)));
+  if ($themecount == 0) return;
+
+  $themesperround = intval(ceil(floatval($themecount) / floatval($RoundCount)));
   $round = 1;
   $count = 0;
+
+  shuffle($themes);
 
   foreach ($themes as $theme)
   {
