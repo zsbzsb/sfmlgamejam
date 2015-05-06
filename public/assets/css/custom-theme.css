@@ -31,7 +31,7 @@ textarea {
   margin-left: -15px;
 }
 
-.table > tbody > tr:hover> td {
+.clickabletable > tbody > tr:hover> td {
   background-color: #CC5D3E;
   color: #FFFFFF;
   cursor: pointer;

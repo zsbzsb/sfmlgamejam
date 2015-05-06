@@ -57,13 +57,13 @@ $routes->map('GET', '/time', array('source' => 'time', 'title' => 'Time'), 'time
 $routes->map('GET', '/admin', array('source' => 'admin/admin', 'title' => 'Admin Panel', 'active' => 'admin', 'adminsonly' => true), 'admin');
 
 // Jam Admin
-$routes->map('GET', '/admin/jam/[i:id]?', array('source' => 'admin/jam', 'title' => 'Jam Admin', 'active' => 'admin', 'adminsonly' => true), 'jamadmin');
+$routes->map('GET', '/admin/jam/[i:id]', array('source' => 'admin/jam', 'title' => 'Jam Admin', 'active' => 'admin', 'adminsonly' => true), 'jamadmin');
 
 // Themes Admin
 $routes->map('GET', '/admin/themes/[i:id]', array('source' => 'admin/themes', 'title' => 'Theme Admin', 'active' => 'admin', 'adminsonly' => true), 'themeadmin');
 
 // News Admin
-$routes->map('GET', '/admin/news/[i:id]?', array('source' => 'admin/news', 'title' => 'News Admin', 'active' => 'admin', 'adminsonly' => true), 'newsadmin');
+$routes->map('GET', '/admin/news/[i:id]', array('source' => 'admin/news', 'title' => 'News Admin', 'active' => 'admin', 'adminsonly' => true), 'newsadmin');
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // API | HTTP POST requests only
@@ -102,8 +102,10 @@ $routes->map('POST', '/api/v1/news/update', array('source' => 'v1/donewsupdate',
 // News Delete
 $routes->map('POST', '/api/v1/news/delete', array('source' => 'v1/donewsdelete', 'postvariables' => array('id')), null);
 
-// Suggestion Submit
+// Suggestions Submit
 $routes->map('POST', '/api/v1/suggestions/submit', array('source' => 'v1/dosuggestionsubmit', 'postvariables' => array('jamid', 'themename'), 'optionalvariables' => array('themeid'), 'usersonly' => true), null);
 
+// Suggestions Approve
+$routes->map('POST', '/api/v1/suggestions/approve', array('source' => 'v1/dosuggestionapprove', 'postvariables' => array('themeid', 'isapproved'), 'adminsonly' => true), null);
 
 ?>

@@ -19,7 +19,7 @@
       <div class="panel-body">
         <div id="my-tab-content" class="tab-content">
           <div class="tab-pane active" id="jams">
-            <table class="table table-striped">
+            <table class="table table-striped clickabletable">
               <thead>
                 <tr>
                   <th>Title</th>
@@ -48,7 +48,7 @@
             <a href="<?php echo $routes->generate('jamadmin'); ?>" class="btn btn-info pull-right" id="newjam">Create Jam</a>
           </div>
           <div class="tab-pane" id="news">
-            <table class="table table-striped">
+            <table class="table table-striped clickabletable">
               <thead>
                 <tr>
                   <th>Title</th>
