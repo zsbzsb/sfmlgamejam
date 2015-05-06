@@ -45,7 +45,7 @@
                 ?>
               </tbody>
             </table>
-            <a href="<?php echo $routes->generate('jamadmin'); ?>" class="btn btn-info pull-right" id="newjam">Create Jam</a>
+            <a href="<?php echo $routes->generate('jam_admin'); ?>" class="btn btn-info pull-right" id="newjam">Create Jam</a>
           </div>
           <div class="tab-pane" id="news">
             <table class="table table-striped clickabletable">
@@ -72,7 +72,7 @@
                 ?>
               </tbody>
             </table>
-            <a href="<?php echo $routes->generate('newsadmin'); ?>" class="btn btn-info pull-right" id="newjam">Add News</a>
+            <a href="<?php echo $routes->generate('news_admin'); ?>" class="btn btn-info pull-right" id="newjam">Add News</a>
           </div>
         </div>
       </div>
