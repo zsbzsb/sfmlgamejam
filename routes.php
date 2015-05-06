@@ -57,13 +57,13 @@ $routes->map('GET', '/time', array('source' => 'time', 'title' => 'Time'), 'time
 $routes->map('GET', '/admin', array('source' => 'admin/admin', 'title' => 'Admin Panel', 'active' => 'admin', 'adminsonly' => true), 'admin');
 
 // Jam Admin
-$routes->map('GET', '/admin/jam/[i:id]', array('source' => 'admin/jam', 'title' => 'Jam Admin', 'active' => 'admin', 'adminsonly' => true), 'jamadmin');
+$routes->map('GET', '/admin/jam/[i:id]', array('source' => 'admin/jam', 'title' => 'Jam Admin', 'active' => 'admin', 'adminsonly' => true), 'jam_admin');
 
 // Themes Admin
-$routes->map('GET', '/admin/themes/[i:id]', array('source' => 'admin/themes', 'title' => 'Theme Admin', 'active' => 'admin', 'adminsonly' => true), 'themeadmin');
+$routes->map('GET', '/admin/themes/[i:id]', array('source' => 'admin/themes', 'title' => 'Theme Admin', 'active' => 'admin', 'adminsonly' => true), 'theme_admin');
 
 // News Admin
-$routes->map('GET', '/admin/news/[i:id]', array('source' => 'admin/news', 'title' => 'News Admin', 'active' => 'admin', 'adminsonly' => true), 'newsadmin');
+$routes->map('GET', '/admin/news/[i:id]', array('source' => 'admin/news', 'title' => 'News Admin', 'active' => 'admin', 'adminsonly' => true), 'news_admin');
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // API | HTTP POST requests only

@@ -34,7 +34,7 @@
                   foreach ($jams as $jam)
                   {
                     echo '
-                      <tr class="jamrow" jamtitle="'.$jam['title'].'" jamediturl="'.$routes->generate('jamadmin', array('id' => $jam['id'])).'" themesediturl="'.$routes->generate('themeadmin', array('id' => $jam['id'])).'">
+                      <tr class="jamrow" jamtitle="'.$jam['title'].'" jamediturl="'.$routes->generate('jam_admin', array('id' => $jam['id'])).'" themesediturl="'.$routes->generate('theme_admin', array('id' => $jam['id'])).'">
                         <td>'.$jam['title'].'</td>
                         <td>'.date(DATETIME_FORMAT, $jam['suggestionsbegin']).'</td>
                         <td>'.date(DATETIME_FORMAT, $jam['suggestionsbegin'] + $jam['suggestionslength'] + $jam['approvallength'] + $jam['themeannouncelength']).'</td>
@@ -62,7 +62,7 @@
                   foreach ($news as $article)
                   {
                     echo '
-                      <tr class="newsrow" newsid ="'.$article['id'].'" newstitle="'.$article['title'].'" newsediturl="'.$routes->generate('newsadmin', array('id' => $article['id'])).'">
+                      <tr class="newsrow" newsid ="'.$article['id'].'" newstitle="'.$article['title'].'" newsediturl="'.$routes->generate('news_admin', array('id' => $article['id'])).'">
                         <td>'.$article['title'].'</td>
                         <td>'.date(DATETIME_FORMAT, $article['date']).'</td>
                         <td>'.$article['summary'].'</td>

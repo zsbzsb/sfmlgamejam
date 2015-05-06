@@ -1,4 +1,10 @@
 <div class="row">
+  <h2 class="text-center">Approve Themes for the <a href="<?=$routes->generate('jam_page', array('id' => $id))?>"><?=$jam['title']?></a></h2>
+  <h3 class="text-center"><?=count($themes)?> total submitted themes</h3>
+  <hr />
+</div>
+
+<div class="row">
   <div class="col-md-8 col-md-offset-2">
     <?php require TEMPLATEROOT.'formfeedback.php'; ?>
     <table class="table table-striped <?=$canedit ? 'clickabletable' : ''?>">
