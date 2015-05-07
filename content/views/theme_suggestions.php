@@ -8,8 +8,6 @@
   <div class="col-md-6 col-md-offset-3">
     <?php
 
-    $addjs = false;
-
     if ($jam['status'] != JamStatus::ReceivingSuggestions)
     {
       echo '<h4 class="text-center">Suggestions are currently closed</h4>';
@@ -20,7 +18,6 @@
     }
     else
     {
-      $addjs = true;
       echo '<form role="form" id="suggestionsform">';
       require TEMPLATEROOT.'formfeedback.php';
 
