@@ -58,13 +58,11 @@ else if ($round != $jam['currentround'] || $jam['status'] != JamStatus::ThemeVot
       </thead>
       <tbody>';
 
-  for ($i = 0; $i < count($themes); $i++)
+  foreach ($themes as $theme)
   {
-    $theme = $themes[$i];
-
     echo '
       <tr>
-        <td>'.($i + 1).'</td>
+        <td>'.$theme['rank'].'</td>
         <td>'.$theme['name'].'</td>
         <td>'.$theme['finalscore'].'</td>
         <td>'.$theme['downvotes'].'</td>
