@@ -26,7 +26,7 @@ if (isset($round) && $session->IsLoggedIn() && $round == $jam['currentround'] &&
   $stmt->execute(array($id, $round, $session->GetUserID()));
   $votes = $stmt->fetchAll();
 }
-else if (isset($round) && $jam['status'] >= JamStatus::ThemeVoting)
+else if (isset($round) && (($round != $jam['currentround'] && $jam['status'] == JamStatus::ThemeVoting) ||  $jam['status'] > JamStatus::ThemeVoting))
 {
   $themes = $cache->get('themes_voting_results'.$round);
   if ($themes == null)
@@ -67,13 +67,16 @@ else if (isset($round) && $jam['status'] >= JamStatus::ThemeVoting)
     usort($themes, 'OrderThemes');
 
     $rank = 0;
+    $tie = 0;
     for ($i = 0; $i < count($themes); $i++)
     {
       if (!isset($score) || $score > $themes[$i]['finalscore'])
       {
         $score = $themes[$i]['finalscore'];
-        $rank++;
+        $rank += $tie + 1;
+        $tie = 0;
       }
+      else $tie++;
 
       $themes[$i]['rank'] = $rank;
     }
@@ -84,7 +87,7 @@ else if (isset($round) && $jam['status'] >= JamStatus::ThemeVoting)
 
 $title = $jam['title'];
 
-$rounddescription = isset($round) ? $round != 0 ? 'Round '.($jam['initialvotingrounds'] + 1 - $round) : 'the Final Round' : '';
+$rounddescription = isset($round) ? $round != CurrentRound::FinalRound ? 'Round '.($jam['initialvotingrounds'] + 1 - $round) : 'the Final Round' : '';
 
 function OrderThemes($A, $B)
 {

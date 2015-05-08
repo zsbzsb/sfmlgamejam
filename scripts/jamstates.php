@@ -23,7 +23,7 @@ function JamCountdownString($Status)
     case JamStatus::Complete: return 'until infinity???';
     case JamStatus::ReceivingGameSubmissions: return 'until game submissions end';
     case JamStatus::JamRunning: return 'until jam ends';
-    case JamStatus::ThemeAnnounced: return 'until theme is announced';
+    case JamStatus::ThemeAnnounced: return 'until jam starts';
     case JamStatus::ThemeVoting: return 'until theme voting ends';
     case JamStatus::WaitingThemeApprovals: return 'until voting begins';
     case JamStatus::ReceivingSuggestions: return 'until theme suggestions close';
@@ -177,9 +177,50 @@ function VerifyJamState(&$Jam)
     }
   }
 
-  if ($status > JamStatus::ThemeVoting && $selectedtheme == SelectedTheme::NotSelected)
+  if ($status >= JamStatus::ThemeAnnounced && $selectedtheme == SelectedTheme::NotSelected)
   {
-    // todo calculate the theme that won
+    $stmt = $dbconnection->prepare('SELECT * FROM themes WHERE jamid = ? AND round = ?;');
+    $stmt->execute(array($Jam['id'], CurrentRound::FinalRound));
+    $themes = $stmt->fetchAll();
+
+    for ($i = 0; $i < count($themes); $i++)
+    {
+      $stmt = $dbconnection->prepare('SELECT value FROM votes WHERE jamid = ? AND themeid = ? AND round = ?;');
+      $stmt->execute(array($Jam['id'], $themes[$i]['id'], CurrentRound::FinalRound));
+      $votes = $stmt->fetchAll();
+
+      $themes[$i]['votes'] = 0;
+      foreach ($votes as $vote)
+      {
+        $themes[$i]['votes'] += $vote['value'];
+      }
+    }
+
+    usort($themes, 'CompareThemeVotes');
+
+    $count = 0;
+    $winningthemes = array();
+
+    foreach ($themes as $theme)
+    {
+      if (!isset($highscore))
+      {
+        $highscore = $theme['votes'];
+        $winningthemes[$count++] = $theme;
+      }
+      else if ($highscore == $theme['votes'])
+      {
+        $winningthemes[$count++] = $theme;
+      }
+      else break;
+    }
+
+    if ($count == 1) $selectedtheme = $winningthemes[0]['id'];
+    else if ($count > 1)
+    {
+      $pickedtheme = array_rand($winningthemes);
+      $selectedtheme = $winningthemes[$pickedtheme]['id'];
+    }
   }
 
   if ($status != $Jam['status'] || $round != $Jam['currentround'] || $selectedtheme != $Jam['selectedthemeid'])
@@ -250,8 +291,8 @@ function SetupFinalRound($JamID, $RoundCount, $TopThemesinFinal)
 
     foreach ($themes as &$theme)
     {
-      $stmt = $dbconnection->prepare('SELECT value FROM votes WHERE themeid = ? AND round = ?;');
-      $stmt->execute(array($theme['id'], $i));
+      $stmt = $dbconnection->prepare('SELECT value FROM votes WHERE jamid = ? AND themeid = ? AND round = ?;');
+      $stmt->execute(array($JamID, $theme['id'], $i));
       $votes = $stmt->fetchAll();
 
       $theme['votes'] = 0;
