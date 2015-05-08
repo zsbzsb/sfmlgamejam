@@ -8,7 +8,7 @@ if (isset($round) && ($round > $jam['initialvotingrounds'] || $round < $jam['cur
   die();
 }
 
-if (isset($round) && $session->IsLoggedIn() && $jam['status'] == JamStatus::ThemeVoting)
+if (isset($round) && $session->IsLoggedIn() && $round == $jam['currentround'] && $jam['status'] == JamStatus::ThemeVoting)
 {
   $themes = $cache->get('themes_voting_vote'.$round);
   if ($themes == null)
