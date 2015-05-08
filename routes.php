@@ -42,7 +42,7 @@ $routes->map('GET', '/jams/[i:id]', array('source' => 'jam_page', 'active' => 'j
 $routes->map('GET', '/jams/[i:id]/suggestions', array('source' => 'theme_suggestions', 'active' => 'jams'), 'theme_suggestions');
 
 // Theme Voting
-$routes->map('GET', '/jams/[i:id]/voting', array('source' => 'theme_voting', 'active' => 'jams'), 'theme_voting');
+$routes->map('GET', '/jams/[i:id]/voting/[i:round]?', array('source' => 'theme_voting', 'active' => 'jams'), 'theme_voting');
 
 // Game Submissions
 $routes->map('GET', '/jams/[i:id]/submissions', array('source' => 'game_submissions', 'active' => 'jams'), 'game_submissions');
@@ -103,9 +103,12 @@ $routes->map('POST', '/api/v1/news/update', array('source' => 'v1/donewsupdate',
 $routes->map('POST', '/api/v1/news/delete', array('source' => 'v1/donewsdelete', 'postvariables' => array('id')), null);
 
 // Suggestions Submit
-$routes->map('POST', '/api/v1/suggestions/submit', array('source' => 'v1/dosuggestionsubmit', 'postvariables' => array('jamid', 'themename'), 'optionalvariables' => array('themeid'), 'usersonly' => true), null);
+$routes->map('POST', '/api/v1/themes/suggestions/submit', array('source' => 'v1/dosuggestionsubmit', 'postvariables' => array('jamid', 'themename'), 'optionalvariables' => array('themeid'), 'usersonly' => true), null);
 
 // Suggestions Approve
-$routes->map('POST', '/api/v1/suggestions/approve', array('source' => 'v1/dosuggestionapprove', 'postvariables' => array('themeid', 'isapproved'), 'adminsonly' => true), null);
+$routes->map('POST', '/api/v1/themes/suggestions/approve', array('source' => 'v1/dosuggestionapprove', 'postvariables' => array('themeid', 'isapproved'), 'adminsonly' => true), null);
+
+// Voting Vote
+$routes->map('POST', '/api/v1/themes/voting/vote', array('source' => 'v1/dovotingvote', 'postvariables' => array('jamid', 'round', 'votes'), 'usersonly' => true), null);
 
 ?>

@@ -10,7 +10,7 @@
     <table class="table table-striped <?=$canedit ? 'clickabletable' : ''?>">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>Theme</th>
           <th>Submitter</th>
           <th>Is Approved</th>
         </tr>
@@ -59,7 +59,7 @@ function ApproveTheme(ID, Cell, IsApproved) {
     Cell.html(IsApproved ? 'Yes' : 'No');
   };
 
-  Post('/api/v1/suggestions/approve', { themeid:ID, isapproved:IsApproved })
+  Post('/api/v1/themes/suggestions/approve', { themeid:ID, isapproved:IsApproved })
     .done(function(result) {
       if (result.success) RestoreCell(IsApproved);
       else {

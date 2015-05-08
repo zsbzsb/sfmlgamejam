@@ -84,9 +84,7 @@ function Submit() {
     var currentid = $(suggestions[i]).attr('currentid');
 
     if (name.length > 0 || currentid != -1) {
-      postdata[count] = { name:name, id:currentid };
-
-      count++;
+      postdata[count++] = { name:name, id:currentid };
     }
   }
 
@@ -102,13 +100,13 @@ function Submit() {
     var data = { jamid:JamID, themename:Suggestions[Index]['name'] };
     if (Suggestions[Index]['id'] != -1) data['themeid'] = Suggestions[Index]['id'];
 
-    Post('/api/v1/suggestions/submit', data)
+    Post('/api/v1/themes/suggestions/submit', data)
       .done(function(result) {
         if (result.success) {
           if (Index < Count - 1)
             SendSuggestion(Suggestions, Index + 1, Count);
           else {
-            SuccessFeedback('Your theme suggestions have been saved.');
+            SuccessFeedback('Your theme suggestions have been saved, redirecting...');
             Redirect('<?=$routes->generate('jam_page', array('id' => $id))?>');
           }
         }

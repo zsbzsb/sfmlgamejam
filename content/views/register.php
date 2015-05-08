@@ -40,7 +40,7 @@ $(function() {
   BindTextboxChanged($('#password'), ValidateForm);
   BindTextboxChanged($('#confirmpassword'), ValidateForm);
   BindTextboxChanged($('#email'), ValidateForm);
-  $('#acceptterms').bind("change", function() { ValidateForm(); });
+  BindCheckboxChanged($('#acceptterms'), ValidateForm);
 });
 
 function OnSubmit() {
@@ -50,13 +50,13 @@ function OnSubmit() {
 };
 
 function ValidateForm() {
-  valid = true;
+  var valid = true;
 
   if ($('#username').val().length == 0) valid = false;
   if ($('#password').val().length == 0) valid = false;
   if ($('#confirmpassword').val() != $('#password').val()) valid = false;
   if (!(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i).test($('#email').val())) valid = false;
-  if (!$('#acceptterms').is(":checked")) valid = false;
+  if (!$('#acceptterms').is(':checked')) valid = false;
 
   EnableButton($('#registersubmit'), valid);
   return valid;
@@ -66,13 +66,13 @@ function Submit() {
   EnableButton($('#registersubmit'), false);
   EnableFormInput('#registerform', false);
 
-  animation = DotAnimation($('#registersubmit'));
+  var animation = DotAnimation($('#registersubmit'));
 
-  username = $('#username').val();
-  password = $('#password').val();
-  email = $('#email').val();
+  var username = $('#username').val();
+  var password = $('#password').val();
+  var email = $('#email').val();
 
-  success = false;
+  var success = false;
 
   Post('/api/v1/account/register', { username:username, password:password, email:email })
     .done(function(result) {

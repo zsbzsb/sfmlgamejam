@@ -20,7 +20,7 @@ function EnableFormInput(Form, Enabled) {
 };
 
 function BindTextboxChanged(Textbox, Callback) {
-  Textbox.bind('change keypress paste input', function() { Callback(); });
+  Textbox.bind('change keypress paste input', function() { Callback(this); });
 
   var last = Textbox.val();
 
@@ -29,13 +29,17 @@ function BindTextboxChanged(Textbox, Callback) {
 
     if (text != last) {
       last = text;
-      Callback();
+      Callback(this);
     }
   }, 100);
 };
 
 function BindButtonClick(Button, Callback) {
-  Button.bind("click", function() { Callback(); return false; });
+  Button.bind('click', function() { Callback(this); return false; });
+};
+
+function BindCheckboxChanged(Checkbox, Callback) {
+  Checkbox.bind('change', function() { Callback(this) });
 };
 
 function Redirect(URL) {
