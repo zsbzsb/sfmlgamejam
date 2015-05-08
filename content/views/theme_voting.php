@@ -43,8 +43,39 @@ else if (!isset($round))
 }
 else if ($round != $jam['currentround'] || $jam['status'] != JamStatus::ThemeVoting)
 {
-  // todo display results
-  echo '<h4 class="text-center">Results coming soon :)</h4>';
+  echo '
+    <h4 class="text-center">Results for '.$rounddescription.'</h4>
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Theme</th>
+          <th>Score</th>
+          <th>-1</th>
+          <th>1+</th>
+          <th>Votes</th>
+        </tr>
+      </thead>
+      <tbody>';
+
+  for ($i = 0; $i < count($themes); $i++)
+  {
+    $theme = $themes[$i];
+
+    echo '
+      <tr>
+        <td>'.($i + 1).'</td>
+        <td>'.$theme['name'].'</td>
+        <td>'.$theme['finalscore'].'</td>
+        <td>'.$theme['downvotes'].'</td>
+        <td>'.$theme['upvotes'].'</td>
+        <td>'.$theme['totalvotes'].'</td>
+      </tr>';
+    }
+
+  echo '
+      </tbody>
+    </table>';
 }
 else if (!$session->IsLoggedIn())
 {
@@ -55,20 +86,20 @@ else
   require TEMPLATEROOT.'formfeedback.php';
 
   echo '
-    <h4 class="text-center" id="totalvotesdisplay"></h4>
     <table class="table table-striped table-bordered">
+    <h4 class="text-center" id="totalvotesdisplay"></h4>
       <col width="20">
       <col width="20">
       <col width="20">
       <thead>
         <tr>
-        <th>-1</th>
-        <th>0</th>
-        <th>1+</th>
-        <th>Theme</th>
-      </tr>
-    </thead>
-    <tbody>';
+          <th>-1</th>
+          <th>0</th>
+          <th>1+</th>
+          <th>Theme</th>
+        </tr>
+      </thead>
+      <tbody>';
 
   foreach ($themes as $theme)
   {
@@ -110,7 +141,7 @@ JamID = <?=$id?>;
 TotalVotes = <?=isset($votes) ? count($votes) : 0?>;
 MaximumVotes = <?=$jam['votesperuser']?>;
 Round = <?=isset($round) ? $round : 1?>;
-RoundDescription = '<?=isset($round) ? $round != 0 ? 'Round '.($jam['initialvotingrounds'] + 1 - $round) : 'the Final Round' : ''?>';
+RoundDescription = '<?=$rounddescription?>';
 ChangesSaved = true;
 
 $(function() {
