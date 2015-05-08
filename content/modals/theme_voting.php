@@ -29,7 +29,6 @@ if (isset($round) && $session->IsLoggedIn() && $round == $jam['currentround'] &&
 else if (isset($round) && $jam['status'] >= JamStatus::ThemeVoting)
 {
   $themes = $cache->get('themes_voting_results'.$round);
-$themes=null;
   if ($themes == null)
   {
     $stmt = $dbconnection->prepare('SELECT themes.name AS themename, votes.value, votes.themeid FROM votes JOIN themes ON themes.id = votes.themeid WHERE votes.jamid = ? AND votes.round = ?;');

@@ -10,7 +10,7 @@ else
 
   if ($jam['status'] == JamStatus::ThemeVoting && $jam['currentround'] == $round)
   {
-    $stmt = $dbconnection->prepare('SELECT themes.id, votes.id AS voteid FROM themes LEFT JOIN votes ON themes.id = votes.themeid AND votes.voterid = ? WHERE themes.jamid = ? AND themes.round = ?;');
+    $stmt = $dbconnection->prepare('SELECT themes.id, votes.id AS voteid FROM themes LEFT JOIN votes ON votes.themeid = themes.id AND votes.round = themes.round AND votes.voterid = ? WHERE themes.jamid = ? AND themes.round = ?;');
     $stmt->execute(array($session->GetUserID(), $jamid, $round));
     $validthemes = $stmt->fetchAll();
     $existingvotecount = 0;
