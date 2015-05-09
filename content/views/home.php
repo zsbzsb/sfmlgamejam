@@ -34,7 +34,7 @@
   </div>
 
   <!-- Upcoming Jams -->
-  <div class="col-md-3 col-md-offset-2">
+  <div class="col-md-4 col-md-offset-1">
     <h3 id="jams">Upcoming Jams</h3>
     <?php
 
