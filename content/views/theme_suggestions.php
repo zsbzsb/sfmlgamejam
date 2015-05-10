@@ -1,5 +1,5 @@
 <div class="row">
-  <h2 class="text-center">Suggest Themes for the <a href="<?=$routes->generate('jam_page', array('id' => $id))?>"><?=$jam['title']?></a></h2>
+  <h2 class="text-center">Suggest themes for the <a href="<?=$routes->generate('jam_page', array('id' => $id))?>"><?=$jam['title']?></a></h2>
   <?php require TEMPLATEROOT.'countdown.php'; ?>
   <hr />
 </div>

@@ -49,8 +49,8 @@ textarea {
   cursor: pointer;
 }
 
-.timer:after {
-  content: attr(timer-tag);
+.aftertag:after {
+  content: attr(aftertag);
   position: absolute;
   white-space: nowrap;
   margin-left: 8px;
