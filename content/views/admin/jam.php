@@ -87,6 +87,13 @@
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
+      <div class="form-group">
+        <label for="judgingend">Judging End*</label>
+        <div class="input-group date" id="judgingendpicker">
+          <input type="text" class="form-control" id="judgingend" placeholder="Select a Date" value="<?php if (!$createjam) echo date(DATETIME_FORMAT, $offset += $jam['judginglength']); ?>" />
+          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>
+      </div>
       <button type="submit" class="btn btn-success pull-right disabled" id="jamsubmit"><?php echo $createjam ? 'Create' : 'Save' ?></button>
     </form>
     <span><small>*All times are entered in UTC</small></span>
@@ -96,7 +103,7 @@
 <script>
 CreateJam = <?php echo $createjam ? 'true' : 'false'; ?>;
 JamID = <?php echo !$createjam ? $jam['id'] : -1; ?>;
-Pickers = ['#suggestionsbegin', '#approvalsbegin', '#votingbegins', '#themeannounce', '#jambegins', '#jamends', '#submissionsend'];
+Pickers = ['#suggestionsbegin', '#approvalsbegin', '#votingbegins', '#themeannounce', '#jambegins', '#jamends', '#submissionsend', '#judgingend'];
 
 $(function() {
   // initialize the date-time pickers and register for validation
@@ -168,24 +175,25 @@ function Submit() {
   EnableButton($('#jamsubmit'), false);
   EnableFormInput('#jamform', false);
 
-  animation = DotAnimation($('#jamsubmit'));
+  var animation = DotAnimation($('#jamsubmit'));
 
-  title = $('#title').val();
-  themesperuser = parseInt($('#themesperuser').val(), 10);
-  autoapprovethemes = $('#autoapprovethemes').is(':checked');
-  initialvotingrounds = parseInt($('#initialvotingrounds').val(), 10);
-  votesperuser = parseInt($('#votesperuser').val(), 10);
-  topthemesinfinal = parseInt($('#topthemesinfinal').val(), 10);
+  var title = $('#title').val();
+  var themesperuser = parseInt($('#themesperuser').val(), 10);
+  var autoapprovethemes = $('#autoapprovethemes').is(':checked');
+  var initialvotingrounds = parseInt($('#initialvotingrounds').val(), 10);
+  var votesperuser = parseInt($('#votesperuser').val(), 10);
+  var topthemesinfinal = parseInt($('#topthemesinfinal').val(), 10);
 
-  suggestionsbegin = GetTimeStamp('#suggestionsbeginpicker');
-  suggestionslength = GetTimeStamp('#approvalsbeginpicker') - GetTimeStamp('#suggestionsbeginpicker');
-  approvallength = GetTimeStamp('#votingbeginspicker') - GetTimeStamp('#approvalsbeginpicker');
-  votinglength = GetTimeStamp('#themeannouncepicker') - GetTimeStamp('#votingbeginspicker');
-  themeannouncelength = GetTimeStamp('#jambeginspicker') - GetTimeStamp('#themeannouncepicker');
-  jamlength = GetTimeStamp('#jamendspicker') - GetTimeStamp('#jambeginspicker');
-  submissionslength = GetTimeStamp('#submissionsendpicker') - GetTimeStamp('#jamendspicker');
+  var suggestionsbegin = GetTimeStamp('#suggestionsbeginpicker');
+  var suggestionslength = GetTimeStamp('#approvalsbeginpicker') - GetTimeStamp('#suggestionsbeginpicker');
+  var approvallength = GetTimeStamp('#votingbeginspicker') - GetTimeStamp('#approvalsbeginpicker');
+  var votinglength = GetTimeStamp('#themeannouncepicker') - GetTimeStamp('#votingbeginspicker');
+  var themeannouncelength = GetTimeStamp('#jambeginspicker') - GetTimeStamp('#themeannouncepicker');
+  var jamlength = GetTimeStamp('#jamendspicker') - GetTimeStamp('#jambeginspicker');
+  var submissionslength = GetTimeStamp('#submissionsendpicker') - GetTimeStamp('#jamendspicker');
+  var judginglength = GetTimeStamp('#judgingendpicker') - GetTimeStamp('#submissionsendpicker');
 
-  success = false;
+  var success = false;
   
   Post(CreateJam ? '/api/v1/jams/create' : '/api/v1/jams/update', {
       id:JamID,
@@ -201,7 +209,8 @@ function Submit() {
       votinglength:votinglength,
       themeannouncelength:themeannouncelength,
       jamlength:jamlength,
-      submissionslength
+      submissionslength:submissionslength,
+      judginglength:judginglength
     })
     .done(function(result) {
       if (result.success) {

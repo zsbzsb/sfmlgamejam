@@ -85,10 +85,10 @@ $routes->map('POST', '/api/v1/profile/update', array('source' => 'v1/doprofileup
 $routes->map('POST', '/api/v1/jams', array('source' => 'v1/getjams', 'optionalvariables' => array('startdate', 'enddate')), null);
 
 // Jam Create
-$routes->map('POST', '/api/v1/jams/create', array('source' => 'v1/dojamcreate', 'postvariables' => array('title', 'themesperuser', 'autoapprovethemes', 'initialvotingrounds', 'votesperuser', 'topthemesinfinal', 'suggestionsbegin', 'suggestionslength', 'approvallength', 'votinglength', 'themeannouncelength', 'jamlength', 'submissionslength'), 'adminsonly' => true), null);
+$routes->map('POST', '/api/v1/jams/create', array('source' => 'v1/dojamcreate', 'postvariables' => array('title', 'themesperuser', 'autoapprovethemes', 'initialvotingrounds', 'votesperuser', 'topthemesinfinal', 'suggestionsbegin', 'suggestionslength', 'approvallength', 'votinglength', 'themeannouncelength', 'jamlength', 'submissionslength', 'judginglength'), 'adminsonly' => true), null);
 
 // Jam Update
-$routes->map('POST', '/api/v1/jams/update', array('source' => 'v1/dojamupdate', 'postvariables' => array('id', 'title', 'themesperuser', 'autoapprovethemes', 'initialvotingrounds', 'votesperuser', 'topthemesinfinal', 'suggestionsbegin', 'suggestionslength', 'approvallength', 'votinglength', 'themeannouncelength', 'jamlength', 'submissionslength'), 'adminsonly' => true), null);
+$routes->map('POST', '/api/v1/jams/update', array('source' => 'v1/dojamupdate', 'postvariables' => array('id', 'title', 'themesperuser', 'autoapprovethemes', 'initialvotingrounds', 'votesperuser', 'topthemesinfinal', 'suggestionsbegin', 'suggestionslength', 'approvallength', 'votinglength', 'themeannouncelength', 'jamlength', 'submissionslength', 'judginglength'), 'adminsonly' => true), null);
 
 // Get News
 $routes->map('POST', '/api/v1/news', array('source' => 'v1/getnews', 'optionalvariables' => array('beforedate', 'afterdate')), null);

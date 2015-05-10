@@ -5,8 +5,9 @@ function JamStatusString($Status)
   switch ($Status)
   {
     case JamStatus::Complete: return 'Jam Finished';
+    case JamStatus::Judging: return 'Game Judging In Progress';
     case JamStatus::ReceivingGameSubmissions: return 'Receiving Game Submissions';
-    case JamStatus::JamRunning: return 'In Progress';
+    case JamStatus::JamRunning: return 'Jam In Progress';
     case JamStatus::ThemeAnnounced: return 'Theme Announced';
     case JamStatus::ThemeVoting: return 'Voting on Theme';
     case JamStatus::WaitingThemeApprovals: return 'Preparing to Vote';
@@ -21,6 +22,7 @@ function JamCountdownString($Status)
   switch ($Status)
   {
     case JamStatus::Complete: return 'until infinity???';
+    case JamStatus::Judging: return 'until game judging ends';
     case JamStatus::ReceivingGameSubmissions: return 'until game submissions end';
     case JamStatus::JamRunning: return 'until jam ends';
     case JamStatus::ThemeAnnounced: return 'until jam starts';
@@ -67,9 +69,15 @@ function SubmissionsEnd($Jam)
   return SubmissionsBegin($Jam) + $Jam['submissionslength'];
 }
 
+function JudgingEnds($Jam)
+{
+  return SubmissionsEnd($Jam) + $Jam['judginglength'];
+}
+
 function JamRemainingTime($Jam)
 {
   if ($Jam['status'] == JamStatus::Disabled || $Jam['status'] == JamStatus::Complete) return 0;
+  else if ($Jam['status'] == JamStatus::Judging) return JudgingEnds($Jam) - time();
   else if ($Jam['status'] == JamStatus::ReceivingGameSubmissions) return SubmissionsEnd($Jam) - time();
   else if ($Jam['status'] == JamStatus::JamRunning) return SubmissionsBegin($Jam) - time();
   else if ($Jam['status'] == JamStatus::ThemeAnnounced) return JamBegins($Jam) - time();
@@ -88,11 +96,15 @@ function VerifyJamState(&$Jam)
   if ($Jam['status'] == JamStatus::Disabled) return;
 
   $time = time();
-  $length = SubmissionsEnd($Jam);
+  $length = JudgingEnds($Jam);
 
   if ($time >= $length)
   {
     $status = JamStatus::Complete;
+  }
+  else if ($time >= ($length -= $Jam['judginglength']))
+  {
+    $status = JamStatus::Judging;
   }
   else if ($time >= ($length -= $Jam['submissionslength']))
   {

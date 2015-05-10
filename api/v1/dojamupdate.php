@@ -12,6 +12,7 @@ else if ($votinglength <= 0) $error = 'Voting length must be greater than 0';
 else if ($themeannouncelength <= 0) $error = 'Theme announce length must be greater than 0';
 else if ($jamlength <= 0) $error = 'Jam length must be greater than 0';
 else if ($submissionslength <= 0) $error = 'Submissions length must be greater than 0';
+else if ($judginglength <= 0) $error = 'Judging length must be greater than 0';
 
 if (isset($error)) SendResponse(array('success' => false, 'message' => $error));
 else
@@ -19,8 +20,8 @@ else
 // TODO current round is not reset as it cause issues with voting
 // find a way to handle this
 
-  $stmt = $dbconnection->prepare('UPDATE jams SET title = ?, themesperuser = ?, autoapprovethemes = ?, initialvotingrounds = ?, votesperuser = ?, topthemesinfinal = ?, suggestionsbegin = ?, suggestionslength = ?, approvallength = ?, votinglength = ?, themeannouncelength = ?, jamlength = ?, submissionslength = ?, status = ? WHERE id = ?;');
-  $stmt->execute(array($title, $themesperuser, $autoapprovethemes ? 1 : 0, $initialvotingrounds, $votesperuser, $topthemesinfinal, $suggestionsbegin, $suggestionslength, $approvallength, $votinglength, $themeannouncelength, $jamlength, $submissionslength, JamStatus::WaitingSuggestionsStart, $id));
+  $stmt = $dbconnection->prepare('UPDATE jams SET title = ?, themesperuser = ?, autoapprovethemes = ?, initialvotingrounds = ?, votesperuser = ?, topthemesinfinal = ?, suggestionsbegin = ?, suggestionslength = ?, approvallength = ?, votinglength = ?, themeannouncelength = ?, jamlength = ?, submissionslength = ?, judginglength = ?, status = ? WHERE id = ?;');
+  $stmt->execute(array($title, $themesperuser, $autoapprovethemes ? 1 : 0, $initialvotingrounds, $votesperuser, $topthemesinfinal, $suggestionsbegin, $suggestionslength, $approvallength, $votinglength, $themeannouncelength, $jamlength, $submissionslength, $judginglength, JamStatus::WaitingSuggestionsStart, $id));
 
   SendResponse(array('success' => true));
 }

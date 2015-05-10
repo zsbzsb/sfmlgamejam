@@ -18,6 +18,7 @@ CREATE TABLE jams (
   themeannouncelength BIGINT NOT NULL,
   jamlength BIGINT NOT NULL,
   submissionslength BIGINT NOT NULL,
+  judginglength BIGINT NOT NULL,
   status INT NOT NULL,
   /* the round that is currently being voted on
      always starts at the initialvotingrounds and

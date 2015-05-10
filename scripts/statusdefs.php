@@ -19,7 +19,8 @@ abstract class JamStatus
   const ThemeAnnounced = 4;
   const JamRunning = 5;
   const ReceivingGameSubmissions = 6;
-  const Complete = 7;
+  const Judging = 7;
+  const Complete = 8;
 }
 
 abstract class CurrentRound
