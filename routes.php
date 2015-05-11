@@ -60,7 +60,10 @@ $routes->map('GET', '/admin', array('source' => 'admin/admin', 'title' => 'Admin
 $routes->map('GET', '/admin/jam/[i:id]?', array('source' => 'admin/jam', 'title' => 'Jam Admin', 'active' => 'admin', 'adminsonly' => true), 'jam_admin');
 
 // Themes Admin
-$routes->map('GET', '/admin/themes/[i:id]', array('source' => 'admin/themes', 'title' => 'Theme Admin', 'active' => 'admin', 'adminsonly' => true), 'theme_admin');
+$routes->map('GET', '/admin/jam/[i:id]/themes', array('source' => 'admin/themes', 'title' => 'Theme Admin', 'active' => 'admin', 'adminsonly' => true), 'theme_admin');
+
+// Theme Admin Edit
+$routes->map('GET', '/admin/jam/[i:id]/themes/[i:themeid]', array('source' => 'admin/theme_edit', 'title' => 'Theme Edit', 'active' => 'admin', 'adminsonly' => true), 'theme_edit_admin');
 
 // News Admin
 $routes->map('GET', '/admin/news/[i:id]?', array('source' => 'admin/news', 'title' => 'News Admin', 'active' => 'admin', 'adminsonly' => true), 'news_admin');
@@ -110,5 +113,8 @@ $routes->map('POST', '/api/v1/themes/suggestions/approve', array('source' => 'v1
 
 // Voting Vote
 $routes->map('POST', '/api/v1/themes/voting/vote', array('source' => 'v1/dovotingvote', 'postvariables' => array('jamid', 'round', 'votes'), 'usersonly' => true), null);
+
+// Theme Edit
+$routes->map('POST', '/api/v1/themes/edit', array('source' => 'v1/dothemeedit', 'postvariables' => array('id', 'name'), 'adminsonly' => true), null);
 
 ?>

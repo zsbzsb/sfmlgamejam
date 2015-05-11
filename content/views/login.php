@@ -39,7 +39,6 @@ function ValidateForm() {
   if ($('#username').val().length == 0) valid = false;
   if ($('#password').val().length == 0) valid = false;
 
-
   EnableButton($('#loginsubmit'), valid);
   return valid;
 };
@@ -60,7 +59,7 @@ function Submit() {
       if (result.success) {
         SuccessFeedback('You have been successfully logged in, redirecting...');
         success = true;
-        Redirect('<?php echo $routes->generate('account'); ?>');
+        Redirect('<?=$routes->generate('account')?>');
       }
       else ErrorFeedback(result.message);
     })

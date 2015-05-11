@@ -79,7 +79,7 @@ function Submit() {
       if (result.success) {
         SuccessFeedback('You have been successfully registered, redirecting...');
         success = true;
-        Redirect('<?php echo $routes->generate('register_thanks'); ?>');
+        Redirect('<?=$routes->generate('register_thanks')?>');
       }
       else ErrorFeedback(result.message);
     })

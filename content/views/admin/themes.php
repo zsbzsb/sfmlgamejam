@@ -13,6 +13,7 @@
           <th>Theme</th>
           <th>Submitter</th>
           <th>Is Approved</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -25,6 +26,7 @@
                 <td>'.$theme['name'].'</td>
                 <td>'.$theme['username'].'</td>
                 <td class="isapproved">'.($theme['isapproved'] ? 'Yes' : 'No').'</td>
+                <td><a href="'.$routes->generate('theme_edit_admin', array('id' => $id, 'themeid' => $theme['id'])).'" class="editlink">Edit</a></td>
               </tr>';
           }
 
@@ -49,6 +51,10 @@ $(function() {
         ApproveTheme(id, cell, false);
       else if (cell.html() == 'No')
         ApproveTheme(id, cell, true);
+    });
+
+    $('.themerow .editlink').click(function(e) {
+      e.stopPropagation(); 
     });
   }
 
