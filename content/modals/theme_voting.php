@@ -81,7 +81,7 @@ else if (isset($round) && (($round != $jam['currentround'] && $jam['status'] == 
       $themes[$i]['rank'] = $rank;
     }
 
-    $cache->set('themes_voting_results'.$round, $themes, 0);
+    $cache->set('themes_voting_results'.$round, $themes, CACHE_TIME);
   }
 }
 
@@ -92,7 +92,7 @@ $rounddescription = isset($round) ? $round != CurrentRound::FinalRound ? 'Round 
 function OrderThemes($A, $B)
 {
   if ($A['finalscore'] == $B['finalscore']) return 0;
-  else return abs($A['finalscore']) < abs($B['finalscore']) ? -1 : 1;
+  else return $A['finalscore'] < $B['finalscore'] ? 1 : -1;
 }
 
 ?>

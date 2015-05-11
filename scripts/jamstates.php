@@ -195,16 +195,16 @@ function VerifyJamState(&$Jam)
     $stmt->execute(array($Jam['id'], CurrentRound::FinalRound));
     $themes = $stmt->fetchAll();
 
-    for ($i = 0; $i < count($themes); $i++)
+    foreach ($themes as $key => $theme)
     {
       $stmt = $dbconnection->prepare('SELECT value FROM votes WHERE jamid = ? AND themeid = ? AND round = ?;');
-      $stmt->execute(array($Jam['id'], $themes[$i]['id'], CurrentRound::FinalRound));
+      $stmt->execute(array($Jam['id'], $theme['id'], CurrentRound::FinalRound));
       $votes = $stmt->fetchAll();
 
-      $themes[$i]['votes'] = 0;
+      $themes[$key]['votes'] = 0;
       foreach ($votes as $vote)
       {
-        $themes[$i]['votes'] += $vote['value'];
+        $themes[$key]['votes'] += $vote['value'];
       }
     }
 
@@ -301,16 +301,16 @@ function SetupFinalRound($JamID, $RoundCount, $TopThemesinFinal)
 
     if (count($themes) == 0) continue;
 
-    foreach ($themes as &$theme)
+    foreach ($themes as $key => $theme)
     {
       $stmt = $dbconnection->prepare('SELECT value FROM votes WHERE jamid = ? AND themeid = ? AND round = ?;');
       $stmt->execute(array($JamID, $theme['id'], $i));
       $votes = $stmt->fetchAll();
 
-      $theme['votes'] = 0;
+      $themes[$key]['votes'] = 0;
       foreach ($votes as $vote)
       {
-        $theme['votes'] += $vote['value'];
+        $themes[$key]['votes'] += $vote['value'];
       }
     }
 
@@ -320,8 +320,7 @@ function SetupFinalRound($JamID, $RoundCount, $TopThemesinFinal)
     for ($c = 0; $c < count($themes) && !$gotalltop; $c++)
     {
       $finalthemes[$finalthemescount++] = $themes[$c];
-
-      if ($c + 1 == $TopThemesinFinal)
+      if ($c + 1 >= $TopThemesinFinal)
       {
         if ($c + 1 < count($themes) && $themes[$c]['votes'] > $themes[$c + 1]['votes'])
         {
