@@ -6,9 +6,9 @@ $stmt = $dbconnection->prepare('SELECT * FROM jams ORDER BY suggestionsbegin ASC
 $stmt->execute();
 $jams = $stmt->fetchAll();
 
-foreach ($jams as &$jam)
+foreach ($jams as $key => $jam)
 {
-  VerifyJamState($jam);
+  VerifyJamState($jams[$key]);
 }
 
 $stmt = $dbconnection->prepare('SELECT * FROM news ORDER BY date DESC;');

@@ -1,6 +1,6 @@
 <div class="row">
   <h2 class="text-center">Approve Themes for the <a href="<?=$routes->generate('jam_page', array('id' => $id))?>"><?=$jam['title']?></a></h2>
-  <h3 class="text-center"><?=count($themes)?> total submitted themes</h3>
+  <h3 class="text-center" id="themecountdisplay"></h3>
   <hr />
 </div>
 
@@ -36,6 +36,8 @@
 
 <script>
 CanEdit = <?=$canedit ? 'true' : 'false'?>;
+TotalThemeCount = <?=count($themes)?>;
+ApprovedThemeCount = <?=$approvedthemecount?>;
 
 $(function() {
   if (CanEdit) {
@@ -49,6 +51,8 @@ $(function() {
         ApproveTheme(id, cell, true);
     });
   }
+
+  UpdateThemeCountDisplay();
 });
 
 function ApproveTheme(ID, Cell, IsApproved) {
@@ -61,7 +65,11 @@ function ApproveTheme(ID, Cell, IsApproved) {
 
   Post('/api/v1/themes/suggestions/approve', { themeid:ID, isapproved:IsApproved })
     .done(function(result) {
-      if (result.success) RestoreCell(IsApproved);
+      if (result.success) {
+        RestoreCell(IsApproved);
+        ApprovedThemeCount += IsApproved ? 1 : -1;
+        UpdateThemeCountDisplay();
+      }
       else {
         ErrorFeedback(result.message);
         RestoreCell(!IsApproved);
@@ -71,5 +79,9 @@ function ApproveTheme(ID, Cell, IsApproved) {
       ErrorFeedback('An unexpected error happened, please try again.');  
       RestoreCell(!IsApproved);
     });
+};
+
+function UpdateThemeCountDisplay() {
+  $('#themecountdisplay').html(ApprovedThemeCount + ' / ' + TotalThemeCount + ' approved themes');
 };
 </script>

@@ -21,9 +21,9 @@ if ($jams == null)
   $stmt->execute(array(time(), JamStatus::Disabled));
   $jams = $stmt->fetchAll();
 
-  foreach ($jams as &$jam)
+  foreach ($jams as $key => $jam)
   {
-    VerifyJamState($jam);
+    VerifyJamState($jams[$key]);
   }
 
   $cache->set('home_jams', $jams, CACHE_TIME);
