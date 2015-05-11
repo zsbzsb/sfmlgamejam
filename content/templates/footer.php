@@ -1,5 +1,5 @@
     </div>
-    <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation" id="footer">
+    <nav class="navbar navbar-inverse navbar-fixed-bottom hidden-xs" role="navigation" id="footer">
       <div class="container">
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-left">
