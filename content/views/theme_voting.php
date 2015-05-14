@@ -1,8 +1,7 @@
-<div class="row">
-  <h2 class="text-center">Vote on themes for the <a href="<?=$routes->generate('jam_page', array('id' => $id))?>"><?=$jam['title']?></a></h2>
-  <?php require TEMPLATEROOT.'countdown.php'; ?>
-  <hr />
-</div>
+<?php require TEMPLATEROOT.'jam_header.php'; ?>
+
+<h3 class="text-center">Theme Voting</h3>
+<br>
 
 <?php
 

@@ -1,10 +1,8 @@
-<div class="row">
-  <h2 class="text-center">Suggest themes for the <a href="<?=$routes->generate('jam_page', array('id' => $id))?>"><?=$jam['title']?></a></h2>
-  <?php require TEMPLATEROOT.'countdown.php'; ?>
-  <hr />
-</div>
+<?php require TEMPLATEROOT.'jam_header.php'; ?>
 
 <div class="row">
+  <h3 class="text-center">Submit Your Theme Ideas (try to be creative)</h3>
+  <br>
   <div class="col-md-6 col-md-offset-3">
     <?php
 
