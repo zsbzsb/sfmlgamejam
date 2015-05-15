@@ -4,7 +4,7 @@ require 'jam.php';
 
 if (isset($round) && ($round > $jam['initialvotingrounds'] || $round < $jam['currentround']))
 {
-  header('location: '.$routes->generate('theme_voting', array('id' => $id)));
+  header('Location: '.$routes->generate('theme_voting', array('id' => $id)));
   die();
 }
 

@@ -91,3 +91,15 @@ a.thumbnail {
   background: rgba(204, 204, 204, 0.78);
   z-index: 10;
 }
+
+.gamelogo {
+  display: block;
+  max-height: 100px;
+  width: auto;
+  margin: 0 auto;
+}
+
+#bigpopupimage {
+  display: block;
+  margin: auto;
+}

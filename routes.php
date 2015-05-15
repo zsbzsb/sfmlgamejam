@@ -51,7 +51,7 @@ $routes->map('GET', '/jams/[i:id]/games', array('source' => 'games_list', 'activ
 $routes->map('GET', '/jams/[i:id]/games/[i:gameid]', array('source' => 'game_page', 'active' => 'jams'), 'game_page');
 
 // Game Submission
-$routes->map('GET', '/jams/[i:id]/games/submit', array('source' => 'game_submission', 'active' => 'jams', 'usersonly' => true), 'game_submission');
+$routes->map('GET', '/jams/[i:id]/games/submit', array('source' => 'game_submission', 'title' => 'Submit Game', 'active' => 'jams', 'usersonly' => true), 'game_submission');
 
 // Rules
 $routes->map('GET', '/rules', array('source' => 'rules', 'title' => 'Rules', 'active' => 'rules'), 'rules');

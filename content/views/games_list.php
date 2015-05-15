@@ -16,25 +16,23 @@ if ($jam['status'] == JamStatus::JamRunning || $jam['status'] == JamStatus::Rece
 
 <div class="row">
   <div class="col-md-12">
-    <div class="row">
-      <?php
+    <?php
 
-        foreach ($games as $game)
-        {
-          echo '
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-              <a class="thumbnail" href="'.$routes->generate('game_page', array('id' => $id, 'gameid' => $game['id'])).'">
-                <div class="gamebox">
-                  <img alt="'.$game['name'].'" src="'.$game['thumbnailurl'].'" />
-                  <div>'.$game['name'].'</div>
-                </div>
-              </a>
-            </div>';
-        }
+      foreach ($games as $game)
+      {
+        echo '
+          <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+            <a class="thumbnail" href="'.$routes->generate('game_page', array('id' => $id, 'gameid' => $game['id'])).'">
+              <div class="gamebox">
+                <img alt="'.$game['name'].'" src="'.$game['thumbnailurl'].'" />
+                <div>'.$game['name'].'</div>
+              </div>
+            </a>
+          </div>';
+      }
 
-        if (count($games) == 0) echo '<h4 class="text-center">No games were found :(</h4>';
+      if (count($games) == 0) echo '<h4 class="text-center">No games were found :(</h4>';
 
-      ?>
-    </div>
+    ?>
   </div>
 </div>

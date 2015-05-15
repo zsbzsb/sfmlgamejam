@@ -23,6 +23,4 @@ if ($jam['status'] == JamStatus::JamRunning || $jam['status'] == JamStatus::Rece
   }
 }
 
-$title = $jam['title'];
-
 ?>
