@@ -209,7 +209,7 @@ else
     catch (Exception $e)
     {
       ob_get_clean();
-var_dump($e);
+
       http_response_code(500);
       $error = 500;
       require VIEWROOT.'error.php';
