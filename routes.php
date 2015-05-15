@@ -44,11 +44,14 @@ $routes->map('GET', '/jams/[i:id]/suggestions', array('source' => 'theme_suggest
 // Theme Voting
 $routes->map('GET', '/jams/[i:id]/voting/[i:round]?', array('source' => 'theme_voting', 'active' => 'jams'), 'theme_voting');
 
-// Game Submissions
+// Games List
 $routes->map('GET', '/jams/[i:id]/games', array('source' => 'games_list', 'active' => 'jams'), 'games_list');
 
 // Game Page
 $routes->map('GET', '/jams/[i:id]/games/[i:gameid]', array('source' => 'game_page', 'active' => 'jams'), 'game_page');
+
+// Game Submission
+$routes->map('GET', '/jams/[i:id]/games/submit', array('source' => 'game_submission', 'active' => 'jams', 'usersonly' => true), 'game_submission');
 
 // Rules
 $routes->map('GET', '/rules', array('source' => 'rules', 'title' => 'Rules', 'active' => 'rules'), 'rules');
@@ -119,5 +122,8 @@ $routes->map('POST', '/api/v1/themes/voting/vote', array('source' => 'v1/dovotin
 
 // Theme Edit
 $routes->map('POST', '/api/v1/themes/edit', array('source' => 'v1/dothemeedit', 'postvariables' => array('id', 'name'), 'adminsonly' => true), null);
+
+// Game Submit
+$routes->map('POST', '/api/v1/games/submit', array('source' => 'v1/dogamesubmit', 'postvariables' => array('jamid', 'name', 'partner', 'thumbnail', 'description', 'images', 'links'), 'usersonly' => true), null);
 
 ?>

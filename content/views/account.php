@@ -17,17 +17,16 @@
       </div>
       <div class="form-group">
         <label for="about">Profile Summary</label>
-         <ul class="nav nav-tabs" data-tabs="tabs">
-           <li class="active"><a href="#edit" data-toggle="tab">Edit</a></li>
-           <li><a href="#preview" data-toggle="tab">Preview</a></li>
-         </ul>
-         <div id="my-tab-content" class="tab-content">
-           <div class="tab-pane active" id="edit">
-             <textarea class="form-control" id="about" placeholder="Write about Yourself ;)"><?php echo $session->GetInfo()['about']; ?></textarea>
-           </div>
-           <div class="tab-pane" id="preview">
-           </div>
-         </div>
+        <ul class="nav nav-tabs" data-tabs="tabs">
+          <li class="active"><a href="#edit" data-toggle="tab">Edit</a></li>
+          <li><a href="#preview" data-toggle="tab">Preview</a></li>
+        </ul>
+        <div id="my-tab-content" class="tab-content">
+          <div class="tab-pane active" id="edit">
+            <textarea class="form-control" id="about" placeholder="Write about Yourself ;)"><?php echo $session->GetInfo()['about']; ?></textarea>
+          </div>
+          <div class="tab-pane" id="preview"></div>
+        </div>
       </div>
       <button type="button" class="btn btn-success pull-right" id="profilesubmit">Save</button>
     </form>

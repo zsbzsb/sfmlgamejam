@@ -1,8 +1,9 @@
 <?php require TEMPLATEROOT.'jam_header.php'; ?>
 
+<h3 class="text-center">Submit Your Theme Ideas (try to be creative)</h3>
+<br>
+
 <div class="row">
-  <h3 class="text-center">Submit Your Theme Ideas (try to be creative)</h3>
-  <br>
   <div class="col-md-6 col-md-offset-3">
     <?php
 

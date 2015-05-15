@@ -58,3 +58,36 @@ textarea {
   font-size: 50%;
   line-height: 300%;
 }
+
+a.thumbnail {
+  padding: 0;
+  overflow: hidden;
+}
+
+.thumbnail .gamebox {
+  position: relative;
+  display: block;
+}
+
+.thumbnail .gamebox > img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  margin: auto;
+  padding: 4px;
+  padding-bottom: 10px;
+}
+
+.thumbnail .gamebox > div {
+  display: block;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0px;
+  padding: -100px 0px 0px 0px;
+  text-align: center;
+  background: rgba(204, 204, 204, 0.78);
+  z-index: 10;
+}
