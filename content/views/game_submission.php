@@ -39,10 +39,12 @@ if ($jam['status'] == JamStatus::JamRunning || $jam['status'] == JamStatus::Rece
                 </tr>
               </thead>
               <tbody>';
-
-  foreach ($game['images'] as $image)
+  if (isset($game))
   {
-    echo '<tr class="screenshotrow"><td><input type="text" style="width: 100%;" class="url" value="'.$image['url'].'" /></td><td><button type="button" class="btn btn-danger removerow">Remove</button></td></tr>';
+    foreach ($game['images'] as $image)
+    {
+      echo '<tr class="screenshotrow"><td><input type="text" style="width: 100%;" class="url" value="'.$image['url'].'" /></td><td><button type="button" class="btn btn-danger removerow">Remove</button></td></tr>';
+    }
   }
 
   echo '
@@ -65,9 +67,12 @@ if ($jam['status'] == JamStatus::JamRunning || $jam['status'] == JamStatus::Rece
               </thead>
               <tbody>';
 
-  foreach ($game['links'] as $link)
+  if (isset($game))
   {
-    echo '<tr class="linkrow"><td><input type="text" style="width: 100%;" class="title" value="'.$link['title'].'" /></td><td><input type="text" style="width: 100%;" class="url" value="'.$link['url'].'" /></td><td><button type="button" class="btn btn-danger removerow">Remove</button></td></tr>';
+    foreach ($game['links'] as $link)
+    {
+      echo '<tr class="linkrow"><td><input type="text" style="width: 100%;" class="title" value="'.$link['title'].'" /></td><td><input type="text" style="width: 100%;" class="url" value="'.$link['url'].'" /></td><td><button type="button" class="btn btn-danger removerow">Remove</button></td></tr>';
+    }
   }
 
   echo '
