@@ -8,7 +8,7 @@
 
   <!-- News -->
   <div class="col-md-7">
-    <h3 id="news">News</h3>
+    <h3 id="news"><strong>News</strong></h3>
     <?php
 
       foreach ($news as $article)
@@ -17,12 +17,12 @@
           <a href="'.$routes->generate('news_article', array('id' => $article['id'])).'">
             <div class="row">
               <h4 class="pull-left inline">'.$article['title'].'</h4>
-              <h4 class="pull-right inline">'.date(DATETIME_FORMAT, $article['date']).'</h4>
+              <h4 class="pull-right inline"><small>'.date(DATETIME_FORMAT, $article['date']).'</small></h4>
             </div>
           </a>
           <div class="row">
             <blockquote>
-              <p>'.$article['summary'].'</p>
+              <p><small>'.$article['summary'].'</small></p>
             </blockquote>
           </div>
           <hr />';
@@ -35,7 +35,7 @@
 
   <!-- Upcoming Jams -->
   <div class="col-md-4 col-md-offset-1">
-    <h3 id="jams">Upcoming Jams</h3>
+    <h3 id="jams"><strong>Upcoming Jams</strong></h3>
     <?php
 
       foreach ($jams as $jam)
@@ -44,7 +44,7 @@
           <div class="row">
             <a href="'.$routes->generate('jam_page', array('id' => $jam['id'])).'">
               <h4 class="pull-left inline">'.$jam['title'].'</h4>
-              <h4 class="pull-right inline">'.date(DATETIME_FORMAT, JamBegins($jam)).'</h4>
+              <h4 class="pull-right inline"><small>'.date(DATETIME_FORMAT, JamBegins($jam)).'</small></h4>
             </a>
           </div>
           <hr />';

@@ -22,7 +22,7 @@
     });
 
     function UpdateTime() {
-      $('#timedisplay').html(moment.utc().format('MM/DD/YYYY hh:mm A'));
+      $('#timedisplay').html(moment.utc().format('MM/DD/YYYY hh:mm A') + ' UTC');
     };
     </script>
   </body>
