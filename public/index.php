@@ -50,12 +50,22 @@ require ROOT.'routes.php';
 // handle the route request
 $route = $routes->match();
 
+// error page handling
+function ErrorPage($Error)
+{
+  ob_get_clean();
+
+  http_response_code($Error);
+  $error = $Error;
+
+  require VIEWROOT.'error.php';
+
+  die();
+}
+
 if (!$route)
 {
-  http_response_code(404);
-  $error = 404;
-  require VIEWROOT.'error.php';
-  die();
+  ErrorPage(404);
 }
 else
 {
@@ -96,9 +106,7 @@ else
     {
       if ($apirequest)
       {
-        http_response_code(401);
-        $error = 401;
-        require VIEWROOT.'error.php';
+        ErrorPage(401);
       }
       else header('Location: '.$routes->generate('login'));
       die();
@@ -112,12 +120,13 @@ else
     {
       if ($apirequest)
       {
-        http_response_code(401);
-        $error = 401;
-        require VIEWROOT.'error.php';
+        ErrorPage(401);
       }
-      else header('Location: '.$routes->generate('account'));
-      die();
+      else
+      {
+        header('Location: '.$routes->generate('account'));
+        die();
+      }
     }
   }
 
@@ -130,10 +139,7 @@ else
       {
         if (!isset($_POST[$variable]))
         {
-          http_response_code(400);
-          $error = 400;
-          require VIEWROOT.'error.php';
-          die();
+          ErrorPage(400);
         }
         else
         {
@@ -208,11 +214,17 @@ else
     }
     catch (Exception $e)
     {
-      ob_get_clean();
+      if (SHOW_ERRORS)
+      {
+        ob_get_clean();
+        echo $e->getMessage();
 
-      http_response_code(500);
-      $error = 500;
-      require VIEWROOT.'error.php';
+        die();
+      }
+      else
+      {
+        ErrorPage(500);
+      }
     }
   }
 }
