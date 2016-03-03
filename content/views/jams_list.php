@@ -21,8 +21,8 @@
             echo '
               <tr class="jamrow" jamviewurl="'.$routes->generate('jam_page', array('id' => $jam['id'])).'">
                 <td>'.$jam['title'].'</td>
-                <td>'.date(DATETIME_FORMAT, $jam['suggestionsbegin']).'</td>
-                <td>'.date(DATETIME_FORMAT, $jam['suggestionsbegin'] + $jam['suggestionslength'] + $jam['approvallength'] + $jam['themeannouncelength']).'</td>
+                <td>'.date(DATETIME_FORMAT, SuggestionsBegin($jam)).'</td>
+                <td>'.date(DATETIME_FORMAT, JamBegins($jam)).'</td>
                 <td>'.JamStatusString($jam['status']).'</td>
               </tr>';
           }
