@@ -91,7 +91,7 @@ $routes->map('POST', '/api/v1/markdown/preview', array('source' => 'v1/getmarkdo
 $routes->map('POST', '/api/v1/profile/update', array('source' => 'v1/doprofileupdate', 'postvariables' => array('avatar', 'website', 'about'), 'usersonly' => true), null);
 
 // Get Jams
-$routes->map('POST', '/api/v1/jams', array('source' => 'v1/getjams', 'optionalvariables' => array('startdate', 'enddate')), null);
+$routes->map('POST', '/api/v1/jams', array('source' => 'v1/getjams'), null);
 
 // Jam Create
 $routes->map('POST', '/api/v1/jams/create', array('source' => 'v1/dojamcreate', 'postvariables' => array('title', 'themesperuser', 'autoapprovethemes', 'initialvotingrounds', 'votesperuser', 'topthemesinfinal', 'suggestionsbegin', 'suggestionslength', 'approvallength', 'votinglength', 'themeannouncelength', 'jamlength', 'submissionslength', 'judginglength'), 'adminsonly' => true), null);
