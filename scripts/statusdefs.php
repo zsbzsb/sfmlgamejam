@@ -27,8 +27,9 @@ abstract class RatingState
 {
   const NotReady = 0;
   const NeedLogin = 1;
-  const Ready = 2;
-  const Complete = 3;
+  const OwnGame = 2;
+  const Ready = 3;
+  const Complete = 4;
 }
 
 abstract class CurrentRound

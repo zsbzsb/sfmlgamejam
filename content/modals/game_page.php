@@ -35,7 +35,7 @@ $ratingstate = RatingState::NotReady;
 
 if ($jam['status'] == JamStatus::ReceivingGameSubmissions || $jam['status'] == JamStatus::Judging)
 {
-  $ratingstate = $session->IsLoggedIn() ? RatingState::Ready : RatingState::NeedLogin;
+  $ratingstate = $session->IsLoggedIn() ? $session->GetUserID() != $game['submitterid'] ? RatingState::Ready : RatingState::OwnGame : RatingState::NeedLogin;
 }
 else if ($jam['status'] == JamStatus::Complete)
   $ratingstate = RatingState::Complete;

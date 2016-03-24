@@ -54,6 +54,8 @@
         echo '<h5 class="text-center">Judging will be available soon!</h5>';
       else if ($ratingstate == RatingState::NeedLogin)
         echo '<h5 class="text-center">You must be <a href="'.$routes->generate('login').'">logged in</a> to judge games.</h5>';
+      else if ($ratingstate == RatingState::OwnGame)
+        echo '<h5 class="text-center">Try voting on some other <a href="'.$routes->generate('games_list', array('id' => $id)).'">games</a> instead of your own ;)</h5>';
       else if ($ratingstate == RatingState::Ready)
       {
         require TEMPLATEROOT.'formfeedback.php';

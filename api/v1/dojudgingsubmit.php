@@ -15,15 +15,19 @@ if (isset($error))
   die();
 }
 
-$stmt = $dbconnection->prepare('SELECT jams.status FROM jams INNER JOIN games ON jams.id = games.jamid WHERE jams.id = ? AND games.id = ?;');
+$stmt = $dbconnection->prepare('SELECT jams.status AS jamstatus, games.submitterid FROM jams INNER JOIN games ON jams.id = games.jamid WHERE jams.id = ? AND games.id = ?;');
 $stmt->execute(array($jamid, $gameid));
 
 if ($stmt->rowCount() == 0) SendResponse(array('success' => false, 'message' => 'Invalid jam or game specified.'));
 else
 {
-  $status = $stmt->fetchAll()[0]['status'];
+  $status = $stmt->fetchAll()[0];
 
-  if ($status == JamStatus::ReceivingGameSubmissions || $status == JamStatus::Judging)
+  if ($status['submitterid'] == $session->GetUserID())
+  {
+    SendResponse(array('success' => false, 'message' => 'You can not judge your own game.'));
+  }
+  else if ($status['jamstatus'] == JamStatus::ReceivingGameSubmissions || $status['jamstatus'] == JamStatus::Judging)
   {
     $stmt = $dbconnection->prepare('SELECT id FROM categories WHERE jamid = ?;');
     $stmt->execute(array($jamid));
