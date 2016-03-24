@@ -42,8 +42,8 @@ else if ($jam['status'] == JamStatus::Complete)
 
 if ($ratingstate == RatingState::Ready)
 {
-  $stmt = $dbconnection->prepare('SELECT categoryid, value FROM ratings LEFT JOIN categories ON categories.id = ratings.categoryid WHERE categories.jamid = ? AND ratings.userid = ?;');
-  $stmt->execute(array($id, $session->GetUserID()));
+  $stmt = $dbconnection->prepare('SELECT categoryid, value FROM ratings LEFT JOIN categories ON categories.id = ratings.categoryid WHERE categories.jamid = ? AND ratings.gameid = ? AND ratings.userid = ?;');
+  $stmt->execute(array($id, $gameid, $session->GetUserID()));
   $ratings = $stmt->fetchAll();
 
   $categories = $jam['categories'];

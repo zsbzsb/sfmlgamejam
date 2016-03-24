@@ -31,16 +31,15 @@ else
 
     foreach ($categories as $category)
     {
-      $stmt = $dbconnection->prepare('DELETE FROM ratings WHERE categoryid = ? AND userid = ?;');
-      $stmt->execute(array($category['id'], $session->GetUserID()));
+      $stmt = $dbconnection->prepare('DELETE FROM ratings WHERE categoryid = ? AND gameid = ? AND userid = ?;');
+      $stmt->execute(array($category['id'], $gameid, $session->GetUserID()));
 
       foreach ($ratings as $rating)
       {
         if ($rating['categoryid'] == $category['id'])
         {
-          $stmt = $dbconnection->prepare('INSERT INTO ratings (categoryid, userid, value) VALUES (?, ?, ?);');
-          $stmt->execute(array($category['id'], $session->GetUserID(), $rating['value']));
-
+          $stmt = $dbconnection->prepare('INSERT INTO ratings (categoryid, gameid, userid, value) VALUES (?, ?, ?, ?);');
+          $stmt->execute(array($category['id'], $gameid, $session->GetUserID(), $rating['value']));
           break;
         }
       }
