@@ -23,6 +23,14 @@ abstract class JamStatus
   const Complete = 8;
 }
 
+abstract class RatingState
+{
+  const NotReady = 0;
+  const NeedLogin = 1;
+  const Ready = 2;
+  const Complete = 3;
+}
+
 abstract class CurrentRound
 {
   const NotSelected = -1;

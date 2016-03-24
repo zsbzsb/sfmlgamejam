@@ -17,6 +17,12 @@ if ($jam == null)
   {
     $jam = $stmt->fetchAll()[0];
     VerifyJamState($jam);
+
+    $stmt = $dbconnection->prepare('SELECT id, name, description FROM categories WHERE jamid = ?;');
+    $stmt->execute(array($id));
+
+    $jam['categories'] = $stmt->fetchAll();
+
     $cache->set('jam_'.$id, $jam, CACHE_TIME);
   }
 }

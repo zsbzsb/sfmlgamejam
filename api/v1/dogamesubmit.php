@@ -24,7 +24,7 @@ if (!isset($error))
   {
     if (strlen($link['title']) == 0)
     {
-      '"'.$link['url'].'" title can not be blank';
+      $error = 'Link title can not be blank';
       break;
     }
     else if (!URLValid($link['url']))
@@ -41,7 +41,7 @@ if (isset($error))
   die();
 }
 
-$stmt = $dbconnection->prepare('SELECT themesperuser, status FROM jams WHERE id = ?;');
+$stmt = $dbconnection->prepare('SELECT status FROM jams WHERE id = ?;');
 $stmt->execute(array($jamid));
 
 if ($stmt->rowCount() == 0) SendResponse(array('success' => false, 'message' => 'Invalid jam specified.'));
@@ -75,15 +75,15 @@ else
       $gameid = $dbconnection->lastInsertId('games_id_seq');
     }
 
+    $stmt = $dbconnection->prepare('INSERT INTO images (url, gameid) VALUES (?, ?);');
     foreach ($images as $image)
     {
-      $stmt = $dbconnection->prepare('INSERT INTO images (url, gameid) VALUES (?, ?);');
       $stmt->execute(array($image['url'], $gameid));
     }
 
+    $stmt = $dbconnection->prepare('INSERT INTO links (title, url, gameid) VALUES (?, ?, ?);');
     foreach ($links as $link)
     {
-      $stmt = $dbconnection->prepare('INSERT INTO links (title, url, gameid) VALUES (?, ?, ?);');
       $stmt->execute(array($link['title'], $link['url'], $gameid));
     }
 
@@ -91,7 +91,6 @@ else
   }
   else SendResponse(array('success' => false, 'message' => 'Jam is no longer recieving game submissions.'));
 }
-
 
 
 ?>

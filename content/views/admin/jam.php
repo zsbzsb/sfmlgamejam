@@ -94,6 +94,33 @@
           <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
         </div>
       </div>
+      <div class="form-group">
+        <label>Voting Categories</label>
+        <table class="table table-striped table-bordered">
+          <col width="auto">
+          <col width="auto">
+          <col width="100">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+              if (!$createjam)
+              {
+                foreach ($jam['categories'] as $category)
+                {
+                  echo '<tr class="categoryrow" editid="'.$category['id'].'"><td><input type="text" style="width: 100%;" class="name" value="'.$category['name'].'" /></td><td><input type="text" style="width: 100%;" class="description" value="'.$category['description'].'" /></td><td><button type="button" class="btn btn-danger removerow">Remove</button></td></tr>';
+                }
+              }
+            ?>
+            <tr><td colspan="2"><button type="button" class="btn btn-info" id="addcategory">Add</button></tr></td>
+          </tbody>
+        </table>
+      </div>
       <button type="submit" class="btn btn-success pull-right disabled" id="jamsubmit"><?php echo $createjam ? 'Create' : 'Save' ?></button>
     </form>
     <span><small>*All times are entered in UTC</small></span>
@@ -143,7 +170,29 @@ $(function() {
       });
     })(i);
   }
+
+  BindButtonClick($('#addcategory'), function(obj) {
+    AddRow(obj, $('<tr class="categoryrow" editid="-1"><td><input type="text" style="width: 100%;" class="name" /></td><td><input type="text" style="width: 100%;" class="description" /></td><td><button type="button" class="btn btn-danger removerow">Remove</button></td></tr>'));
+  });
+
+  BindButtonClick($('.removerow'), RemoveRow);
 });
+
+function AddRow(obj, Row) {
+  Row.find('.removerow').click(function() { RemoveRow(this) });
+  Row.find('input').each(function(i, input) {
+    if ($(input).attr('type') == 'text') BindTextboxChanged($(input), ValidateForm);
+  });
+  $(obj).parents('tr:first').before(Row);
+
+  ValidateForm();
+};
+
+function RemoveRow(obj) {
+  $(obj).parents('tr:first').remove();
+
+  ValidateForm();
+};
 
 function OnSubmit() {
   if (ValidateForm()) {
@@ -166,6 +215,13 @@ function ValidateForm() {
       break
     }
   }
+
+  $('.categoryrow').each(function(i, row) {
+    var name = $(row).find('.name').val();
+    var description = $(row).find('.description').val();
+
+    if ((name.length > 0 && description.length == 0) || (name.length == 0 && description.length > 0)) valid = false;
+  });
 
   EnableButton($('#jamsubmit'), valid);
   return valid;
@@ -193,6 +249,24 @@ function Submit() {
   var submissionslength = GetTimeStamp('#submissionsendpicker') - GetTimeStamp('#jamendspicker');
   var judginglength = GetTimeStamp('#judgingendpicker') - GetTimeStamp('#submissionsendpicker');
 
+  var categories = {};
+  var count = -1;
+
+
+  $('.categoryrow').each(function(i, row) {
+    var name = $(row).find('.name').val();
+    var description = $(row).find('.description').val();
+    var id = $(row).attr('editid');
+
+    if (name.length > 0 && description.length > 0)
+    {
+      categories[++count] = { name:name, description:description };
+
+      if (id != -1)
+        categories[count]['id'] = id;
+    }
+  });
+
   var success = false;
   
   Post(CreateJam ? '/api/v1/jams/create' : '/api/v1/jams/update', {
@@ -210,7 +284,8 @@ function Submit() {
       themeannouncelength:themeannouncelength,
       jamlength:jamlength,
       submissionslength:submissionslength,
-      judginglength:judginglength
+      judginglength:judginglength,
+      categories:categories
     })
     .done(function(result) {
       if (result.success) {

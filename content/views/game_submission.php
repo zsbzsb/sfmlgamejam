@@ -29,7 +29,7 @@ if ($jam['status'] == JamStatus::JamRunning || $jam['status'] == JamStatus::Rece
           </div>
           <div class="form-group">
             <label>Screenshots</label>
-            <table class="table table-striped table-bordered" id="screenshots">
+            <table class="table table-striped table-bordered">
               <col width="auto">
               <col width="100">
               <thead>
@@ -54,7 +54,7 @@ if ($jam['status'] == JamStatus::JamRunning || $jam['status'] == JamStatus::Rece
           </div>
           <div class="form-group">
             <label>Download Links</label>
-            <table class="table table-striped table-bordered" id="links">
+            <table class="table table-striped table-bordered">
               <col width="auto">
               <col width="auto">
               <col width="100">
@@ -188,8 +188,6 @@ function Submit() {
     if (url.length > 0)
       images[count++] = { url:url };
   });
-
-  count = 0;
 
   $('.linkrow').each(function(i, row) {
     var title = $(row).find('.title').val();

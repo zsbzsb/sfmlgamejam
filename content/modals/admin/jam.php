@@ -6,14 +6,19 @@ if (!$createjam)
 {
   $stmt = $dbconnection->prepare('SELECT * FROM jams WHERE id = ?;');
   $stmt->execute(array($id));
-  $jams = $stmt->fetchAll();
-  if (count($jams) == 0)
+
+  if ($stmt->rowCount() == 0)
   {
     header('Location: '.$routes->generate('admin'));
     die();
   }
 
-  $jam = $jams[0];
+  $jam = $stmt->fetchAll()[0];
+
+  $stmt = $dbconnection->prepare('SELECT id, name, description FROM categories WHERE jamid = ?;');
+  $stmt->execute(array($jam['id']));
+
+  $jam['categories'] = $stmt->fetchAll();
 }
 
 ?>

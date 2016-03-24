@@ -194,29 +194,25 @@ function Submit() {
     postdata['votes'][count++] = { themeid:$(Row).attr('themeid'), value:$(Row).attr('vote') };
   });
 
-  function ResumeInput() {
-    EnableVoting(true);
-    UpdateVoteDisplay();
-
-    StopAnimation(animation);
-    $('#votesubmit').html('Vote');
-  };
-
   Post('/api/v1/themes/voting/vote', postdata)
     .done(function(result) {
       if (result.success) {
         SuccessFeedback('Your vote(s) have been saved.');
         ChangesSaved = true;
-        ResumeInput();
       }
       else {
         ErrorFeedback(result.message);
-        ResumeInput();
       }
     })
     .fail(function() {
       ErrorFeedback('An unexpected error happened, please try again.');
-      ResumeInput();
+    })
+    .always(function() {
+      EnableVoting(true);
+      UpdateVoteDisplay();
+
+      StopAnimation(animation);
+      $('#votesubmit').html('Vote');
     });
 };
 </script>
